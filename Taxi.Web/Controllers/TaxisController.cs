@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Taxi.Web.Data;
@@ -30,7 +31,7 @@ namespace Taxi.Web.Controllers
                 return NotFound();
             }
 
-            var model = await _context.Taxis
+            TaxiEntity model = await _context.Taxis
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (model == null)
             {
@@ -53,8 +54,23 @@ namespace Taxi.Web.Controllers
             {
                 model.Plaque = model.Plaque.ToUpper();
                 _context.Add(model);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                try
+                {
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex)
+                {
+                    if (ex.InnerException.Message.Contains("duplicate"))
+                    {
+                        ModelState.AddModelError(string.Empty, "Already there is a record with the same plaque.");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, ex.InnerException.Message);
+                    }
+                }
             }
 
             return View(model);
@@ -67,7 +83,7 @@ namespace Taxi.Web.Controllers
                 return NotFound();
             }
 
-            var model = await _context.Taxis.FindAsync(id);
+            TaxiEntity model = await _context.Taxis.FindAsync(id);
             if (model == null)
             {
                 return NotFound();
@@ -89,8 +105,23 @@ namespace Taxi.Web.Controllers
             {
                 model.Plaque = model.Plaque.ToUpper();
                 _context.Update(model);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                try
+                {
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex)
+                {
+                    if (ex.InnerException.Message.Contains("duplicate"))
+                    {
+                        ModelState.AddModelError(string.Empty, "Already there is a record with the same plaque.");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, ex.InnerException.Message);
+                    }
+                }
             }
 
             return View(model);
@@ -103,7 +134,7 @@ namespace Taxi.Web.Controllers
                 return NotFound();
             }
 
-            var model = await _context.Taxis
+            TaxiEntity model = await _context.Taxis
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (model == null)
             {
