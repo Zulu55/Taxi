@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using Taxi.Web.Data.Entities;
 
 namespace Taxi.Web.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class TaxisController : Controller
     {
         private readonly DataContext _context;
