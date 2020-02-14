@@ -1,13 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Taxi.Web.Data;
 using Taxi.Web.Data.Entities;
 
 namespace Taxi.Web.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class TaxisController : Controller
     {
         private readonly DataContext _context;
@@ -52,7 +53,7 @@ namespace Taxi.Web.Controllers
             {
                 taxiEntity.Plaque = taxiEntity.Plaque.ToUpper();
                 _context.Add(taxiEntity);
-                
+
                 try
                 {
                     await _context.SaveChangesAsync();
@@ -68,7 +69,7 @@ namespace Taxi.Web.Controllers
                     {
                         ModelState.AddModelError(string.Empty, ex.Message);
                     }
-                }            
+                }
             }
 
             return View(taxiEntity);
