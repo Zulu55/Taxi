@@ -16,6 +16,7 @@ namespace Taxi.Cross.Android
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
         }
+
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
