@@ -8,7 +8,6 @@
              Title="{Binding Title}">
     <StackLayout>
         <maps:Map x:Name="MyMap"
-                  IsShowingUser="True"
                   MapType="Street"/>
         <StackLayout Padding="5">
             <Button BackgroundColor="Green"

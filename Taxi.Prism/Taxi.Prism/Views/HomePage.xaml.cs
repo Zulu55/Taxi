@@ -15,12 +15,23 @@ namespace Taxi.Prism.Views
             MoveMapToCurrentPositionAsync();
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            try
+            {
+                MyMap.IsShowingUser = true;
+            }
+            catch { }
+        }
+
         private async void MoveMapToCurrentPositionAsync()
         {
             await _geolocatorService.GetLocationAsync();
             if (_geolocatorService.Latitude != 0 && _geolocatorService.Longitude != 0)
             {
-                var position = new Position(
+                Position position = new Position(
                     _geolocatorService.Latitude,
                     _geolocatorService.Longitude);
                 MyMap.MoveToRegion(MapSpan.FromCenterAndRadius(
