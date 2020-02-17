@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Taxi.Common.Models;
+using Taxi.Prism.Helpers;
 
 namespace Taxi.Prism.ViewModels
 {
@@ -26,37 +27,37 @@ namespace Taxi.Prism.ViewModels
                 {
                     Icon = "ic_airport_shuttle",
                     PageName = "HomePage",
-                    Title = "New trip"
+                    Title = Languages.NewTrip
                 },
                 new Menu
                 {
                     Icon = "ic_local_taxi",
                     PageName = "TaxiHistoryPage",
-                    Title = "See taxi history"
+                    Title = Languages.SeeTaxiHistory
                 },
                 new Menu
                 {
                     Icon = "ic_people",
                     PageName = "GroupPage",
-                    Title = "Admin my user group"
+                    Title = Languages.AdminMyUserGroup
                 },
                 new Menu
                 {
                     Icon = "ic_account_circle",
                     PageName = "ModifyUserPage",
-                    Title = "Modify User"
+                    Title = Languages.ModifyUser
                 },
                 new Menu
                 {
                     Icon = "ic_report",
                     PageName = "ReportPage",
-                    Title = "Report an incident"
+                    Title = Languages.ReportAnIncident
                 },
                 new Menu
                 {
                     Icon = "ic_exit_to_app",
                     PageName = "LoginPage",
-                    Title = "Log in"
+                    Title = Languages.LogIn
                 }
             };
 
