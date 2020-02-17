@@ -27,4 +27,9 @@
   <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
     <item name="colorAccent">#0029FA</item>
   </style>
+
+  <style name="Theme.Splash" parent="android:Theme">
+    <item name="android:windowBackground">@drawable/taxi_splash</item>
+    <item name="android:windowNoTitle">true</item>
+  </style>
 </resources>
