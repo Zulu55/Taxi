@@ -6,17 +6,14 @@
            	 xmlns:i18n="clr-namespace:Taxi.Prism.Helpers"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Taxi.Prism.Views.HomePage"
+             BackgroundColor="{StaticResource ColorBackgroud}"
              Title="{Binding Title}">
     <StackLayout>
         <maps:Map x:Name="MyMap"
                   MapType="Street"/>
         <StackLayout Padding="5">
-            <Button BackgroundColor="Green"
-                    CornerRadius="20"
-                    HeightRequest="40"
-                    Margin="10,0"
-                    Text="{i18n:Translate StartTrip}"
-                    TextColor="White"/>
+            <Button Margin="10,0"
+                    Text="{i18n:Translate StartTrip}"/>
         </StackLayout>
     </StackLayout>
 </ContentPage>

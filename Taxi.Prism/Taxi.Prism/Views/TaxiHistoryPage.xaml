@@ -7,6 +7,7 @@
            	 xmlns:i18n="clr-namespace:Taxi.Prism.Helpers"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Taxi.Prism.Views.TaxiHistoryPage"
+             BackgroundColor="{StaticResource ColorBackgroud}"
              Title="{Binding Title}">
 
     <AbsoluteLayout>
@@ -17,24 +18,23 @@
                 <Label Text="{i18n:Translate Plaque}"
                        VerticalOptions="Center"/>
                 <Entry HorizontalOptions="FillAndExpand" 
-                       Placeholder="{i18n:Translate PlaquePlaceHolder}" 
-                       Text="{Binding Plaque}"
-                       VerticalOptions="Center"/>
-                <Button BackgroundColor="Navy"
-                        Command="{Binding CheckPlaqueCommand}"
-                        CornerRadius="20"
-                        HeightRequest="40"
-                        Margin="20,0"
-                        Text="{i18n:Translate CheckPlaque}"
-                        TextColor="White"/>
+                        Placeholder="{i18n:Translate PlaquePlaceHolder}" 
+                        Text="{Binding Plaque}"
+                        VerticalOptions="Center"/>
+                <Button Command="{Binding CheckPlaqueCommand}"
+                        Text="{i18n:Translate CheckPlaque}"/>
             </StackLayout>
             <rating:SfRating HorizontalOptions="Center" 
-                             IsEnabled="False"
-                             Margin="0,5"
-                             Precision="Exact"
-                             Value="{Binding Taxi.Qualification}" />
+                                IsEnabled="False"
+                                Margin="0,5"
+                                Precision="Exact"
+                                Value="{Binding Taxi.Qualification}">
+                <rating:SfRating.RatingSettings>
+                    <rating:SfRatingSettings RatedFill="{StaticResource ColorDanger}"/>
+                </rating:SfRating.RatingSettings>
+            </rating:SfRating>
             <StackLayout HorizontalOptions="Center" 
-                         Orientation="Horizontal">
+                            Orientation="Horizontal">
                 <Label FontAttributes="Bold" 
                        FontSize="Large"
                        Text="{i18n:Translate Qualification}"/>
@@ -101,15 +101,15 @@
             </CollectionView>
         </StackLayout>
         <busyindicator:SfBusyIndicator AnimationType="Gear" 
-                                       AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
-                	                   AbsoluteLayout.LayoutFlags="All"
-                	                   BackgroundColor="Silver"
-                	                   HorizontalOptions="Center"
-                	                   TextColor="White"
-                	                   IsVisible="{Binding IsRunning}"
-                	                   Title="{i18n:Translate Loading}"
-                	                   VerticalOptions="Center"
-                	                   ViewBoxWidth="80"
-                	                   ViewBoxHeight="80" />
+                                        AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+                	                    AbsoluteLayout.LayoutFlags="All"
+                	                    BackgroundColor="{StaticResource ColorDanger}"
+                	                    HorizontalOptions="Center"
+                	                    TextColor="White"
+                	                    IsVisible="{Binding IsRunning}"
+                	                    Title="{i18n:Translate Loading}"
+                	                    VerticalOptions="Center"
+                	                    ViewBoxWidth="80"
+                	                    ViewBoxHeight="80" />
     </AbsoluteLayout>
 </ContentPage>
