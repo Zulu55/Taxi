@@ -9,7 +9,7 @@ namespace Taxi.Common.Models
 
         public string Plaque { get; set; }
 
-        public ICollection<TripResponse> Trips { get; set; }
+        public List<TripResponse> Trips { get; set; }
 
         public UserResponse User { get; set; }
 

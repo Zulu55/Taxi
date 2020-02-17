@@ -25,10 +25,10 @@
                         Text="{i18n:Translate CheckPlaque}"/>
             </StackLayout>
             <rating:SfRating HorizontalOptions="Center" 
-                                IsEnabled="False"
-                                Margin="0,5"
-                                Precision="Exact"
-                                Value="{Binding Taxi.Qualification}">
+                             IsEnabled="False"
+                             Margin="0,5"
+                             Precision="Exact"
+                             Value="{Binding Taxi.Qualification}">
                 <rating:SfRating.RatingSettings>
                     <rating:SfRatingSettings RatedFill="{StaticResource ColorDanger}"/>
                 </rating:SfRating.RatingSettings>
@@ -71,13 +71,16 @@
                        Text="{i18n:Translate Remarks}"/>
             </Grid>
 
-            <CollectionView ItemsSource="{Binding Taxi.Trips}">
+            <CollectionView ItemsSource="{Binding Trips}">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical"/>
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SelectTripCommand}"/>
+                            </Grid.GestureRecognizers>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width=".8*" />
                                 <ColumnDefinition Width=".5*" />
@@ -85,7 +88,7 @@
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0"
-                                   Text="{Binding StartDateLocal, StringFormat='{0:yyyy/MM/dd HH:mm}'}"
+                                   Text="{Binding StartDateLocal, StringFormat='{0:yyyy/MM/dd}'}"
                                    VerticalOptions="Center"/>
                             <Label Grid.Column="1"
                                    Text="{Binding Qualification, StringFormat='{0:N2}'}"

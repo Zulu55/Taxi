@@ -186,4 +186,7 @@
   <data name="LogIn" xml:space="preserve">
     <value>Se connecter</value>
   </data>
+  <data name="TripDetail" xml:space="preserve">
+    <value>Détail du voyage</value>
+  </data>
 </root>

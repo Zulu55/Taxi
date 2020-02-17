@@ -58,5 +58,7 @@ namespace Taxi.Prism.Helpers
         public static string ReportAnIncident => Resource.ReportAnIncident;
 
         public static string LogIn => Resource.LogIn;
+
+        public static string TripDetail => Resource.TripDetail;
     }
 }
