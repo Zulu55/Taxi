@@ -31,5 +31,8 @@ namespace Taxi.Web.Models
 
         [Display(Name = "Picture")]
         public IFormFile PictureFile { get; set; }
+
+        [Display(Name = "Picture")]
+        public string PicturePath { get; set; }
     }
 }
