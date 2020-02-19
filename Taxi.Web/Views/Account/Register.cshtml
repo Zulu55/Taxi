@@ -19,8 +19,8 @@
                 <span asp-validation-for="Username" class="text-danger"></span>
             </div>
 
-            <partial name="_User"/>
-            
+            <partial name="_User" />
+
             <div class="form-group">
                 <label asp-for="UserTypeId" class="control-label"></label>
                 <select asp-for="UserTypeId" asp-items="Model.UserTypes" class="form-control"></select>
@@ -44,6 +44,12 @@
             </div>
         </form>
     </div>
+</div>
+
+<div class="text-success">
+    <p>
+        @ViewBag.Message
+    </p>
 </div>
 
 @section Scripts {
