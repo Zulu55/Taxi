@@ -105,6 +105,226 @@ namespace Taxi.Web.Data
                             Target = "ITM Fraternidad",
                             Remarks = "Conductor muy amable",
                             User = user1
+                        },
+                        new TripEntity
+                        {
+                            StartDate = DateTime.UtcNow,
+                            EndDate = DateTime.UtcNow.AddMinutes(30),
+                            Qualification = 4.8f,
+                            Source = "ITM Robledo",
+                            Target = "ITM Fraternidad",
+                            Remarks = "Conductor muy amable",
+                            User = user1
+                        },
+                        new TripEntity
+                        {
+                            StartDate = DateTime.UtcNow,
+                            EndDate = DateTime.UtcNow.AddMinutes(30),
+                            Qualification = 4.8f,
+                            Source = "ITM Robledo",
+                            Target = "ITM Fraternidad",
+                            Remarks = "Conductor muy amable",
+                            User = user1
+                        },
+                        new TripEntity
+                        {
+                            StartDate = DateTime.UtcNow,
+                            EndDate = DateTime.UtcNow.AddMinutes(30),
+                            Qualification = 4.8f,
+                            Source = "ITM Robledo",
+                            Target = "ITM Fraternidad",
+                            Remarks = "Conductor muy amable",
+                            User = user1
+                        },
+                        new TripEntity
+                        {
+                            StartDate = DateTime.UtcNow,
+                            EndDate = DateTime.UtcNow.AddMinutes(30),
+                            Qualification = 4.8f,
+                            Source = "ITM Robledo",
+                            Target = "ITM Fraternidad",
+                            Remarks = "Conductor muy amable",
+                            User = user1
+                        },
+                        new TripEntity
+                        {
+                            StartDate = DateTime.UtcNow,
+                            EndDate = DateTime.UtcNow.AddMinutes(30),
+                            Qualification = 4.8f,
+                            Source = "ITM Robledo",
+                            Target = "ITM Fraternidad",
+                            Remarks = "Conductor muy amable",
+                            User = user1
+                        },
+                        new TripEntity
+                        {
+                            StartDate = DateTime.UtcNow,
+                            EndDate = DateTime.UtcNow.AddMinutes(30),
+                            Qualification = 4.8f,
+                            Source = "ITM Robledo",
+                            Target = "ITM Fraternidad",
+                            Remarks = "Conductor muy amable",
+                            User = user1
+                        },
+                        new TripEntity
+                        {
+                            StartDate = DateTime.UtcNow,
+                            EndDate = DateTime.UtcNow.AddMinutes(30),
+                            Qualification = 4.8f,
+                            Source = "ITM Robledo",
+                            Target = "ITM Fraternidad",
+                            Remarks = "Conductor muy amable",
+                            User = user1
+                        },
+                        new TripEntity
+                        {
+                            StartDate = DateTime.UtcNow,
+                            EndDate = DateTime.UtcNow.AddMinutes(30),
+                            Qualification = 4.8f,
+                            Source = "ITM Robledo",
+                            Target = "ITM Fraternidad",
+                            Remarks = "Conductor muy amable",
+                            User = user1
+                        },
+                        new TripEntity
+                        {
+                            StartDate = DateTime.UtcNow,
+                            EndDate = DateTime.UtcNow.AddMinutes(30),
+                            Qualification = 4.8f,
+                            Source = "ITM Robledo",
+                            Target = "ITM Fraternidad",
+                            Remarks = "Conductor muy amable",
+                            User = user1
+                        },
+                        new TripEntity
+                        {
+                            StartDate = DateTime.UtcNow,
+                            EndDate = DateTime.UtcNow.AddMinutes(30),
+                            Qualification = 4.8f,
+                            Source = "ITM Robledo",
+                            Target = "ITM Fraternidad",
+                            Remarks = "Conductor muy amable",
+                            User = user1
+                        },
+                        new TripEntity
+                        {
+                            StartDate = DateTime.UtcNow,
+                            EndDate = DateTime.UtcNow.AddMinutes(30),
+                            Qualification = 4.8f,
+                            Source = "ITM Robledo",
+                            Target = "ITM Fraternidad",
+                            Remarks = "Conductor muy amable",
+                            User = user1
+                        },
+                        new TripEntity
+                        {
+                            StartDate = DateTime.UtcNow,
+                            EndDate = DateTime.UtcNow.AddMinutes(30),
+                            Qualification = 4.8f,
+                            Source = "ITM Robledo",
+                            Target = "ITM Fraternidad",
+                            Remarks = "Conductor muy amable",
+                            User = user1
+                        },
+                        new TripEntity
+                        {
+                            StartDate = DateTime.UtcNow,
+                            EndDate = DateTime.UtcNow.AddMinutes(30),
+                            Qualification = 4.8f,
+                            Source = "ITM Robledo",
+                            Target = "ITM Fraternidad",
+                            Remarks = "Conductor muy amable",
+                            User = user1
+                        },
+                        new TripEntity
+                        {
+                            StartDate = DateTime.UtcNow,
+                            EndDate = DateTime.UtcNow.AddMinutes(30),
+                            Qualification = 4.8f,
+                            Source = "ITM Robledo",
+                            Target = "ITM Fraternidad",
+                            Remarks = "Conductor muy amable",
+                            User = user1
+                        },
+                        new TripEntity
+                        {
+                            StartDate = DateTime.UtcNow,
+                            EndDate = DateTime.UtcNow.AddMinutes(30),
+                            Qualification = 4.8f,
+                            Source = "ITM Robledo",
+                            Target = "ITM Fraternidad",
+                            Remarks = "Conductor muy amable",
+                            User = user1
+                        },
+                        new TripEntity
+                        {
+                            StartDate = DateTime.UtcNow,
+                            EndDate = DateTime.UtcNow.AddMinutes(30),
+                            Qualification = 4.8f,
+                            Source = "ITM Robledo",
+                            Target = "ITM Fraternidad",
+                            Remarks = "Conductor muy amable",
+                            User = user1
+                        },
+                        new TripEntity
+                        {
+                            StartDate = DateTime.UtcNow,
+                            EndDate = DateTime.UtcNow.AddMinutes(30),
+                            Qualification = 4.8f,
+                            Source = "ITM Robledo",
+                            Target = "ITM Fraternidad",
+                            Remarks = "Conductor muy amable",
+                            User = user1
+                        },
+                        new TripEntity
+                        {
+                            StartDate = DateTime.UtcNow,
+                            EndDate = DateTime.UtcNow.AddMinutes(30),
+                            Qualification = 4.8f,
+                            Source = "ITM Robledo",
+                            Target = "ITM Fraternidad",
+                            Remarks = "Conductor muy amable",
+                            User = user1
+                        },
+                        new TripEntity
+                        {
+                            StartDate = DateTime.UtcNow,
+                            EndDate = DateTime.UtcNow.AddMinutes(30),
+                            Qualification = 4.8f,
+                            Source = "ITM Robledo",
+                            Target = "ITM Fraternidad",
+                            Remarks = "Conductor muy amable",
+                            User = user1
+                        },
+                        new TripEntity
+                        {
+                            StartDate = DateTime.UtcNow,
+                            EndDate = DateTime.UtcNow.AddMinutes(30),
+                            Qualification = 4.8f,
+                            Source = "ITM Robledo",
+                            Target = "ITM Fraternidad",
+                            Remarks = "Conductor muy amable",
+                            User = user1
+                        },
+                        new TripEntity
+                        {
+                            StartDate = DateTime.UtcNow,
+                            EndDate = DateTime.UtcNow.AddMinutes(30),
+                            Qualification = 4.8f,
+                            Source = "ITM Robledo",
+                            Target = "ITM Fraternidad",
+                            Remarks = "Conductor muy amable",
+                            User = user1
+                        },
+                        new TripEntity
+                        {
+                            StartDate = DateTime.UtcNow,
+                            EndDate = DateTime.UtcNow.AddMinutes(30),
+                            Qualification = 4.8f,
+                            Source = "ITM Robledo",
+                            Target = "ITM Fraternidad",
+                            Remarks = "Conductor muy amable",
+                            User = user1
                         }
                     }
                 });
