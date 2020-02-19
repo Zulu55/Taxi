@@ -1,4 +1,7 @@
-﻿using Taxi.Common.Services;
+﻿using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
+using System.Threading.Tasks;
+using Taxi.Common.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 
@@ -15,29 +18,35 @@ namespace Taxi.Prism.Views
             MoveMapToCurrentPositionAsync();
         }
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-
-            try
-            {
-                MyMap.IsShowingUser = true;
-            }
-            catch { }
-        }
-
         private async void MoveMapToCurrentPositionAsync()
         {
-            await _geolocatorService.GetLocationAsync();
-            if (_geolocatorService.Latitude != 0 && _geolocatorService.Longitude != 0)
+            bool isLocationPermision = await CheckLocationPermisionsAsync();
+
+            if (isLocationPermision)
             {
-                Position position = new Position(
-                    _geolocatorService.Latitude,
-                    _geolocatorService.Longitude);
-                MyMap.MoveToRegion(MapSpan.FromCenterAndRadius(
-                    position,
-                    Distance.FromKilometers(.5)));
+                MyMap.IsShowingUser = true;
+
+                await _geolocatorService.GetLocationAsync();
+                if (_geolocatorService.Latitude != 0 && _geolocatorService.Longitude != 0)
+                {
+                    Position position = new Position(
+                        _geolocatorService.Latitude,
+                        _geolocatorService.Longitude);
+                    MyMap.MoveToRegion(MapSpan.FromCenterAndRadius(
+                        position,
+                        Distance.FromKilometers(.5)));
+                }
             }
+        }
+
+        private async Task<bool> CheckLocationPermisionsAsync()
+        {
+            PermissionStatus permissionLocation = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
+            PermissionStatus permissionLocationAlways = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.LocationAlways);
+            PermissionStatus permissionLocationWhenInUse = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.LocationWhenInUse);
+            return permissionLocation == PermissionStatus.Granted ||
+                   permissionLocationAlways == PermissionStatus.Granted ||
+                   permissionLocationWhenInUse == PermissionStatus.Granted;
         }
     }
 }
