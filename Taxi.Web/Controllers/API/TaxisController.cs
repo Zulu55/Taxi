@@ -41,7 +41,7 @@ namespace Taxi.Web.Controllers.API
 
             if (taxiEntity == null)
             {
-                _context.Taxis.Add(new TaxiEntity { Plaque = plaque });
+                _context.Taxis.Add(new TaxiEntity { Plaque = plaque.ToUpper() });
                 await _context.SaveChangesAsync();
                 taxiEntity = await _context.Taxis.FirstOrDefaultAsync(t => t.Plaque == plaque);
             }

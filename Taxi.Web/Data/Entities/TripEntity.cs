@@ -22,10 +22,10 @@ namespace Taxi.Web.Data.Entities
 
         public DateTime? EndDateLocal => EndDate?.ToLocalTime();
 
-        [MaxLength(100, ErrorMessage = "The {0} field must have {1} characters.")]
+        [MaxLength(500, ErrorMessage = "The {0} field must have {1} characters.")]
         public string Source { get; set; }
 
-        [MaxLength(100, ErrorMessage = "The {0} field must have {1} characters.")]
+        [MaxLength(500, ErrorMessage = "The {0} field must have {1} characters.")]
         public string Target { get; set; }
 
         public float Qualification { get; set; }

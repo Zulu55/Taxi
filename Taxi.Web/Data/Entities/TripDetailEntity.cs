@@ -14,6 +14,9 @@ namespace Taxi.Web.Data.Entities
 
         public DateTime DateLocal => Date.ToLocalTime();
 
+        [MaxLength(500, ErrorMessage = "The {0} field must have {1} characters.")]
+        public string Address { get; set; }
+
         public double Latitude { get; set; }
 
         public double Longitude { get; set; }

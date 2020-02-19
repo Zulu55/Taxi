@@ -6,6 +6,8 @@ namespace Taxi.Common.Models
     {
         public int Id { get; set; }
 
+        public string Address { get; set; }
+
         public DateTime Date { get; set; }
 
         public DateTime DateLocal => Date.ToLocalTime();

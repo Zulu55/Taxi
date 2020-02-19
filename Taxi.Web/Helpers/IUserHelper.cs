@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Threading.Tasks;
 using Taxi.Web.Data.Entities;
 using Taxi.Web.Models;
@@ -7,7 +8,9 @@ namespace Taxi.Web.Helpers
 {
     public interface IUserHelper
     {
-        Task<UserEntity> GetUserByEmailAsync(string email);
+        Task<UserEntity> GetUserAsync(string email);
+
+        Task<UserEntity> GetUserAsync(Guid userId);
 
         Task<IdentityResult> AddUserAsync(UserEntity user, string password);
 
@@ -26,5 +29,8 @@ namespace Taxi.Web.Helpers
         Task<IdentityResult> ChangePasswordAsync(UserEntity user, string oldPassword, string newPassword);
 
         Task<IdentityResult> UpdateUserAsync(UserEntity user);
+
+        Task<SignInResult> ValidatePasswordAsync(UserEntity user, string password);
+
     }
 }
