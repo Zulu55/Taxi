@@ -23,5 +23,35 @@ namespace Taxi.Web.Helpers
 
             return $"~/images/{folder}/{file}";
         }
+
+        public string UploadImage(byte[] pictureArray, string folder)
+        {
+            MemoryStream stream = new MemoryStream(pictureArray);
+            string guid = Guid.NewGuid().ToString();
+            string file = $"{guid}.jpg";
+            string path = string.Empty;
+
+            try
+            {
+                stream.Position = 0;
+                path = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\{folder}", file);
+                File.WriteAllBytes(path, stream.ToArray());
+            }
+            catch
+            {
+                return string.Empty;
+            }
+
+            return $"~/images/{folder}/{file}";
+        }
+
+        public static byte[] ReadFully(Stream input)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                input.CopyTo(ms);
+                return ms.ToArray();
+            }
+        }
     }
 }

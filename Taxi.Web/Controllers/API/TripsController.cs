@@ -74,5 +74,76 @@ namespace Taxi.Web.Controllers.API
             await _context.SaveChangesAsync();
             return Ok(_converterHelper.ToTripResponse(tripEntity));
         }
+
+        [HttpPost]
+        [Route("AddTripDetail")]
+        public async Task<IActionResult> AddTripDetail([FromBody] TripDetailRequest tripDetailRequest)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            TripEntity trip = await _context.Trips
+                .Include(t => t.TripDetails)
+                .FirstOrDefaultAsync(t => t.Id == tripDetailRequest.TripId);
+            if (trip == null)
+            {
+                return BadRequest("Error002");
+            }
+
+            if (trip.TripDetails == null)
+            {
+                trip.TripDetails = new List<TripDetailEntity>();
+            }
+
+            trip.TripDetails.Add(new TripDetailEntity
+            {
+                Address = tripDetailRequest.Address,
+                Date = DateTime.UtcNow,
+                Latitude = tripDetailRequest.Latitude,
+                Longitude = tripDetailRequest.Longitude
+            });
+
+            _context.Trips.Update(trip);
+            await _context.SaveChangesAsync();
+            return Ok(_converterHelper.ToTripResponse(trip));
+        }
+
+        [HttpPost]
+        [Route("CompleteTrip")]
+        public async Task<IActionResult> CompleteTrip([FromBody] CompleteTripRequest completeTripRequest)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            TripEntity trip = await _context.Trips
+                .Include(t => t.TripDetails)
+                .FirstOrDefaultAsync(t => t.Id == completeTripRequest.TripId);
+            if (trip == null)
+            {
+                return BadRequest("Error002");
+            }
+
+            trip.EndDate = DateTime.UtcNow;
+            trip.Qualification = completeTripRequest.Qualification;
+            trip.Remarks = completeTripRequest.Remarks;
+            trip.Target = completeTripRequest.Target;
+            trip.TargetLatitude = completeTripRequest.TargetLatitude;
+            trip.TargetLongitude = completeTripRequest.TargetLongitude;
+            trip.TripDetails.Add(new TripDetailEntity
+            {
+                 Address = completeTripRequest.Target,
+                 Date = DateTime.UtcNow,
+                 Latitude = completeTripRequest.TargetLatitude,
+                 Longitude = completeTripRequest.TargetLongitude
+            });
+
+            _context.Trips.Update(trip);
+            await _context.SaveChangesAsync();
+            return Ok(_converterHelper.ToTripResponse(trip));
+        }
     }
 }
