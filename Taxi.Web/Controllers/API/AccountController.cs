@@ -15,21 +15,21 @@ namespace Taxi.Web.Controllers.API
     [Route("api/[Controller]")]
     public class AccountController : ControllerBase
     {
-        private readonly DataContext _dataContext;
         private readonly IUserHelper _userHelper;
         private readonly IMailHelper _mailHelper;
         private readonly IImageHelper _imageHelper;
+        private readonly IConverterHelper _converterHelper;
 
         public AccountController(
-            DataContext dataContext,
             IUserHelper userHelper,
             IMailHelper mailHelper,
-            IImageHelper imageHelper)
+            IImageHelper imageHelper,
+            IConverterHelper converterHelper)
         {
-            _dataContext = dataContext;
             _userHelper = userHelper;
             _mailHelper = mailHelper;
             _imageHelper = imageHelper;
+            _converterHelper = converterHelper;
         }
 
         [HttpPost]
@@ -113,7 +113,7 @@ namespace Taxi.Web.Controllers.API
                 });
             }
 
-            var user = await _userHelper.GetUserAsync(request.Email);
+            UserEntity user = await _userHelper.GetUserAsync(request.Email);
             if (user == null)
             {
                 return BadRequest(new Response
@@ -123,8 +123,8 @@ namespace Taxi.Web.Controllers.API
                 });
             }
 
-            var myToken = await _userHelper.GeneratePasswordResetTokenAsync(user);
-            var link = Url.Action("ResetPassword", "Account", new { token = myToken }, protocol: HttpContext.Request.Scheme);
+            string myToken = await _userHelper.GeneratePasswordResetTokenAsync(user);
+            string link = Url.Action("ResetPassword", "Account", new { token = myToken }, protocol: HttpContext.Request.Scheme);
             _mailHelper.SendMail(request.Email, "Password Reset", $"<h1>Recover Password</h1>" +
                 $"To reset the password click in this link:</br></br>" +
                 $"<a href = \"{link}\">Reset Password</a>");
@@ -144,7 +144,7 @@ namespace Taxi.Web.Controllers.API
                 return BadRequest(ModelState);
             }
 
-            var userEntity = await _userHelper.GetUserAsync(request.Email);
+            UserEntity userEntity = await _userHelper.GetUserAsync(request.Email);
             if (userEntity == null)
             {
                 return BadRequest("User not found.");
@@ -156,13 +156,13 @@ namespace Taxi.Web.Controllers.API
             userEntity.PhoneNumber = request.Phone;
             userEntity.Document = request.Phone;
 
-            var respose = await _userHelper.UpdateUserAsync(userEntity);
+            IdentityResult respose = await _userHelper.UpdateUserAsync(userEntity);
             if (!respose.Succeeded)
             {
                 return BadRequest(respose.Errors.FirstOrDefault().Description);
             }
 
-            var updatedUser = await _userHelper.GetUserAsync(request.Email);
+            UserEntity updatedUser = await _userHelper.GetUserAsync(request.Email);
             return Ok(updatedUser);
         }
 
@@ -180,7 +180,7 @@ namespace Taxi.Web.Controllers.API
                 });
             }
 
-            var user = await _userHelper.GetUserAsync(request.Email);
+            UserEntity user = await _userHelper.GetUserAsync(request.Email);
             if (user == null)
             {
                 return BadRequest(new Response
@@ -190,7 +190,7 @@ namespace Taxi.Web.Controllers.API
                 });
             }
 
-            var result = await _userHelper.ChangePasswordAsync(user, request.OldPassword, request.NewPassword);
+            IdentityResult result = await _userHelper.ChangePasswordAsync(user, request.OldPassword, request.NewPassword);
             if (!result.Succeeded)
             {
                 return BadRequest(new Response
@@ -205,6 +205,25 @@ namespace Taxi.Web.Controllers.API
                 IsSuccess = true,
                 Message = "The password was changed successfully!"
             });
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPost]
+        [Route("GetUserByEmail")]
+        public async Task<IActionResult> GetUserByEmail([FromBody] EmailRequest emailRequest)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            UserEntity userEntity = await _userHelper.GetUserAsync(emailRequest.Email);
+            if (userEntity == null)
+            {
+                return NotFound("Error002");
+            }
+
+            return Ok(_converterHelper.ToUserResponse(userEntity));
         }
     }
 }
