@@ -189,4 +189,25 @@
   <data name="TripDetail" xml:space="preserve">
     <value>Détail du voyage</value>
   </data>
+  <data name="Email" xml:space="preserve">
+    <value>Courrier électronique</value>
+  </data>
+  <data name="EmailPlaceHolder" xml:space="preserve">
+    <value>Entrez votre adresse e-mail</value>
+  </data>
+  <data name="EmailError" xml:space="preserve">
+    <value>Vous devez entrer un email.</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Mot de passe :</value>
+  </data>
+  <data name="PasswordPlaceHolder" xml:space="preserve">
+    <value>Entrez votre mot de passe</value>
+  </data>
+  <data name="PasswordError" xml:space="preserve">
+    <value>Vous devez entrer un mot de passe.</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Registres</value>
+  </data>
 </root>

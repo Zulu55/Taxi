@@ -169,4 +169,25 @@
   <data name="TripDetail" xml:space="preserve">
     <value>Trip Detail</value>
   </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="EmailPlaceHolder" xml:space="preserve">
+    <value>Enter your email...</value>
+  </data>
+  <data name="EmailError" xml:space="preserve">
+    <value>You must enter an email.</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PasswordPlaceHolder" xml:space="preserve">
+    <value>Enter your password...</value>
+  </data>
+  <data name="PasswordError" xml:space="preserve">
+    <value>You must enter a password.</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
 </root>

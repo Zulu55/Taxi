@@ -17,13 +17,22 @@
             <Color x:Key="ColorDanger">#8D07F6</Color>
             <Color x:Key="ColorAccent">#0029FA</Color>
             <Color x:Key="ColorFont">#3D3D3D</Color>
-            <Color x:Key="ColorFontInverse">#FFFF05</Color>
+            <Color x:Key="ColorFontInverse">#FFFFFF</Color>
 
             <!-- Styles -->
             <Style TargetType="Button">
                 <Setter Property="BackgroundColor" Value="{StaticResource ColorAccent}" />
                 <Setter Property="HorizontalOptions" Value="FillAndExpand" />
                 <Setter Property="TextColor" Value="{StaticResource ColorFontInverse}" />
+                <Setter Property="CornerRadius" Value="10" />
+            </Style>
+
+            <Style TargetType="Entry">
+                <Setter Property="BackgroundColor" Value="{StaticResource ColorFontInverse}" />
+            </Style>
+
+            <Style TargetType="Picker">
+                <Setter Property="BackgroundColor" Value="{StaticResource ColorFontInverse}" />
             </Style>
 
             <Style TargetType="Label">
@@ -37,6 +46,7 @@
             <Style x:Key="DangerButton" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="{StaticResource ColorDanger}" />
             </Style>
+
         </ResourceDictionary>
 
     </Application.Resources>
