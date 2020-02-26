@@ -318,4 +318,40 @@
   <data name="Message002" xml:space="preserve">
     <value>Se envió un email con instrucciones sobre cómo cambiar la contraseña.</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Cambiar contraseña</value>
+  </data>
+  <data name="UserUpdated" xml:space="preserve">
+    <value>Usuario actualizado.</value>
+  </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>Confirmar nueva contraseña</value>
+  </data>
+  <data name="ConfirmNewPasswordError" xml:space="preserve">
+    <value>Debe ingresar una confirmación para la nueva contraseña.</value>
+  </data>
+  <data name="ConfirmNewPasswordPlaceHolder" xml:space="preserve">
+    <value>Ingrese la confirmación de la nueva contraseña.</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Contraseña actual</value>
+  </data>
+  <data name="CurrentPasswordError" xml:space="preserve">
+    <value>Debe introducir su contraseña actual.</value>
+  </data>
+  <data name="CurrentPasswordPlaceHolder" xml:space="preserve">
+    <value>Escriba la contraseña actual.</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Contraseña nueva</value>
+  </data>
+  <data name="NewPasswordError" xml:space="preserve">
+    <value>Debe ingresar una nueva contraseña de al menos seis caracteres de longitud.</value>
+  </data>
+  <data name="NewPasswordPlaceHolder" xml:space="preserve">
+    <value>Escriba su nueva contraseña</value>
+  </data>
 </root>

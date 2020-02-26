@@ -13,6 +13,26 @@ namespace Taxi.Prism.Helpers
             DependencyService.Get<ILocalize>().SetLocale(ci);
         }
 
+        public static string ConfirmNewPassword => Resource.ConfirmNewPassword;
+
+        public static string ConfirmNewPasswordError => Resource.ConfirmNewPasswordError;
+
+        public static string ConfirmNewPasswordPlaceHolder => Resource.ConfirmNewPasswordPlaceHolder;
+
+        public static string CurrentPassword => Resource.CurrentPassword;
+
+        public static string CurrentPasswordError => Resource.CurrentPasswordError;
+
+        public static string CurrentPasswordPlaceHolder => Resource.CurrentPasswordPlaceHolder;
+
+        public static string NewPassword => Resource.NewPassword;
+
+        public static string NewPasswordError => Resource.NewPasswordError;
+
+        public static string NewPasswordPlaceHolder => Resource.NewPasswordPlaceHolder;
+        
+        public static string UserUpdated => Resource.UserUpdated;
+
         public static string Accept => Resource.Accept;
 
         public static string ConnectionError => Resource.ConnectionError;
@@ -134,5 +154,9 @@ namespace Taxi.Prism.Helpers
         public static string PasswordRecover => Resource.PasswordRecover;
 
         public static string ForgotPassword => Resource.ForgotPassword;
+
+        public static string Save => Resource.Save;
+
+        public static string ChangePassword => Resource.ChangePassword;
     }
 }

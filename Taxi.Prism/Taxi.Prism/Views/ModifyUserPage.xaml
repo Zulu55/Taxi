@@ -2,9 +2,122 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
+         	 xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+           	 xmlns:i18n="clr-namespace:Taxi.Prism.Helpers"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Taxi.Prism.Views.ModifyUserPage"
              BackgroundColor="{StaticResource ColorBackgroud}"
              Title="{Binding Title}">
-  
+
+
+    <AbsoluteLayout>
+        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                     AbsoluteLayout.LayoutFlags="All"
+                     Padding="5">
+            <ScrollView>
+                <StackLayout>
+                    <ffimageloading:CachedImage Aspect="AspectFit"
+                                                Source="{Binding Image}" 
+                                                CacheDuration= "50"
+                                                HeightRequest="150"
+                                                Margin="5"
+                                                RetryCount= "3"
+                                                RetryDelay= "600">
+                        <ffimageloading:CachedImage.Transformations>
+                            <fftransformations:CircleTransformation />
+                        </ffimageloading:CachedImage.Transformations>
+                        <ffimageloading:CachedImage.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ChangeImageCommand}"/>
+                        </ffimageloading:CachedImage.GestureRecognizers>
+                    </ffimageloading:CachedImage>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0"
+                               Grid.Column="0"
+                               Text="{i18n:Translate Document}"
+                               VerticalOptions="Center"/>
+                        <Entry Grid.Row="0"
+                               Grid.Column="1"
+                               Keyboard="Numeric"
+                               Placeholder="{i18n:Translate DocumentPlaceHolder}"
+                               Text="{Binding User.Document}"/>
+
+                        <Label Grid.Row="1"
+                               Grid.Column="0"
+                               Text="{i18n:Translate FirstName}"
+                               VerticalOptions="Center"/>
+                        <Entry Grid.Row="1"
+                               Grid.Column="1"
+                               Placeholder="{i18n:Translate FirstNamePlaceHolder}"
+                               Text="{Binding User.FirstName}"/>
+
+                        <Label Grid.Row="2"
+                               Grid.Column="0"
+                               Text="{i18n:Translate LastName}"
+                               VerticalOptions="Center"/>
+                        <Entry Grid.Row="2"
+                               Grid.Column="1"
+                               Placeholder="{i18n:Translate LastNamePlaceHolder}"
+                               Text="{Binding User.LastName}"/>
+
+                        <Label Grid.Row="3"
+                               Grid.Column="0"
+                               Text="{i18n:Translate Address}"
+                               VerticalOptions="Center"/>
+                        <Entry Grid.Row="3"
+                               Grid.Column="1"
+                               Placeholder="{i18n:Translate AddressPlaceHolder}"
+                               Text="{Binding User.Address}"/>
+                        
+                        <Label Grid.Row="4"
+                               Grid.Column="0"
+                               Text="{i18n:Translate Phone}"
+                               VerticalOptions="Center"/>
+                        <Entry Grid.Row="4" 
+                               Grid.Column="1"
+                               Keyboard="Telephone"
+                               Placeholder="{i18n:Translate PhonePlaceHolder}"
+                               Text="{Binding User.PhoneNumber}"/>
+                    </Grid>
+                </StackLayout>
+            </ScrollView>
+            <StackLayout Orientation="Horizontal"
+                         VerticalOptions="EndAndExpand">
+                <Button Command="{Binding SaveCommand}"
+                        IsEnabled="{Binding IsEnabled}"
+                        Text="{i18n:Translate Save}"/>
+                <Button Command="{Binding ChangePasswordCommand}"
+                        IsEnabled="{Binding IsEnabled}"
+                        Text="{i18n:Translate ChangePassword}"
+                        Style="{StaticResource DangerButton}"/>
+            </StackLayout>
+        </StackLayout>
+        <busyindicator:SfBusyIndicator AnimationType="Gear" 
+                                       AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+                	                   AbsoluteLayout.LayoutFlags="All"
+                	                   BackgroundColor="{StaticResource ColorAccent}"
+                	                   HorizontalOptions="Center"
+                	                   TextColor="{StaticResource ColorFontInverse}"
+                	                   IsVisible="{Binding IsRunning}"
+                	                   Title="{i18n:Translate Loading}"
+                	                   VerticalOptions="Center"
+                	                   ViewBoxWidth="80"
+                	                   ViewBoxHeight="80" />
+    </AbsoluteLayout>
+
 </ContentPage>
