@@ -104,6 +104,7 @@ namespace Taxi.Web.Controllers
                 if (user == null)
                 {
                     ModelState.AddModelError(string.Empty, "This email is already used.");
+                    model.UserTypes = _combosHelper.GetComboRoles();
                     return View(model);
                 }
 
@@ -114,10 +115,17 @@ namespace Taxi.Web.Controllers
                     token = myToken
                 }, protocol: HttpContext.Request.Scheme);
 
-                _mailHelper.SendMail(model.Username, "Email confirmation", $"<h1>Email Confirmation</h1>" +
+                var response = _mailHelper.SendMail(model.Username, "Email confirmation", $"<h1>Email Confirmation</h1>" +
                     $"To allow the user, " +
                     $"plase click in this link:</br></br><a href = \"{tokenLink}\">Confirm Email</a>");
-                ViewBag.Message = "The instructions to allow your user has been sent to email.";
+                if (response.IsSuccess)
+                {
+                    ViewBag.Message = "The instructions to allow your user has been sent to email.";
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, response.Message);
+                }
             }
 
             return View(model);

@@ -158,7 +158,7 @@
     <value>Admin my user group</value>
   </data>
   <data name="ModifyUser" xml:space="preserve">
-    <value>Modify user</value>
+    <value>Modify User</value>
   </data>
   <data name="ReportAnIncident" xml:space="preserve">
     <value>Report an incident</value>
@@ -189,5 +189,11 @@
   </data>
   <data name="Register" xml:space="preserve">
     <value>Register</value>
+  </data>
+  <data name="LoginError" xml:space="preserve">
+    <value>Email or password incorrect.</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Logout</value>
   </data>
 </root>

@@ -160,7 +160,25 @@ namespace Taxi.Prism.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Modify user.
+        ///   Looks up a localized string similar to Email or password incorrect..
+        /// </summary>
+        public static string LoginError {
+            get {
+                return ResourceManager.GetString("LoginError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logout.
+        /// </summary>
+        public static string Logout {
+            get {
+                return ResourceManager.GetString("Logout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modify User.
         /// </summary>
         public static string ModifyUser {
             get {

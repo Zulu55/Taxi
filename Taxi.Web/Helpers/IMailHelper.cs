@@ -1,7 +1,9 @@
-﻿namespace Taxi.Web.Helpers
+﻿using Taxi.Common.Models;
+
+namespace Taxi.Web.Helpers
 {
 	public interface IMailHelper
 	{
-		void SendMail(string to, string subject, string body);
+		Response SendMail(string to, string subject, string body);
 	}
 }

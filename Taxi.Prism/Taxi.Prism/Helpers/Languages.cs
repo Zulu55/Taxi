@@ -74,5 +74,9 @@ namespace Taxi.Prism.Helpers
         public static string PasswordPlaceHolder => Resource.PasswordPlaceHolder;
 
         public static string Register => Resource.Register;
+
+        public static string LoginError => Resource.LoginError;
+
+        public static string Logout => Resource.Logout;
     }
 }

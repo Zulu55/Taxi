@@ -210,4 +210,10 @@
   <data name="Register" xml:space="preserve">
     <value>Registrar</value>
   </data>
+  <data name="LoginError" xml:space="preserve">
+    <value>Email o contraseña incorrectos</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Cerrar sesión</value>
+  </data>
 </root>
