@@ -13,7 +13,7 @@ namespace Taxi.Prism.ViewModels
         private bool _isRunning;
         private DelegateCommand _checkPlaqueCommand;
 
-        public TaxiHistoryPageViewModel(INavigationService navigationService, IApiService apiService) 
+        public TaxiHistoryPageViewModel(INavigationService navigationService, IApiService apiService)
             : base(navigationService)
         {
             _apiService = apiService;
@@ -59,6 +59,14 @@ namespace Taxi.Prism.ViewModels
 
             IsRunning = true;
             string url = App.Current.Resources["UrlAPI"].ToString();
+            bool connection = await _apiService.CheckConnectionAsync(url);
+            if (!connection)
+            {
+                IsRunning = false;
+                await App.Current.MainPage.DisplayAlert("Error", "Check the internet connection.", "Accept");
+                return;
+            }
+
             Response response = await _apiService.GetTaxiAsync(Plaque, url, "/api", "/Taxis");
             IsRunning = false;
 
