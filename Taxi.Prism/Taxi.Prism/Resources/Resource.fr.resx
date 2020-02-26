@@ -285,4 +285,13 @@
   <data name="User" xml:space="preserve">
     <value>Utilisateur</value>
   </data>
+  <data name="Error001" xml:space="preserve">
+    <value>Cet e-mail est déjà enregistré.</value>
+  </data>
+  <data name="Message001" xml:space="preserve">
+    <value>Un e-mail de confirmation a été envoyé. Veuillez confirmer votre compte et vous connecter à l&amp;#39;application.!</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
 </root>

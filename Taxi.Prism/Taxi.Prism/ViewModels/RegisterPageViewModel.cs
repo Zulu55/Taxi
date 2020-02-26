@@ -83,6 +83,39 @@ namespace Taxi.Prism.ViewModels
             {
                 return;
             }
+
+            IsRunning = true;
+            IsEnabled = false;
+            string url = App.Current.Resources["UrlAPI"].ToString();
+            bool connection = await _apiService.CheckConnectionAsync(url);
+            if (!connection)
+            {
+                IsRunning = false;
+                IsEnabled = true;
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ConnectionError, Languages.Accept);
+                return;
+            }
+
+            User.UserTypeId = Role.Id;
+            Response response = await _apiService.RegisterUserAsync(url, "/api", "/Account", User);
+            IsRunning = false;
+            IsEnabled = true;
+
+            if (!response.IsSuccess)
+            {
+                if (response.Message == "Error001")
+                {
+                    await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.Error001, Languages.Accept);
+                }
+                else
+                {
+                    await App.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
+                }
+                return;
+            }
+
+            await App.Current.MainPage.DisplayAlert(Languages.Ok, Languages.Message001, Languages.Accept);
+            await _navigationService.GoBackAsync();
         }
 
         private async Task<bool> ValidateDataAsync()

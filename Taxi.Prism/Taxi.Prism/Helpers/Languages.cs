@@ -112,5 +112,11 @@ namespace Taxi.Prism.Helpers
         public static string FirstNameError => Resource.FirstNameError;
 
         public static string LastNameError => Resource.LastNameError;
+
+        public static string Error001 => Resource.Error001;
+
+        public static string Message001 => Resource.Message001;
+
+        public static string Ok => Resource.Ok;
     }
 }

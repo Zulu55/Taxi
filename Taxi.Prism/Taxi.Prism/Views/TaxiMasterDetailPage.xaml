@@ -21,7 +21,7 @@
                                                 Aspect="AspectFit"
                                                 Source="{Binding User.PictureFullPath}" 
                                                 CacheDuration= "50"
-                                                HeightRequest="150"
+                                                HeightRequest="100"
                                                 Margin="5"
                                                 RetryCount= "3"
                                                 RetryDelay= "600">

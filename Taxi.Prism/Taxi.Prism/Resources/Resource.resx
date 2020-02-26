@@ -265,4 +265,13 @@
   <data name="User" xml:space="preserve">
     <value>User</value>
   </data>
+  <data name="Error001" xml:space="preserve">
+    <value>This email is already registered.</value>
+  </data>
+  <data name="Message001" xml:space="preserve">
+    <value>A Confirmation email was sent. Please confirm your account and log into the App.</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Ok</value>
+  </data>
 </root>

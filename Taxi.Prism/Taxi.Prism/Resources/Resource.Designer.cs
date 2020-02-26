@@ -196,6 +196,15 @@ namespace Taxi.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This email is already registered..
+        /// </summary>
+        public static string Error001 {
+            get {
+                return ResourceManager.GetString("Error001", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to First name.
         /// </summary>
         public static string FirstName {
@@ -286,6 +295,15 @@ namespace Taxi.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A Confirmation email was sent. Please confirm your account and log into the App..
+        /// </summary>
+        public static string Message001 {
+            get {
+                return ResourceManager.GetString("Message001", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Modify User.
         /// </summary>
         public static string ModifyUser {
@@ -309,6 +327,15 @@ namespace Taxi.Prism.Resources {
         public static string NumberOfTrips {
             get {
                 return ResourceManager.GetString("NumberOfTrips", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ok.
+        /// </summary>
+        public static string Ok {
+            get {
+                return ResourceManager.GetString("Ok", resourceCulture);
             }
         }
         
