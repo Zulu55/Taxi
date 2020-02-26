@@ -306,4 +306,16 @@
   <data name="FromGallery" xml:space="preserve">
     <value>À partir de la galerie</value>
   </data>
+  <data name="PasswordRecover" xml:space="preserve">
+    <value>Retrouver son mot de passe</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Vous avez oublié votre mot de passe?</value>
+  </data>
+  <data name="Error002" xml:space="preserve">
+    <value>Cet e-mail n&amp;#39;est attribué à aucun utilisateur.!</value>
+  </data>
+  <data name="Message002" xml:space="preserve">
+    <value>Un e-mail contenant des instructions pour modifier le mot de passe a été envoyé.!</value>
+  </data>
 </root>

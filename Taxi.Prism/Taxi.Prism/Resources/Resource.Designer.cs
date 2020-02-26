@@ -214,6 +214,15 @@ namespace Taxi.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This email is not assigned to any user..
+        /// </summary>
+        public static string Error002 {
+            get {
+                return ResourceManager.GetString("Error002", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to First name.
         /// </summary>
         public static string FirstName {
@@ -237,6 +246,15 @@ namespace Taxi.Prism.Resources {
         public static string FirstNamePlaceHolder {
             get {
                 return ResourceManager.GetString("FirstNamePlaceHolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Forgot your password?.
+        /// </summary>
+        public static string ForgotPassword {
+            get {
+                return ResourceManager.GetString("ForgotPassword", resourceCulture);
             }
         }
         
@@ -327,6 +345,15 @@ namespace Taxi.Prism.Resources {
         public static string Message001 {
             get {
                 return ResourceManager.GetString("Message001", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An email with instructions to change the password was sent..
+        /// </summary>
+        public static string Message002 {
+            get {
+                return ResourceManager.GetString("Message002", resourceCulture);
             }
         }
         
@@ -426,6 +453,15 @@ namespace Taxi.Prism.Resources {
         public static string PasswordPlaceHolder {
             get {
                 return ResourceManager.GetString("PasswordPlaceHolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password recover.
+        /// </summary>
+        public static string PasswordRecover {
+            get {
+                return ResourceManager.GetString("PasswordRecover", resourceCulture);
             }
         }
         

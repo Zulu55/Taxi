@@ -306,4 +306,16 @@
   <data name="FromGallery" xml:space="preserve">
     <value>De la galería</value>
   </data>
+  <data name="PasswordRecover" xml:space="preserve">
+    <value>Recuperar la clave</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>¿Olvidó su contraseña?</value>
+  </data>
+  <data name="Error002" xml:space="preserve">
+    <value>Este correo electrónico no está asignado a ningún usuario.</value>
+  </data>
+  <data name="Message002" xml:space="preserve">
+    <value>Se envió un email con instrucciones sobre cómo cambiar la contraseña.</value>
+  </data>
 </root>

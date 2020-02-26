@@ -286,4 +286,16 @@
   <data name="FromGallery" xml:space="preserve">
     <value>From gallery</value>
   </data>
+  <data name="PasswordRecover" xml:space="preserve">
+    <value>Password recover</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Forgot your password?</value>
+  </data>
+  <data name="Error002" xml:space="preserve">
+    <value>This email is not assigned to any user.</value>
+  </data>
+  <data name="Message002" xml:space="preserve">
+    <value>An email with instructions to change the password was sent.</value>
+  </data>
 </root>
