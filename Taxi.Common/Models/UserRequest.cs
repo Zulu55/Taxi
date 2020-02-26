@@ -30,5 +30,7 @@ namespace Taxi.Common.Models
         public int UserTypeId { get; set; } // 1: User, 2: Driver
 
         public byte[] PictureArray { get; set; }
+
+        public string PasswordConfirm { get; set; }
     }
 }

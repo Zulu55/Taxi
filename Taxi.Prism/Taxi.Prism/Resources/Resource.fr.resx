@@ -216,4 +216,73 @@
   <data name="Logout" xml:space="preserve">
     <value>Déconnexion</value>
   </data>
+  <data name="Document" xml:space="preserve">
+    <value>Document</value>
+  </data>
+  <data name="DocumentPlaceHolder" xml:space="preserve">
+    <value>Entrez votre numéro de document ...</value>
+  </data>
+  <data name="DocumentError" xml:space="preserve">
+    <value>Vous devez saisir un document.!</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>Prénom</value>
+  </data>
+  <data name="FirstNamePlaceHolder" xml:space="preserve">
+    <value>Entrez votre prénom</value>
+  </data>
+  <data name="FirstNameError" xml:space="preserve">
+    <value>Vous devez entrer un prénom</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="LastNamePlaceHolder" xml:space="preserve">
+    <value>Entrez votre nom</value>
+  </data>
+  <data name="LastNameError" xml:space="preserve">
+    <value>Vous devez entrer un nom</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Adresse</value>
+  </data>
+  <data name="AddressPlaceHolder" xml:space="preserve">
+    <value>Entrez votre adresse&amp;hellip;</value>
+  </data>
+  <data name="AddressError" xml:space="preserve">
+    <value>Vous devez indiquer une adresse.</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Téléphone</value>
+  </data>
+  <data name="PhoneError" xml:space="preserve">
+    <value>Entrez votre téléphone</value>
+  </data>
+  <data name="PhonePlaceHolder" xml:space="preserve">
+    <value>Vous devez introduire un numéro de téléphone.</value>
+  </data>
+  <data name="PasswordConfirm" xml:space="preserve">
+    <value>Confirmer le mot de passe</value>
+  </data>
+  <data name="PasswordConfirmError1" xml:space="preserve">
+    <value>Vous devez saisir un mot de passe.</value>
+  </data>
+  <data name="PasswordConfirmError2" xml:space="preserve">
+    <value>Le mot de passe et sa confirmation ne coïncident pas.</value>
+  </data>
+  <data name="PasswordConfirmPlaceHolder" xml:space="preserve">
+    <value>Saisir le mot de passe, puis valider</value>
+  </data>
+  <data name="RegisterAs" xml:space="preserve">
+    <value>Enregistrer en tant que</value>
+  </data>
+  <data name="RegisterAsError" xml:space="preserve">
+    <value>Vous devez sélectionner un rôle.</value>
+  </data>
+  <data name="RegisterAsPlaceHolder" xml:space="preserve">
+    <value>Sélectionner un rôle</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>Utilisateur</value>
+  </data>
 </root>

@@ -9,6 +9,7 @@
 
             <!-- Parameters -->
             <x:String x:Key="UrlAPI">https://taxiweb0.azurewebsites.net/</x:String>
+            <x:String x:Key="UrlNoImage">https://TaxiWeb0.azurewebsites.net/images/noimage.png</x:String>
 
             <!-- Colors -->
             <Color x:Key="ColorBackgroud">#FFFF05</Color>
