@@ -79,8 +79,8 @@ namespace Taxi.Prism.ViewModels
             bool connection = await _apiService.CheckConnectionAsync(url);
             if (!connection)
             {
-                IsRunning = true;
-                IsEnabled = false;
+                IsRunning = false;
+                IsEnabled = true;
                 await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ConnectionError, Languages.Accept);
                 return;
             }

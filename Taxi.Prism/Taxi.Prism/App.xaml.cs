@@ -1,5 +1,6 @@
 ﻿using Prism;
 using Prism.Ioc;
+using Soccer.Common.Helpers;
 using Syncfusion.Licensing;
 using Taxi.Common.Helpers;
 using Taxi.Common.Services;
@@ -29,6 +30,7 @@ namespace Taxi.Prism
             containerRegistry.Register<IGeolocatorService, GeolocatorService>();
             containerRegistry.Register<IRegexHelper, RegexHelper>();
             containerRegistry.Register<IApiService, ApiService>();
+            containerRegistry.Register<IFilesHelper, FilesHelper>();
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<HomePage, HomePageViewModel>();
             containerRegistry.RegisterForNavigation<TaxiMasterDetailPage, TaxiMasterDetailPageViewModel>();
