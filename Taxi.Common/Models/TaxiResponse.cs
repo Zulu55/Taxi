@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Taxi.Common.Models
 {
@@ -11,5 +12,9 @@ namespace Taxi.Common.Models
         public List<TripResponse> Trips { get; set; }
 
         public UserResponse User { get; set; }
+
+        public float? Qualification => Trips?.Average(t => t.Qualification);
+
+        public int? NumberOfTrips => Trips?.Count;
     }
 }
