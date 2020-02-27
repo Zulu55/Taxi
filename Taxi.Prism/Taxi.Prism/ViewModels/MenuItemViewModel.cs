@@ -24,8 +24,6 @@ namespace Taxi.Prism.ViewModels
                 Settings.IsLogin = false;
                 Settings.User = null;
                 Settings.Token = null;
-                await _navigationService.NavigateAsync("/TaxiMasterDetailPage/NavigationPage/TournamentsPage");
-                return;
             }
 
             await _navigationService.NavigateAsync($"/TaxiMasterDetailPage/NavigationPage/{PageName}");
