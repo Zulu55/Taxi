@@ -177,7 +177,7 @@ namespace Taxi.Prism.ViewModels
             
             _timer = new Timer
             {
-                Interval = 30000
+                Interval = 5000
             };
 
             _timer.Elapsed += Timer_Elapsed;
@@ -225,7 +225,10 @@ namespace Taxi.Prism.ViewModels
                 return;
             }
 
-            StartTripPage.GetInstance().DrawLine(previousPosition, _position);
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                StartTripPage.GetInstance().DrawLine(previousPosition, _position);
+            });
         }
 
         private async Task<bool> ValidateDataAsync()

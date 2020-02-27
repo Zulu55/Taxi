@@ -45,7 +45,7 @@ namespace Taxi.Prism.Views
         {
             Polygon polygon = new Polygon
             {
-                StrokeWidth = 3,
+                StrokeWidth = 10,
                 StrokeColor = Color.FromHex("#1BA1E2"),
                 FillColor = Color.FromHex("#881BA1E2"),
                 Geopath = { a, b }
