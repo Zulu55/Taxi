@@ -354,4 +354,10 @@
   <data name="NewPasswordPlaceHolder" xml:space="preserve">
     <value>Entrez votre nouveau mot de passe.</value>
   </data>
+  <data name="ConfirmNewPasswordError2" xml:space="preserve">
+    <value>Le mot de passe et la confirmation ne correspondent pas.!</value>
+  </data>
+  <data name="Message003" xml:space="preserve">
+    <value>Le mot de passe a été modifié.</value>
+  </data>
 </root>

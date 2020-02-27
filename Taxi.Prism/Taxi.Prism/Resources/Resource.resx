@@ -334,4 +334,10 @@
   <data name="NewPasswordPlaceHolder" xml:space="preserve">
     <value>Enter your new password.</value>
   </data>
+  <data name="ConfirmNewPasswordError2" xml:space="preserve">
+    <value>The password and the confirm does not match.</value>
+  </data>
+  <data name="Message003" xml:space="preserve">
+    <value>The password was changed successfully!</value>
+  </data>
 </root>

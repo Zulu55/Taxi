@@ -151,6 +151,15 @@ namespace Taxi.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The password and the confirm does not match..
+        /// </summary>
+        public static string ConfirmNewPasswordError2 {
+            get {
+                return ResourceManager.GetString("ConfirmNewPasswordError2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter confirmation for new password..
         /// </summary>
         public static string ConfirmNewPasswordPlaceHolder {
@@ -417,6 +426,15 @@ namespace Taxi.Prism.Resources {
         public static string Message002 {
             get {
                 return ResourceManager.GetString("Message002", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The password was changed successfully!.
+        /// </summary>
+        public static string Message003 {
+            get {
+                return ResourceManager.GetString("Message003", resourceCulture);
             }
         }
         

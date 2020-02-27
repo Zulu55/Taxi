@@ -10,6 +10,7 @@ using Taxi.Common.Helpers;
 using Taxi.Common.Models;
 using Taxi.Common.Services;
 using Taxi.Prism.Helpers;
+using Taxi.Prism.Views;
 using Xamarin.Forms;
 
 namespace Taxi.Prism.ViewModels
@@ -26,8 +27,9 @@ namespace Taxi.Prism.ViewModels
         private MediaFile _file;
         private DelegateCommand _changeImageCommand;
         private DelegateCommand _saveCommand;
+        private DelegateCommand _changePasswordCommand;
 
-        public ModifyUserPageViewModel(INavigationService navigationService, IFilesHelper filesHelper, IApiService apiService) 
+        public ModifyUserPageViewModel(INavigationService navigationService, IFilesHelper filesHelper, IApiService apiService)
             : base(navigationService)
         {
             _navigationService = navigationService;
@@ -38,6 +40,8 @@ namespace Taxi.Prism.ViewModels
             User = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
             Image = User.PictureFullPath;
         }
+
+        public DelegateCommand ChangePasswordCommand => _changePasswordCommand ?? (_changePasswordCommand = new DelegateCommand(ChangePasswordAsync));
 
         public DelegateCommand ChangeImageCommand => _changeImageCommand ?? (_changeImageCommand = new DelegateCommand(ChangeImageAsync));
 
@@ -69,7 +73,7 @@ namespace Taxi.Prism.ViewModels
 
         private async void SaveAsync()
         {
-            var isValid = await ValidateDataAsync();
+            bool isValid = await ValidateDataAsync();
             if (!isValid)
             {
                 return;
@@ -84,7 +88,7 @@ namespace Taxi.Prism.ViewModels
                 imageArray = _filesHelper.ReadFully(_file.GetStream());
             }
 
-            var userRequest = new UserRequest
+            UserRequest userRequest = new UserRequest
             {
                 Address = User.Address,
                 Document = User.Document,
@@ -97,10 +101,10 @@ namespace Taxi.Prism.ViewModels
                 UserTypeId = User.UserType == UserType.User ? 1 : 2
             };
 
-            var token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
+            TokenResponse token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
 
-            var url = App.Current.Resources["UrlAPI"].ToString();
-            var response = await _apiService.PutAsync(url, "/api", "/Account", userRequest, "bearer", token.Token);
+            string url = App.Current.Resources["UrlAPI"].ToString();
+            Response response = await _apiService.PutAsync(url, "/api", "/Account", userRequest, "bearer", token.Token);
 
             IsRunning = false;
             IsEnabled = true;
@@ -194,6 +198,11 @@ namespace Taxi.Prism.ViewModels
                     return stream;
                 });
             }
+        }
+
+        private async void ChangePasswordAsync()
+        {
+            await _navigationService.NavigateAsync(nameof(ChangePasswordPage));
         }
     }
 }

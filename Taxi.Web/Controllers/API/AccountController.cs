@@ -193,7 +193,7 @@ namespace Taxi.Web.Controllers.API
                 return BadRequest(new Response
                 {
                     IsSuccess = false,
-                    Message = "This email is not assigned to any user."
+                    Message = "Error002"
                 });
             }
 
@@ -210,7 +210,7 @@ namespace Taxi.Web.Controllers.API
             return Ok(new Response
             {
                 IsSuccess = true,
-                Message = "The password was changed successfully!"
+                Message = "Message003"
             });
         }
 
