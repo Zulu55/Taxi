@@ -4,6 +4,7 @@
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Taxi.Prism.Views.ModifyUserPage"
+             BackgroundColor="{StaticResource ColorBackgroud}"
              Title="{Binding Title}">
   
 </ContentPage>

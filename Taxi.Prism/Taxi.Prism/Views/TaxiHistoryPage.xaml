@@ -6,6 +6,7 @@
              xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Taxi.Prism.Views.TaxiHistoryPage"
+             BackgroundColor="{StaticResource ColorBackgroud}"
              Title="{Binding Title}">
 
     <AbsoluteLayout>
@@ -19,13 +20,9 @@
                        Placeholder="Enter plaque..." 
                        Text="{Binding Plaque}"
                        VerticalOptions="Center"/>
-                <Button BackgroundColor="Navy"
-                        Command="{Binding CheckPlaqueCommand}"
-                        CornerRadius="20"
-                        HeightRequest="40"
+                <Button Command="{Binding CheckPlaqueCommand}"
                         Margin="10,0"
-                        Text="Check Plaque"
-                        TextColor="White"/>
+                        Text="Check Plaque"/>
             </StackLayout>
             <rating:SfRating HorizontalOptions="Center" 
                              Margin="0,5"
