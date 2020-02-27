@@ -366,4 +366,7 @@
   <data name="ConfirmAddress" xml:space="preserve">
     <value>Confirma tu dirección</value>
   </data>
+  <data name="EndTrip" xml:space="preserve">
+    <value>Finalizar viaje</value>
+  </data>
 </root>

@@ -277,6 +277,15 @@ namespace Taxi.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to End Trip.
+        /// </summary>
+        public static string EndTrip {
+            get {
+                return ResourceManager.GetString("EndTrip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         public static string Error {

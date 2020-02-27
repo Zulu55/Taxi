@@ -13,6 +13,8 @@ namespace Taxi.Prism.Helpers
             DependencyService.Get<ILocalize>().SetLocale(ci);
         }
 
+        public static string EndTrip => Resource.EndTrip;
+
         public static string Source => Resource.Source;
 
         public static string ConfirmAddress => Resource.ConfirmAddress;

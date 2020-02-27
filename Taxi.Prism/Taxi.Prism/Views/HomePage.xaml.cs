@@ -39,7 +39,7 @@ namespace Taxi.Prism.Views
                         _geolocatorService.Longitude);
                     MyMap.MoveToRegion(MapSpan.FromCenterAndRadius(
                         position,
-                        Distance.FromKilometers(.5)));
+                        Distance.FromKilometers(.3)));
                 }
             }
         }

@@ -39,7 +39,7 @@ namespace Taxi.Web.Controllers.API
             UserEntity userEntity = await _userHelper.GetUserAsync(tripRequest.UserId);
             if (userEntity == null)
             {
-                return BadRequest("Error001");
+                return BadRequest("User doesn't exists.");
             }
 
             TaxiEntity taxiEntity = await _context.Taxis.FirstOrDefaultAsync(t => t.Plaque == tripRequest.Plaque);

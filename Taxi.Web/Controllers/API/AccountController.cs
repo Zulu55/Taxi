@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Taxi.Common.Enums;
 using Taxi.Common.Models;
-using Taxi.Web.Data;
 using Taxi.Web.Data.Entities;
 using Taxi.Web.Helpers;
 

@@ -20,5 +20,9 @@ namespace Taxi.Common.Services
         Task<Response> PutAsync<T>(string urlBase, string servicePrefix, string controller, T model, string tokenType, string accessToken);
 
         Task<Response> ChangePasswordAsync(string urlBase, string servicePrefix, string controller, ChangePasswordRequest changePasswordRequest, string tokenType, string accessToken);
+
+        Task<Response> NewTripAsync(string urlBase, string servicePrefix, string controller, TripRequest model, string tokenType, string accessToken);
+
+        Task<Response> AddTripDetailAsync(string urlBase, string servicePrefix, string controller, TripDetailRequest model, string tokenType, string accessToken);
     }
 }

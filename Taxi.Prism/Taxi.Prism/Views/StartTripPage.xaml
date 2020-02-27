@@ -4,55 +4,72 @@
              xmlns:prism="http://prismlibrary.com"
          	 xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"    
            	 xmlns:i18n="clr-namespace:Taxi.Prism.Helpers"
+         	 xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Taxi.Prism.Views.StartTripPage"
              BackgroundColor="{StaticResource ColorBackgroud}"
              Title="{Binding Title}">
 
-    <StackLayout Padding="5">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" 
-                   Grid.Column="0"
-                   Text="{i18n:Translate Plaque}"
-                   VerticalOptions="Center"/>
-            <Entry Grid.Row="0" 
-                   Grid.Column="1"
-                   FontSize="48" 
-                   HorizontalOptions="FillAndExpand"
-                   Placeholder="{i18n:Translate PlaquePlaceHolder}" 
-                   Text="{Binding Plaque}"/>
-            <Label Grid.Row="1" 
-                   Grid.Column="0"
-                   HorizontalOptions="FillAndExpand" 
-                   Text="{i18n:Translate Source}"
-                   VerticalOptions="Center"/>
-            <StackLayout Grid.Row="1" 
-                         Grid.Column="1"
-                         Orientation="Horizontal">
-                <Entry HorizontalOptions="FillAndExpand" 
-                       Placeholder="{i18n:Translate AddressPlaceHolder}"
-                       Text="{Binding Source}"/>
-                <ImageButton Command="{Binding GetAddressCommand}"
-                             Source="ic_airport_shuttle"/>
+    <AbsoluteLayout>
+        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                     AbsoluteLayout.LayoutFlags="All" 
+                     Padding="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" 
+                       Grid.Column="0"
+                       Text="{i18n:Translate Plaque}"
+                       VerticalOptions="Center"/>
+                <Entry Grid.Row="0" 
+                       Grid.Column="1"
+                       FontSize="48" 
+                       HorizontalOptions="FillAndExpand"
+                       Placeholder="{i18n:Translate PlaquePlaceHolder}" 
+                       Text="{Binding Plaque}"/>
+                <Label Grid.Row="1" 
+                       Grid.Column="0"
+                       HorizontalOptions="FillAndExpand" 
+                       Text="{i18n:Translate Source}"
+                       VerticalOptions="Center"/>
+                <StackLayout Grid.Row="1" 
+                             Grid.Column="1"
+                             Orientation="Horizontal">
+                    <Entry HorizontalOptions="FillAndExpand" 
+                           Placeholder="{i18n:Translate AddressPlaceHolder}"
+                           Text="{Binding Source}"/>
+                    <ImageButton Command="{Binding GetAddressCommand}"
+                                 Source="ic_airport_shuttle"/>
+                </StackLayout>
+            </Grid>
+            <maps:Map x:Name="MyMap"
+                        MapType="Street"/>
+            <StackLayout Orientation="Horizontal">
+                <Button Command="{Binding StartTripCommand}" 
+                        IsEnabled="{Binding IsEnabled}"
+                        Text="{Binding ButtonLabel}"/>
+                <Button Command="{Binding StartTripCommand}" 
+                        IsVisible="{Binding IsSecondButtonVisible}"
+                        Style="{StaticResource DangerButton}"
+                        Text="{i18n:Translate Cancel}"/>
             </StackLayout>
-        </Grid>
-        <maps:Map x:Name="MyMap"
-                    MapType="Street"/>
-        <StackLayout Orientation="Horizontal">
-            <Button Command="{Binding StartTripCommand}" 
-                    Text="{Binding ButtonLabel}"/>
-            <Button Command="{Binding StartTripCommand}" 
-                    IsVisible="{Binding IsSecondButtonVisible}"
-                    Style="{StaticResource DangerButton}"
-                    Text="{i18n:Translate Cancel}"/>
         </StackLayout>
-    </StackLayout>
+        <busyindicator:SfBusyIndicator AnimationType="Gear" 
+                                       AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+                	                   AbsoluteLayout.LayoutFlags="All"
+                	                   BackgroundColor="{StaticResource ColorAccent}"
+                	                   HorizontalOptions="Center"
+                	                   TextColor="{StaticResource ColorFontInverse}"
+                	                   IsVisible="{Binding IsRunning}"
+                	                   Title="{i18n:Translate Loading}"
+                	                   VerticalOptions="Center"
+                	                   ViewBoxWidth="80"
+                	                   ViewBoxHeight="80" />
+    </AbsoluteLayout>
 </ContentPage>
