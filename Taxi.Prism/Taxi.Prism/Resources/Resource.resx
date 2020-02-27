@@ -340,4 +340,10 @@
   <data name="Message003" xml:space="preserve">
     <value>The password was changed successfully!</value>
   </data>
+  <data name="Source" xml:space="preserve">
+    <value>Source</value>
+  </data>
+  <data name="ConfirmAddress" xml:space="preserve">
+    <value>Confirm your address.</value>
+  </data>
 </root>

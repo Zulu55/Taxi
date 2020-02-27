@@ -360,4 +360,10 @@
   <data name="Message003" xml:space="preserve">
     <value>Le mot de passe a été modifié.</value>
   </data>
+  <data name="Source" xml:space="preserve">
+    <value>Source</value>
+  </data>
+  <data name="ConfirmAddress" xml:space="preserve">
+    <value>Confirmer votre/vos adresse(s)</value>
+  </data>
 </root>
