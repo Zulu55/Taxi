@@ -67,7 +67,7 @@
 
                         <Label Grid.Row="2"
                                Grid.Column="0" 
-                               Text="Distance traveled"
+                               Text="{i18n:Translate DistanceTraveled}"
                                VerticalOptions="Center"/>
                         <Label Grid.Row="2"
                                Grid.Column="1"
@@ -78,24 +78,24 @@
 
                         <Label Grid.Row="3"
                                Grid.Column="0" 
-                               Text="Time"
+                               Text="{i18n:Translate Time}"
                                VerticalOptions="Center"/>
                         <Label Grid.Row="3"
                                Grid.Column="1"
                                FontSize="Medium"
                                FontAttributes="Bold"
-                               Text="{Binding Time, StringFormat='{0:HH:mm}'}"
+                               Text="{Binding Time}"
                                VerticalTextAlignment="Center"/>
 
                         <Label Grid.Row="4"
                                Grid.Column="0" 
-                               Text="Approximate value"
+                               Text="{i18n:Translate ApproximateValue}"
                                VerticalOptions="Center"/>
                         <Label Grid.Row="4"
                                Grid.Column="1"
                                FontSize="Medium"
                                FontAttributes="Bold"
-                               Text="{Binding Value, StringFormat='{0:C2}'}"
+                               Text="{Binding Value}"
                                VerticalTextAlignment="Center"/>
                     </Grid>
                 </StackLayout>

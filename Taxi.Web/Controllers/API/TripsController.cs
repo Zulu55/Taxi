@@ -28,6 +28,25 @@ namespace Taxi.Web.Controllers.API
             _converterHelper = converterHelper;
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetTripEntity([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            TripEntity tripEntity = await _context.Trips
+                .Include(t => t.TripDetails)
+                .FirstOrDefaultAsync(t => t.Id == id);
+            if (tripEntity == null)
+            {
+                return BadRequest("Error002");
+            }
+
+            return Ok(_converterHelper.ToTripResponse(tripEntity));
+        }
+
         [HttpPost]
         public async Task<IActionResult> PostTripEntity([FromBody] TripRequest tripRequest)
         {

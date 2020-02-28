@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using Taxi.Common.Models;
 using Xamarin.Forms.Maps;
 
 namespace Taxi.Prism.Helpers
@@ -21,6 +23,36 @@ namespace Taxi.Prism.Helpers
             dist = dist * 60 * 1.1515;
 
             return unitOfLength.ConvertFromMiles(dist);
+        }
+
+        public static TripSummary GetTripSummary(TripResponse trip)
+        {
+            double distance = 0;
+            TimeSpan time;
+
+            if (trip.TripDetails == null || trip.TripDetails.Count < 2)
+            {
+                return new TripSummary();
+            }
+
+            System.Collections.Generic.List<TripDetailResponse> details = trip.TripDetails.ToList();
+            for (int i = 0; i < details.Count - 1; i++)
+            {
+                Position a = new Position(details[i].Latitude, details[i].Longitude);
+                Position b = new Position(details[i + 1].Latitude, details[i + 1].Longitude);
+                distance += GetDistance(a, b, UnitOfLength.Kilometers) * 1000;
+
+                time += details[i + 1].Date.Subtract(details[i].Date);
+            }
+
+            decimal value = (decimal)(3600 + (distance / 78) * 110);
+
+            return new TripSummary
+            {
+                Distance = distance,
+                Time = time,
+                Value = value < 5600 ? 5600 : value
+            };
         }
     }
 }

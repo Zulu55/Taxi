@@ -106,6 +106,15 @@ namespace Taxi.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Approximate value.
+        /// </summary>
+        public static string ApproximateValue {
+            get {
+                return ResourceManager.GetString("ApproximateValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string Cancel {
@@ -282,6 +291,15 @@ namespace Taxi.Prism.Resources {
         public static string CurrentPasswordPlaceHolder {
             get {
                 return ResourceManager.GetString("CurrentPasswordPlaceHolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Distance traveled.
+        /// </summary>
+        public static string DistanceTraveled {
+            get {
+                return ResourceManager.GetString("DistanceTraveled", resourceCulture);
             }
         }
         
@@ -876,6 +894,15 @@ namespace Taxi.Prism.Resources {
         public static string TaxiHistory {
             get {
                 return ResourceManager.GetString("TaxiHistory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time.
+        /// </summary>
+        public static string Time {
+            get {
+                return ResourceManager.GetString("Time", resourceCulture);
             }
         }
         

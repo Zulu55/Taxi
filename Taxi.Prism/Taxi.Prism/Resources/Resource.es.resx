@@ -399,4 +399,13 @@
   <data name="Comment" xml:space="preserve">
     <value>Comentario</value>
   </data>
+  <data name="DistanceTraveled" xml:space="preserve">
+    <value>Distancia Recorrida</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Tiempo</value>
+  </data>
+  <data name="ApproximateValue" xml:space="preserve">
+    <value>Valor aproximado</value>
+  </data>
 </root>

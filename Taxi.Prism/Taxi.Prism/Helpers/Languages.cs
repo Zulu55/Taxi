@@ -13,23 +13,29 @@ namespace Taxi.Prism.Helpers
             DependencyService.Get<ILocalize>().SetLocale(ci);
         }
 
-        public static string Comment => Resource.Comment;
+public static string DistanceTraveled => Resource.DistanceTraveled;
 
-        public static string Comment1 => Resource.Comment1;
+public static string Time => Resource.Time;
 
-        public static string Comment2 => Resource.Comment2;
+public static string ApproximateValue => Resource.ApproximateValue;
 
-        public static string Comment3 => Resource.Comment3;
+public static string Comment => Resource.Comment;
 
-        public static string Comment4 => Resource.Comment4;
+public static string Comment1 => Resource.Comment1;
 
-        public static string Comment5 => Resource.Comment5;
+public static string Comment2 => Resource.Comment2;
 
-        public static string Comment6 => Resource.Comment6;
+public static string Comment3 => Resource.Comment3;
 
-        public static string GenericComment => Resource.GenericComment;
+public static string Comment4 => Resource.Comment4;
 
-        public static string CommnetPlaceHolder => Resource.CommnetPlaceHolder;
+public static string Comment5 => Resource.Comment5;
+
+public static string Comment6 => Resource.Comment6;
+
+public static string GenericComment => Resource.GenericComment;
+
+public static string CommnetPlaceHolder => Resource.CommnetPlaceHolder;
 
         public static string GeolocationError => Resource.GeolocationError;
 

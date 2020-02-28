@@ -24,5 +24,7 @@ namespace Taxi.Common.Services
         Task<Response> NewTripAsync(string urlBase, string servicePrefix, string controller, TripRequest model, string tokenType, string accessToken);
 
         Task<Response> AddTripDetailAsync(string urlBase, string servicePrefix, string controller, TripDetailRequest model, string tokenType, string accessToken);
+
+        Task<Response> GetTripAsync(string urlBase, string servicePrefix, string controller, int id, string tokenType, string accessToken);
     }
 }

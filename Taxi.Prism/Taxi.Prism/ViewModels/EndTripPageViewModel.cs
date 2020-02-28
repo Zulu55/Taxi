@@ -1,13 +1,16 @@
-﻿using Prism.Navigation;
-using System;
+﻿using Newtonsoft.Json;
+using Prism.Navigation;
 using System.Collections.ObjectModel;
+using Taxi.Common.Helpers;
 using Taxi.Common.Models;
+using Taxi.Common.Services;
 using Taxi.Prism.Helpers;
 
 namespace Taxi.Prism.ViewModels
 {
     public class EndTripPageViewModel : ViewModelBase
     {
+        private readonly IApiService _apiService;
         private TripResponse _trip;
         private bool _isRunning;
         private bool _isEnabled;
@@ -16,18 +19,19 @@ namespace Taxi.Prism.ViewModels
         private ObservableCollection<Comment> _comments;
         private string _remark;
         private double _distance;
-        private DateTime _time;
-        private decimal _value;
+        private string _time;
+        private string _value;
 
-        public EndTripPageViewModel(INavigationService navigationService)
+        public EndTripPageViewModel(INavigationService navigationService, IApiService apiService)
             : base(navigationService)
         {
+            _apiService = apiService;
             Title = Languages.EndTrip;
             IsEnabled = true;
             Comments = new ObservableCollection<Comment>(CombosHelper.GetComments());
         }
 
-        public decimal Value
+        public string Value
         {
             get => _value;
             set => SetProperty(ref _value, value);
@@ -39,7 +43,7 @@ namespace Taxi.Prism.ViewModels
             set => SetProperty(ref _distance, value);
         }
 
-        public DateTime Time
+        public string Time
         {
             get => _time;
             set => SetProperty(ref _time, value);
@@ -91,6 +95,48 @@ namespace Taxi.Prism.ViewModels
             base.OnNavigatedTo(parameters);
 
             _trip = parameters.GetValue<TripResponse>("trip");
+            LoadTripAsync(_trip.Id);
+        }
+
+        private async void LoadTripAsync(int id)
+        {
+            IsRunning = true;
+            IsEnabled = false;
+
+            string url = App.Current.Resources["UrlAPI"].ToString();
+            bool connection = await _apiService.CheckConnectionAsync(url);
+            if (!connection)
+            {
+                IsRunning = false;
+                IsEnabled = true;
+                await App.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    Languages.ConnectionError,
+                    Languages.Accept);
+                return;
+            }
+
+            TokenResponse token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
+            Response response = await _apiService.GetTripAsync(url, "api", "/Trips", id, "bearer", token.Token);
+
+            IsRunning = false;
+            IsEnabled = true;
+
+            if (!response.IsSuccess)
+            {
+                await App.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    response.Message,
+                    Languages.Accept);
+                return;
+            }
+
+            _trip = (TripResponse)response.Result;
+            TripSummary tripSummary = GeoHelper.GetTripSummary(_trip);
+            Distance = tripSummary.Distance;
+            Time = $"{tripSummary.Time.ToString().Substring(0, 8)}";
+            decimal value2 = tripSummary.Value * 1.1m;
+            Value = $"Min: {tripSummary.Value:C0}, Max: {value2:C0}";
         }
     }
 }
