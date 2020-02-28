@@ -6,7 +6,8 @@
                   x:Class="Taxi.Prism.Views.TaxiMasterDetailPage">
 
     <MasterDetailPage.Master>
-        <ContentPage Title="Menu">
+        <ContentPage BackgroundColor="{StaticResource ColorBackgroud}"
+                     Title="Menu">
             <StackLayout Padding="20">
                 <Image HeightRequest="150"
                        Source="taxi"/>

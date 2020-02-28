@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
+           	 xmlns:i18n="clr-namespace:Taxi.Prism.Helpers"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="Taxi.Prism.Views.TripDetailPage"
+             BackgroundColor="{StaticResource ColorBackgroud}"
+             Title="{Binding Title}">
+
+    <StackLayout Padding="5">
+        <rating:SfRating HorizontalOptions="Center" 
+                         IsEnabled="False"
+                         Margin="0,5"
+                         Precision="Exact"
+                         Value="{Binding Trip.Qualification}">
+            <rating:SfRating.RatingSettings>
+                <rating:SfRatingSettings RatedFill="{StaticResource ColorDanger}"/>
+            </rating:SfRating.RatingSettings>
+        </rating:SfRating>
+        <StackLayout HorizontalOptions="Center" 
+                     Orientation="Horizontal">
+            <Label FontAttributes="Bold" 
+                   FontSize="Large"
+                   Text="Qualification"/>
+            <Label FontAttributes="Bold" 
+                   FontSize="Large"
+                   Text="{Binding Trip.Qualification, StringFormat='{0:N2}'}"/>
+        </StackLayout>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" 
+                   Grid.Row="0"
+                   FontAttributes="Bold" 
+                   Text="StartDate"/>
+            <Label Grid.Column="1" 
+                   Grid.Row="0"
+                   Text="{Binding Trip.StartDateLocal, StringFormat='{0:yyyy/MM/dd}'}"/>
+            <Label Grid.Column="0" 
+                   Grid.Row="1"
+                   LineBreakMode="CharacterWrap"
+                   FontAttributes="Bold" 
+                   Text="Remarks"/>
+            <Label Grid.Column="1" 
+                   Grid.Row="1"
+                   Text="{Binding Trip.Remarks}"/>
+        </Grid>
+    </StackLayout>
+</ContentPage>
