@@ -781,6 +781,15 @@ namespace Taxi.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must enter a qualification..
+        /// </summary>
+        public static string QualificationError {
+            get {
+                return ResourceManager.GetString("QualificationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Register.
         /// </summary>
         public static string Register {

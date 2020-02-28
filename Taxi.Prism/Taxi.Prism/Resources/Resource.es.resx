@@ -408,4 +408,7 @@
   <data name="ApproximateValue" xml:space="preserve">
     <value>Valor aproximado</value>
   </data>
+  <data name="QualificationError" xml:space="preserve">
+    <value>Debe ingresar una calificación.</value>
+  </data>
 </root>

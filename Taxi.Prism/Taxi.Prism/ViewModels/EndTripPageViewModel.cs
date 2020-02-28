@@ -1,16 +1,22 @@
 ﻿using Newtonsoft.Json;
+using Prism.Commands;
 using Prism.Navigation;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Taxi.Common.Helpers;
 using Taxi.Common.Models;
 using Taxi.Common.Services;
 using Taxi.Prism.Helpers;
+using Xamarin.Forms.Maps;
 
 namespace Taxi.Prism.ViewModels
 {
     public class EndTripPageViewModel : ViewModelBase
     {
+        private readonly INavigationService _navigationService;
         private readonly IApiService _apiService;
+        private readonly IGeolocatorService _geolocatorService;
         private TripResponse _trip;
         private bool _isRunning;
         private bool _isEnabled;
@@ -21,15 +27,20 @@ namespace Taxi.Prism.ViewModels
         private double _distance;
         private string _time;
         private string _value;
+        private DelegateCommand _endTripCommand;
 
-        public EndTripPageViewModel(INavigationService navigationService, IApiService apiService)
+        public EndTripPageViewModel(INavigationService navigationService, IApiService apiService, IGeolocatorService geolocatorService)
             : base(navigationService)
         {
+            _navigationService = navigationService;
             _apiService = apiService;
+            _geolocatorService = geolocatorService;
             Title = Languages.EndTrip;
             IsEnabled = true;
             Comments = new ObservableCollection<Comment>(CombosHelper.GetComments());
         }
+
+        public DelegateCommand EndTripCommand => _endTripCommand ?? (_endTripCommand = new DelegateCommand(EndTripAsync));
 
         public string Value
         {
@@ -137,6 +148,68 @@ namespace Taxi.Prism.ViewModels
             Time = $"{tripSummary.Time.ToString().Substring(0, 8)}";
             decimal value2 = tripSummary.Value * 1.1m;
             Value = $"Min: {tripSummary.Value:C0}, Max: {value2:C0}";
+        }
+
+        private async void EndTripAsync()
+        {
+            if (Qualification == 0)
+            {
+                await App.Current.MainPage.DisplayAlert( Languages.Error, Languages.QualificationError, Languages.Accept);
+                return;
+            }
+
+            IsRunning = true;
+            IsEnabled = false;
+
+            var url = App.Current.Resources["UrlAPI"].ToString();
+            bool connection = await _apiService.CheckConnectionAsync(url);
+            if (!connection)
+            {
+                IsRunning = false;
+                IsEnabled = true;
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ConnectionError, Languages.Accept);
+                return;
+            }
+
+            await _geolocatorService.GetLocationAsync();
+            var position = new Position();
+            var address = string.Empty;
+
+            if (_geolocatorService.Latitude != 0 && _geolocatorService.Longitude != 0)
+            {
+                position = new Position(_geolocatorService.Latitude, _geolocatorService.Longitude);
+                Geocoder geoCoder = new Geocoder();
+                IEnumerable<string> sources = await geoCoder.GetAddressesForPositionAsync(position);
+                List<string> addresses = new List<string>(sources);
+                if (addresses.Count > 1)
+                {
+                    address = addresses[0];
+                }
+            }
+
+            var user = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
+            var token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
+
+            CompleteTripRequest completeTripRequest = new CompleteTripRequest
+            {
+                Qualification = Qualification,
+                Remarks = Remark,
+                Target = address,
+                TargetLatitude = position.Latitude,
+                TargetLongitude = position.Longitude,
+                TripId = _trip.Id
+            };
+
+            // ACA VOY COMPLETAR EL API CON EL MÉTODO PARA CONSUMIRLO
+            Response response = await _apiService.(url, "/api", "/Trips", completeTripRequest, "bearer", token.Token);
+
+            if (!response.IsSuccess)
+            {
+                IsRunning = false;
+                IsEnabled = true;
+                await App.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
+                return;
+            }
         }
     }
 }

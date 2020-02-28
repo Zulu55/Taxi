@@ -388,4 +388,7 @@
   <data name="ApproximateValue" xml:space="preserve">
     <value>Approximate value</value>
   </data>
+  <data name="QualificationError" xml:space="preserve">
+    <value>You must enter a qualification.</value>
+  </data>
 </root>
