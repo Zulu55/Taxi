@@ -135,8 +135,8 @@
                                 ItemDisplayBinding="{Binding Name}"
                                 ItemsSource="{Binding Roles}"
                                 SelectedItem="{Binding Role}"
-                                Title="{i18n:Translate RegisterAsPlaceHolder}">
-                        </Picker>
+                                Title="{i18n:Translate RegisterAsPlaceHolder}"/>
+
                     </Grid>
                 </StackLayout>
             </ScrollView>

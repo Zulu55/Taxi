@@ -372,4 +372,31 @@
   <data name="GeolocationError" xml:space="preserve">
     <value>Nous ne pouvons pas obtenir votre position actuelle, veuillez réessayer.!</value>
   </data>
+  <data name="GenericComment" xml:space="preserve">
+    <value>Commentaire générique</value>
+  </data>
+  <data name="CommnetPlaceHolder" xml:space="preserve">
+    <value>Sélectionnez un type de commentaire...</value>
+  </data>
+  <data name="Comment1" xml:space="preserve">
+    <value>Service très bon</value>
+  </data>
+  <data name="Comment2" xml:space="preserve">
+    <value>Chauffeur très sympathique!</value>
+  </data>
+  <data name="Comment3" xml:space="preserve">
+    <value>Taxi propre!</value>
+  </data>
+  <data name="Comment5" xml:space="preserve">
+    <value>Mauvais conducteur!</value>
+  </data>
+  <data name="Comment6" xml:space="preserve">
+    <value>Charge plus élevée que prévu!</value>
+  </data>
+  <data name="Comment4" xml:space="preserve">
+    <value>Taxi sale ou gâté</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Commentaire</value>
+  </data>
 </root>

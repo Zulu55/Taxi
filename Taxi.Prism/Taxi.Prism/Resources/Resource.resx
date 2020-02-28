@@ -352,4 +352,31 @@
   <data name="GeolocationError" xml:space="preserve">
     <value>We can't get your current location, please try again.</value>
   </data>
+  <data name="GenericComment" xml:space="preserve">
+    <value>Generic comment</value>
+  </data>
+  <data name="CommnetPlaceHolder" xml:space="preserve">
+    <value>Select a comment....</value>
+  </data>
+  <data name="Comment1" xml:space="preserve">
+    <value>Very good service</value>
+  </data>
+  <data name="Comment2" xml:space="preserve">
+    <value>Very friendly driver</value>
+  </data>
+  <data name="Comment3" xml:space="preserve">
+    <value>Clean taxi</value>
+  </data>
+  <data name="Comment4" xml:space="preserve">
+    <value>Dirty or spoiled taxi</value>
+  </data>
+  <data name="Comment5" xml:space="preserve">
+    <value>Bad driver</value>
+  </data>
+  <data name="Comment6" xml:space="preserve">
+    <value>Charge higher than expected</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Comment</value>
+  </data>
 </root>

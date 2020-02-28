@@ -84,6 +84,15 @@ namespace Taxi.Prism.ViewModels
             set => SetProperty(ref _buttonLabel, value);
         }
 
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            base.OnNavigatedTo(parameters);
+            if (IsSecondButtonVisible && _timer != null)
+            {
+                _timer.Start();
+            }
+        }
+
         private async void LoadSourceAsync()
         {
             IsRunning = true;
@@ -134,6 +143,18 @@ namespace Taxi.Prism.ViewModels
                 return;
             }
 
+            if (IsSecondButtonVisible)
+            {
+                await EndTripAsync();
+            }
+            else
+            {
+                await BeginTripAsync();
+            }
+        }
+
+        private async Task BeginTripAsync()
+        {
             IsRunning = true;
             IsEnabled = false;
 
@@ -186,6 +207,18 @@ namespace Taxi.Prism.ViewModels
 
             _timer.Elapsed += Timer_Elapsed;
             _timer.Start();
+        }
+
+        private async Task EndTripAsync()
+        {
+            _timer.Stop();
+
+            NavigationParameters parameters = new NavigationParameters
+            {
+                { "trip", _tripResponse },
+            };
+
+            await _navigationService.NavigateAsync(nameof(EndTripPage), parameters);
         }
 
         private async void Timer_Elapsed(object sender, ElapsedEventArgs e)

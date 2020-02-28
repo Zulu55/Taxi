@@ -54,7 +54,7 @@
                 <Button Command="{Binding StartTripCommand}" 
                         IsEnabled="{Binding IsEnabled}"
                         Text="{Binding ButtonLabel}"/>
-                <Button Command="{Binding StartTripCommand}" 
+                <Button Command="{Binding CancelTripCommand}" 
                         IsVisible="{Binding IsSecondButtonVisible}"
                         Style="{StaticResource DangerButton}"
                         Text="{i18n:Translate Cancel}"/>
