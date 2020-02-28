@@ -367,6 +367,15 @@ namespace Taxi.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to We can&apos;t get your current location, please try again..
+        /// </summary>
+        public static string GeolocationError {
+            get {
+                return ResourceManager.GetString("GeolocationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Last name.
         /// </summary>
         public static string LastName {

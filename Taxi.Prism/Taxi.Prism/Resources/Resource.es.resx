@@ -369,4 +369,7 @@
   <data name="EndTrip" xml:space="preserve">
     <value>Finalizar viaje</value>
   </data>
+  <data name="GeolocationError" xml:space="preserve">
+    <value>No podemos obtener su ubicación actual, vuelva a intentarlo.</value>
+  </data>
 </root>

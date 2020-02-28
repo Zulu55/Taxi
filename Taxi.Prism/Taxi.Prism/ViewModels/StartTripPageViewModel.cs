@@ -11,9 +11,9 @@ using Taxi.Common.Models;
 using Taxi.Common.Services;
 using Taxi.Prism.Helpers;
 using Taxi.Prism.Views;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
-using Xamarin.Essentials;
 
 namespace Taxi.Prism.ViewModels
 {
@@ -89,29 +89,36 @@ namespace Taxi.Prism.ViewModels
             IsRunning = true;
             IsEnabled = false;
             await _geolocatorService.GetLocationAsync();
-            if (_geolocatorService.Latitude != 0 && _geolocatorService.Longitude != 0)
+
+            if (_geolocatorService.Latitude == 0 && _geolocatorService.Longitude == 0)
             {
-                _position = new Position(_geolocatorService.Latitude, _geolocatorService.Longitude);
-                Geocoder geoCoder = new Geocoder();
-                IEnumerable<string> sources = await geoCoder.GetAddressesForPositionAsync(_position);
-                List<string> addresses = new List<string>(sources);
+                IsRunning = false;
+                IsEnabled = true;
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.GeolocationError, Languages.Accept);
+                await _navigationService.GoBackAsync();
+                return;
+            }
 
-                if (addresses.Count == 1)
-                {
-                    Source = addresses[0];
-                }
+            _position = new Position(_geolocatorService.Latitude, _geolocatorService.Longitude);
+            Geocoder geoCoder = new Geocoder();
+            IEnumerable<string> sources = await geoCoder.GetAddressesForPositionAsync(_position);
+            List<string> addresses = new List<string>(sources);
 
-                if (addresses.Count > 1)
+            if (addresses.Count == 1)
+            {
+                Source = addresses[0];
+            }
+
+            if (addresses.Count > 1)
+            {
+                string address = await Application.Current.MainPage.DisplayActionSheet(
+                    Languages.ConfirmAddress,
+                    Languages.Cancel,
+                    null,
+                    addresses.ToArray());
+                if (address != Languages.Cancel)
                 {
-                    string address = await Application.Current.MainPage.DisplayActionSheet(
-                        Languages.ConfirmAddress,
-                        Languages.Cancel,
-                        null,
-                        addresses.ToArray());
-                    if (address != Languages.Cancel)
-                    {
-                        Source = address;
-                    }
+                    Source = address;
                 }
             }
 
@@ -161,10 +168,7 @@ namespace Taxi.Prism.ViewModels
             {
                 IsRunning = false;
                 IsEnabled = true;
-                await App.Current.MainPage.DisplayAlert(
-                    Languages.Error,
-                    response.Message,
-                    Languages.Accept);
+                await App.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
                 return;
             }
 
@@ -174,7 +178,7 @@ namespace Taxi.Prism.ViewModels
             StartTripPage.GetInstance().AddPin(_position, Source, Languages.StartTrip);
             IsRunning = false;
             IsEnabled = true;
-            
+
             _timer = new Timer
             {
                 Interval = 5000
@@ -200,8 +204,9 @@ namespace Taxi.Prism.ViewModels
 
             Position previousPosition = new Position(_position.Latitude, _position.Longitude);
             _position = new Position(_geolocatorService.Latitude, _geolocatorService.Longitude);
+            double distance = GeoHelper.GetDistance(previousPosition, _position, UnitOfLength.Kilometers);
 
-            if (previousPosition.Latitude == _position.Latitude && previousPosition.Longitude == _position.Longitude)
+            if (distance < 0.01 || double.IsNaN(distance))
             {
                 return;
             }

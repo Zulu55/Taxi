@@ -34,10 +34,10 @@ namespace Taxi.Prism.Views
         {
             MyMap.Pins.Add(new Pin
             {
-                    Address = address,
-                    Label = label,
-                    Position = position,
-                    Type = PinType.Place
+                Address = address,
+                Label = label,
+                Position = position,
+                Type = PinType.Place
             });
         }
 
@@ -46,13 +46,13 @@ namespace Taxi.Prism.Views
             Polygon polygon = new Polygon
             {
                 StrokeWidth = 10,
-                StrokeColor = Color.FromHex("#1BA1E2"),
-                FillColor = Color.FromHex("#881BA1E2"),
+                StrokeColor = Color.FromHex("#8D07F6"),
+                FillColor = Color.FromHex("#8D07F6"),
                 Geopath = { a, b }
             };
 
             MyMap.MapElements.Add(polygon);
-
+            MoveMap(b);
         }
 
         private async void MoveMapToCurrentPositionAsync()
@@ -69,11 +69,16 @@ namespace Taxi.Prism.Views
                     Position position = new Position(
                         _geolocatorService.Latitude,
                         _geolocatorService.Longitude);
-                    MyMap.MoveToRegion(MapSpan.FromCenterAndRadius(
-                        position,
-                        Distance.FromKilometers(.3)));
+                    MoveMap(position);
                 }
             }
+        }
+
+        private void MoveMap(Position position)
+        {
+            MyMap.MoveToRegion(MapSpan.FromCenterAndRadius(
+                position,
+                Distance.FromKilometers(.2)));
         }
 
         private async Task<bool> CheckLocationPermisionsAsync()

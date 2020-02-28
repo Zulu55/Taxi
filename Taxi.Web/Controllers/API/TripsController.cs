@@ -107,7 +107,7 @@ namespace Taxi.Web.Controllers.API
 
             _context.Trips.Update(trip);
             await _context.SaveChangesAsync();
-            return Ok(_converterHelper.ToTripResponse(trip));
+            return NoContent();
         }
 
         [HttpPost]

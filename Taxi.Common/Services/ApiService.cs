@@ -338,11 +338,9 @@ namespace Taxi.Common.Services
                     };
                 }
 
-                TripResponse trip = JsonConvert.DeserializeObject<TripResponse>(answer);
                 return new Response
                 {
                     IsSuccess = true,
-                    Result = trip,
                 };
             }
             catch (Exception ex)

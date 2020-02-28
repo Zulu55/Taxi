@@ -15,7 +15,7 @@ namespace Taxi.Common.Services
             try
             {
                 var locator = CrossGeolocator.Current;
-                locator.DesiredAccuracy = 50;
+                locator.DesiredAccuracy = 30;
                 var location = await locator.GetPositionAsync();
                 Latitude = location.Latitude;
                 Longitude = location.Longitude;
