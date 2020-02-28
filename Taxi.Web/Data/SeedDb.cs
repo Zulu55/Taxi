@@ -90,7 +90,7 @@ namespace Taxi.Web.Data
                             Qualification = 4.5f,
                             Source = "ITM Fraternidad",
                             Target = "ITM Robledo",
-                            Remarks = "Muy buen servicio",
+                            Remarks = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempus elit quis ante lobortis placerat. Sed metus dui, ornare sed dignissim et, rutrum id justo. Vivamus mattis felis fermentum lacus venenatis porta. Nulla facilisi. Cras id laoreet orci, vitae aliquam nibh. Fusce eu urna consectetur, ornare augue a, accumsan nibh. Nullam consequat orci quis eleifend auctor. Morbi id purus facilisis, pharetra magna vitae, eleifend sapien.",
                             User = user1
                         },
                         new TripEntity
@@ -100,7 +100,7 @@ namespace Taxi.Web.Data
                             Qualification = 4.8f,
                             Source = "ITM Robledo",
                             Target = "ITM Fraternidad",
-                            Remarks = "Conductor muy amable",
+                            Remarks = "Maecenas enim quam, gravida eu nisi id, auctor varius lectus. Integer nec faucibus sapien. Suspendisse potenti. Maecenas varius, erat ut facilisis viverra, est turpis feugiat odio, et condimentum dui nisi non nibh. Mauris vestibulum tellus pulvinar, placerat leo eu, imperdiet est. Mauris luctus massa lacus. Nam dignissim congue eleifend. Praesent fermentum tristique sem, eget dignissim nisi ultricies accumsan.",
                             User = user1
                         }
                     }

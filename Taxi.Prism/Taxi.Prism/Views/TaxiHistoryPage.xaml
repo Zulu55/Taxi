@@ -61,7 +61,7 @@
                        Text="Remarks"/>
             </Grid>
 
-            <CollectionView ItemsSource="{Binding Taxi.Trips}">
+            <CollectionView ItemsSource="{Binding Details}">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical"/>
                 </CollectionView.ItemsLayout>
@@ -74,6 +74,9 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SelectTripCommand}"/>
+                            </Grid.GestureRecognizers>
                             <Label Grid.Column="0"
                                    Text="{Binding StartDateLocal, StringFormat='{0:yyyy/MM/dd}'}"
                                    VerticalOptions="Center"/>
@@ -81,6 +84,7 @@
                                    Text="{Binding Qualification, StringFormat='{0:N2}'}"
                                    VerticalOptions="Center"/>
                             <Label Grid.Column="2"
+                                   MaxLines="2"
                                    Text="{Binding Remarks}"
                                    VerticalOptions="Center"/>
                             <Image Grid.Column="3" 
