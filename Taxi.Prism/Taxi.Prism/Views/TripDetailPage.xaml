@@ -29,6 +29,10 @@
                    Text="{Binding Trip.Qualification, StringFormat='{0:N2}'}"/>
         </StackLayout>
         <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>

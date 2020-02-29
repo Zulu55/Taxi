@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Navigation;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Taxi.Common.Helpers;
@@ -147,21 +146,28 @@ namespace Taxi.Prism.ViewModels
             Distance = tripSummary.Distance;
             Time = $"{tripSummary.Time.ToString().Substring(0, 8)}";
             decimal value2 = tripSummary.Value * 1.1m;
-            Value = $"Min: {tripSummary.Value:C0}, Max: {value2:C0}";
+            if (tripSummary.Value == 5600)
+            {
+                Value = $"{tripSummary.Value:C0}";
+            }
+            else
+            {
+                Value = $"Min: {tripSummary.Value:C0}, Max: {value2:C0}";
+            }
         }
 
         private async void EndTripAsync()
         {
             if (Qualification == 0)
             {
-                await App.Current.MainPage.DisplayAlert( Languages.Error, Languages.QualificationError, Languages.Accept);
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.QualificationError, Languages.Accept);
                 return;
             }
 
             IsRunning = true;
             IsEnabled = false;
 
-            var url = App.Current.Resources["UrlAPI"].ToString();
+            string url = App.Current.Resources["UrlAPI"].ToString();
             bool connection = await _apiService.CheckConnectionAsync(url);
             if (!connection)
             {
@@ -172,8 +178,8 @@ namespace Taxi.Prism.ViewModels
             }
 
             await _geolocatorService.GetLocationAsync();
-            var position = new Position();
-            var address = string.Empty;
+            Position position = new Position();
+            string address = string.Empty;
 
             if (_geolocatorService.Latitude != 0 && _geolocatorService.Longitude != 0)
             {
@@ -187,8 +193,7 @@ namespace Taxi.Prism.ViewModels
                 }
             }
 
-            var user = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
-            var token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
+            TokenResponse token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
 
             CompleteTripRequest completeTripRequest = new CompleteTripRequest
             {
@@ -200,8 +205,7 @@ namespace Taxi.Prism.ViewModels
                 TripId = _trip.Id
             };
 
-            // ACA VOY COMPLETAR EL API CON EL MÉTODO PARA CONSUMIRLO
-            Response response = await _apiService.(url, "/api", "/Trips", completeTripRequest, "bearer", token.Token);
+            Response response = await _apiService.CompleteTripAsync(url, "/api", "/Trips/CompleteTrip", completeTripRequest, "bearer", token.Token);
 
             if (!response.IsSuccess)
             {
@@ -210,6 +214,8 @@ namespace Taxi.Prism.ViewModels
                 await App.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
                 return;
             }
+
+            await _navigationService.GoBackToRootAsync();
         }
     }
 }

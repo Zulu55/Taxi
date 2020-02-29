@@ -94,6 +94,8 @@
                                    Text="{Binding Qualification, StringFormat='{0:N2}'}"
                                    VerticalOptions="Center"/>
                             <Label Grid.Column="2"
+                                   LineBreakMode="TailTruncation"
+                                   MaxLines="2"
                                    Text="{Binding Remarks}"
                                    VerticalOptions="Center"/>
                             <Image Grid.Column="3" 

@@ -113,22 +113,9 @@ namespace Taxi.Prism.ViewModels
             IEnumerable<string> sources = await geoCoder.GetAddressesForPositionAsync(_position);
             List<string> addresses = new List<string>(sources);
 
-            if (addresses.Count == 1)
+            if (addresses.Count > 0)
             {
                 Source = addresses[0];
-            }
-
-            if (addresses.Count > 1)
-            {
-                string address = await Application.Current.MainPage.DisplayActionSheet(
-                    Languages.ConfirmAddress,
-                    Languages.Cancel,
-                    null,
-                    addresses.ToArray());
-                if (address != Languages.Cancel)
-                {
-                    Source = address;
-                }
             }
 
             IsRunning = false;

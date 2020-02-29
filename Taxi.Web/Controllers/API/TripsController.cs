@@ -154,15 +154,15 @@ namespace Taxi.Web.Controllers.API
             trip.TargetLongitude = completeTripRequest.TargetLongitude;
             trip.TripDetails.Add(new TripDetailEntity
             {
-                 Address = completeTripRequest.Target,
-                 Date = DateTime.UtcNow,
-                 Latitude = completeTripRequest.TargetLatitude,
-                 Longitude = completeTripRequest.TargetLongitude
+                    Address = completeTripRequest.Target,
+                    Date = DateTime.UtcNow,
+                    Latitude = completeTripRequest.TargetLatitude,
+                    Longitude = completeTripRequest.TargetLongitude
             });
 
             _context.Trips.Update(trip);
             await _context.SaveChangesAsync();
-            return Ok(_converterHelper.ToTripResponse(trip));
+            return NoContent();
         }
     }
 }

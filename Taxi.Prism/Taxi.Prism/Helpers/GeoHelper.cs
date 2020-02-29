@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Taxi.Common.Models;
 using Xamarin.Forms.Maps;
@@ -35,7 +36,7 @@ namespace Taxi.Prism.Helpers
                 return new TripSummary();
             }
 
-            System.Collections.Generic.List<TripDetailResponse> details = trip.TripDetails.ToList();
+            List<TripDetailResponse> details = trip.TripDetails.ToList();
             for (int i = 0; i < details.Count - 1; i++)
             {
                 Position a = new Position(details[i].Latitude, details[i].Longitude);
@@ -45,7 +46,7 @@ namespace Taxi.Prism.Helpers
                 time += details[i + 1].Date.Subtract(details[i].Date);
             }
 
-            decimal value = (decimal)(3600 + (distance / 78) * 110);
+            decimal value = (decimal)(3600 + Math.Truncate(distance / 78) * 110);
 
             return new TripSummary
             {
