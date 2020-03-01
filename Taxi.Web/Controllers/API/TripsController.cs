@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Taxi.Common.Models;
 using Taxi.Web.Data;
@@ -130,6 +131,49 @@ namespace Taxi.Web.Controllers.API
         }
 
         [HttpPost]
+        [Route("AddTripDetails")]
+        public async Task<IActionResult> AddTripDetails([FromBody] TripDetailsRequest tripDetailsRequest)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (tripDetailsRequest.TripDetails == null || tripDetailsRequest.TripDetails.Count == 0)
+            {
+                return NoContent();
+            }
+
+            TripEntity trip = await _context.Trips
+                .Include(t => t.TripDetails)
+                .FirstOrDefaultAsync(t => t.Id == tripDetailsRequest.TripDetails.FirstOrDefault().TripId);
+            if (trip == null)
+            {
+                return BadRequest("Error002");
+            }
+
+            if (trip.TripDetails == null)
+            {
+                trip.TripDetails = new List<TripDetailEntity>();
+            }
+
+            foreach (TripDetailRequest tripDetailRequest in tripDetailsRequest.TripDetails)
+            {
+                trip.TripDetails.Add(new TripDetailEntity
+                {
+                    Address = tripDetailRequest.Address,
+                    Date = DateTime.UtcNow,
+                    Latitude = tripDetailRequest.Latitude,
+                    Longitude = tripDetailRequest.Longitude
+                });
+            }
+
+            _context.Trips.Update(trip);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpPost]
         [Route("CompleteTrip")]
         public async Task<IActionResult> CompleteTrip([FromBody] CompleteTripRequest completeTripRequest)
         {
@@ -154,10 +198,10 @@ namespace Taxi.Web.Controllers.API
             trip.TargetLongitude = completeTripRequest.TargetLongitude;
             trip.TripDetails.Add(new TripDetailEntity
             {
-                    Address = completeTripRequest.Target,
-                    Date = DateTime.UtcNow,
-                    Latitude = completeTripRequest.TargetLatitude,
-                    Longitude = completeTripRequest.TargetLongitude
+                Address = completeTripRequest.Target,
+                Date = DateTime.UtcNow,
+                Latitude = completeTripRequest.TargetLatitude,
+                Longitude = completeTripRequest.TargetLongitude
             });
 
             _context.Trips.Update(trip);

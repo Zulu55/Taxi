@@ -96,7 +96,7 @@ namespace Taxi.Prism.ViewModels
             }
 
             Taxi = (TaxiResponse)response.Result;
-            Trips = Taxi.Trips.Select(t => new TripItemViewModel(_navigationService)
+            Trips = Taxi.Trips.Where(t => t.Qualification != 0).Select(t => new TripItemViewModel(_navigationService)
             {
                 EndDate = t.EndDate,
                 Id = t.Id,
@@ -111,7 +111,7 @@ namespace Taxi.Prism.ViewModels
                 TargetLongitude = t.TargetLongitude,
                 TripDetails = t.TripDetails,
                 User = t.User
-            }).ToList();
+            }).OrderByDescending(t => t.StartDate).ToList();
         }
     }
 }

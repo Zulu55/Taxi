@@ -29,7 +29,6 @@ namespace Taxi.Prism.Helpers
         public static TripSummary GetTripSummary(TripResponse trip)
         {
             double distance = 0;
-            TimeSpan time;
 
             if (trip.TripDetails == null || trip.TripDetails.Count < 2)
             {
@@ -42,8 +41,6 @@ namespace Taxi.Prism.Helpers
                 Position a = new Position(details[i].Latitude, details[i].Longitude);
                 Position b = new Position(details[i + 1].Latitude, details[i + 1].Longitude);
                 distance += GetDistance(a, b, UnitOfLength.Kilometers) * 1000;
-
-                time += details[i + 1].Date.Subtract(details[i].Date);
             }
 
             decimal value = (decimal)(3600 + Math.Truncate(distance / 78) * 110);
@@ -51,7 +48,7 @@ namespace Taxi.Prism.Helpers
             return new TripSummary
             {
                 Distance = distance,
-                Time = time,
+                Time = details[details.Count - 1].Date.Subtract(details[0].Date),
                 Value = value < 5600 ? 5600 : value
             };
         }

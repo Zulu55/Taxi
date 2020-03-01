@@ -16,7 +16,7 @@ namespace Taxi.Prism.ViewModels
         private readonly INavigationService _navigationService;
         private readonly IApiService _apiService;
         private readonly IGeolocatorService _geolocatorService;
-        private TripResponse _trip;
+        private int _tripId;
         private bool _isRunning;
         private bool _isEnabled;
         private float _qualification;
@@ -104,8 +104,8 @@ namespace Taxi.Prism.ViewModels
         {
             base.OnNavigatedTo(parameters);
 
-            _trip = parameters.GetValue<TripResponse>("trip");
-            LoadTripAsync(_trip.Id);
+            _tripId = parameters.GetValue<int>("tripId");
+            LoadTripAsync(_tripId);
         }
 
         private async void LoadTripAsync(int id)
@@ -141,18 +141,17 @@ namespace Taxi.Prism.ViewModels
                 return;
             }
 
-            _trip = (TripResponse)response.Result;
-            TripSummary tripSummary = GeoHelper.GetTripSummary(_trip);
+            TripResponse trip = (TripResponse)response.Result;
+            TripSummary tripSummary = GeoHelper.GetTripSummary(trip);
             Distance = tripSummary.Distance;
             Time = $"{tripSummary.Time.ToString().Substring(0, 8)}";
-            decimal value2 = tripSummary.Value * 1.1m;
             if (tripSummary.Value == 5600)
             {
                 Value = $"{tripSummary.Value:C0}";
             }
             else
             {
-                Value = $"Min: {tripSummary.Value:C0}, Max: {value2:C0}";
+                Value = $"{tripSummary.Value:C0}";
             }
         }
 
@@ -202,19 +201,10 @@ namespace Taxi.Prism.ViewModels
                 Target = address,
                 TargetLatitude = position.Latitude,
                 TargetLongitude = position.Longitude,
-                TripId = _trip.Id
+                TripId = _tripId
             };
 
-            Response response = await _apiService.CompleteTripAsync(url, "/api", "/Trips/CompleteTrip", completeTripRequest, "bearer", token.Token);
-
-            if (!response.IsSuccess)
-            {
-                IsRunning = false;
-                IsEnabled = true;
-                await App.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
-                return;
-            }
-
+            _apiService.CompleteTripAsync(url, "/api", "/Trips/CompleteTrip", completeTripRequest, "bearer", token.Token);
             await _navigationService.GoBackToRootAsync();
         }
     }
