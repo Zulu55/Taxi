@@ -2,6 +2,7 @@
 using Plugin.Permissions.Abstractions;
 using System.Threading.Tasks;
 using Taxi.Common.Services;
+using Taxi.Prism.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 

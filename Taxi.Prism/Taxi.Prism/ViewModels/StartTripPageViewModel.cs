@@ -12,7 +12,6 @@ using Taxi.Common.Services;
 using Taxi.Prism.Helpers;
 using Taxi.Prism.Views;
 using Xamarin.Essentials;
-using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 
 namespace Taxi.Prism.ViewModels
@@ -33,9 +32,10 @@ namespace Taxi.Prism.ViewModels
         private TokenResponse _token;
         private string _url;
         private Timer _timer;
-        private TripDetailsRequest _tripDetailsRequest;
+        private readonly TripDetailsRequest _tripDetailsRequest;
         private DelegateCommand _getAddressCommand;
         private DelegateCommand _startTripCommand;
+        private DelegateCommand _cancelTripCommand;
 
         public StartTripPageViewModel(INavigationService navigationService, IGeolocatorService geolocatorService, IApiService apiService)
             : base(navigationService)
@@ -49,6 +49,8 @@ namespace Taxi.Prism.ViewModels
             IsEnabled = true;
             LoadSourceAsync();
         }
+
+        public DelegateCommand CancelTripCommand => _cancelTripCommand ?? (_cancelTripCommand = new DelegateCommand(CancelTripAsync));
 
         public DelegateCommand GetAddressCommand => _getAddressCommand ?? (_getAddressCommand = new DelegateCommand(LoadSourceAsync));
 
@@ -93,6 +95,34 @@ namespace Taxi.Prism.ViewModels
             {
                 _timer.Start();
             }
+        }
+
+        private async void CancelTripAsync()
+        {
+            bool answer = await App.Current.MainPage.DisplayAlert(Languages.Confirmation, Languages.CancelTripConfirm, Languages.Yes, Languages.No);
+            if (!answer)
+            {
+                return;
+            }
+
+            IsRunning = true;
+            IsEnabled = false;
+
+            _timer.Stop();
+            bool connection = await _apiService.CheckConnectionAsync(_url);
+            if (!connection)
+            {
+                IsRunning = false;
+                IsEnabled = true;
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ConnectionError, Languages.Accept);
+                return;
+            }
+
+            _apiService.DeleteAsync(_url, "/api", "/Trips", _tripResponse.Id, "bearer", _token.Token);
+            IsRunning = false;
+            IsEnabled = true;
+
+            await _navigationService.GoBackToRootAsync();
         }
 
         private async void LoadSourceAsync()
@@ -245,7 +275,7 @@ namespace Taxi.Prism.ViewModels
                 TripId = _tripResponse.Id
             });
 
-            if(_tripDetailsRequest.TripDetails.Count > 9)
+            if (_tripDetailsRequest.TripDetails.Count > 9)
             {
                 _apiService.AddTripDetailsAsync(_url, "/api", "/Trips/AddTripDetails", _tripDetailsRequest, "bearer", _token.Token);
                 System.Threading.Thread.Sleep(100);
@@ -262,20 +292,14 @@ namespace Taxi.Prism.ViewModels
         {
             if (string.IsNullOrEmpty(Plaque))
             {
-                await App.Current.MainPage.DisplayAlert(
-                    Languages.Error,
-                    Languages.PlaqueError1,
-                    Languages.Accept);
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.PlaqueError1, Languages.Accept);
                 return false;
             }
 
             Regex regex = new Regex(@"^([A-Za-z]{3}\d{3})$");
             if (!regex.IsMatch(Plaque))
             {
-                await App.Current.MainPage.DisplayAlert(
-                    Languages.Error,
-                    Languages.PlaqueError2,
-                    Languages.Accept);
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.PlaqueError2, Languages.Accept);
                 return false;
             }
 

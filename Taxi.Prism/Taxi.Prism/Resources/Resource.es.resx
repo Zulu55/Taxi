@@ -411,4 +411,16 @@
   <data name="QualificationError" xml:space="preserve">
     <value>Debe ingresar una calificación.</value>
   </data>
+  <data name="CancelTripConfirm" xml:space="preserve">
+    <value>¿Estás seguro de cancelar el viaje?</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Sí</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>Confirmación</value>
+  </data>
 </root>
