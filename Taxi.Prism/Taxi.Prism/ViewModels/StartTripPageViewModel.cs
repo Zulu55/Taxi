@@ -237,7 +237,7 @@ namespace Taxi.Prism.ViewModels
 
             if (_tripDetailsRequest.TripDetails.Count > 0)
             {
-                await SendTripDetailsAsync(true);
+                await SendTripDetailsAsync();
             }
 
             NavigationParameters parameters = new NavigationParameters
@@ -281,12 +281,12 @@ namespace Taxi.Prism.ViewModels
             {
                 Task.Run(async () =>
                 {
-                    await SendTripDetailsAsync(false);
+                    await SendTripDetailsAsync();
                 }).Start();
             }
         }
 
-        private async Task SendTripDetailsAsync(bool isLast)
+        private async Task SendTripDetailsAsync()
         {
             foreach (var tripDetailRequest in _tripDetailsRequest.TripDetails)
             {
