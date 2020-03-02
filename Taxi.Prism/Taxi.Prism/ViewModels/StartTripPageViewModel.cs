@@ -260,10 +260,10 @@ namespace Taxi.Prism.ViewModels
             _position = new Position(_geolocatorService.Latitude, _geolocatorService.Longitude);
             double distance = GeoHelper.GetDistance(previousPosition, _position, UnitOfLength.Kilometers);
 
-            if (distance < 0.003 || double.IsNaN(distance))
-            {
-                return;
-            }
+            //if (distance < 0.003 || double.IsNaN(distance))
+            //{
+            //    return;
+            //}
 
             MainThread.BeginInvokeOnMainThread(() =>
             {
@@ -298,21 +298,8 @@ namespace Taxi.Prism.ViewModels
                 }
             }
 
-            if (isLast)
-            {
-                await _apiService.AddTripDetailsAsync(_url, "/api", "/Trips/AddTripDetails", _tripDetailsRequest, "bearer", _token.Token);
-            }
-            else
-            {
-                Task.Run(async () =>
-                {
-                    await _apiService.AddTripDetailsAsync(_url, "/api", "/Trips/AddTripDetails", _tripDetailsRequest, "bearer", _token.Token);
-                }).Start();
-
-                System.Threading.Thread.Sleep(1000);
-            }
-
-            _tripDetailsRequest.TripDetails = new List<TripDetailRequest>();
+            await _apiService.AddTripDetailsAsync(_url, "/api", "/Trips/AddTripDetails", _tripDetailsRequest, "bearer", _token.Token);
+            _tripDetailsRequest.TripDetails.Clear();
         }
 
         private async Task<bool> ValidateDataAsync()
