@@ -406,4 +406,10 @@
   <data name="MyTrips" xml:space="preserve">
     <value>My Trips</value>
   </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>End Date</value>
+  </data>
+  <data name="Target" xml:space="preserve">
+    <value>Target</value>
+  </data>
 </root>

@@ -3,8 +3,90 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
+         	 xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+           	 xmlns:i18n="clr-namespace:Taxi.Prism.Helpers"
              x:Class="Taxi.Prism.Views.MyTripsPage"
              BackgroundColor="{StaticResource ColorBackgroud}"
              Title="{Binding Title}">
-    
+    <AbsoluteLayout>
+        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                     AbsoluteLayout.LayoutFlags="All" 
+                     Padding="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="48" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0"
+                       FontAttributes="Bold"
+                       Text="{i18n:Translate StartDate}"/>
+                <Label Grid.Column="1"
+                       FontAttributes="Bold"
+                       Text="{i18n:Translate EndDate}"/>
+                <Label Grid.Column="2"
+                       FontAttributes="Bold"
+                       Text="{i18n:Translate Source}"/>
+                <Label Grid.Column="3"
+                       FontAttributes="Bold"
+                       Text="{i18n:Translate Target}"/>
+            </Grid>
+
+            <CollectionView ItemsSource="{Binding Trips}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SelectTripCommand}"/>
+                            </Grid.GestureRecognizers>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0"
+                                   Text="{Binding StartDateLocal, StringFormat='{0:yyyy/MM/dd HH:mm}'}"
+                                   VerticalOptions="Center"/>
+                            <Label Grid.Column="1"
+                                   Text="{Binding EndDateLocal, StringFormat='{0:yyyy/MM/dd HH:mm}'}"
+                                   VerticalOptions="Center"/>
+                            <Label Grid.Column="2"
+                                   LineBreakMode="TailTruncation"
+                                   MaxLines="2"
+                                   Text="{Binding Source}"
+                                   VerticalOptions="Center"/>
+                            <Label Grid.Column="2"
+                                   LineBreakMode="TailTruncation"
+                                   MaxLines="2"
+                                   Text="{Binding Source}"
+                                   VerticalOptions="Center"/>
+                            <Image Grid.Column="3" 
+                                   Source="ic_more_vert"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+        <busyindicator:SfBusyIndicator AnimationType="Gear" 
+                                        AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+                	                    AbsoluteLayout.LayoutFlags="All"
+                	                    BackgroundColor="{StaticResource ColorDanger}"
+                	                    HorizontalOptions="Center"
+                	                    TextColor="White"
+                	                    IsVisible="{Binding IsRunning}"
+                	                    Title="{i18n:Translate Loading}"
+                	                    VerticalOptions="Center"
+                	                    ViewBoxWidth="80"
+                	                    ViewBoxHeight="80" />
+    </AbsoluteLayout>
+
 </ContentPage>

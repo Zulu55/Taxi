@@ -110,6 +110,7 @@ namespace Taxi.Web.Controllers.API
                 .Include(t => t.TripDetails)
                 .Include(t => t.Taxi)
                 .Where(t => t.User.Id == id)
+                .OrderByDescending(t => t.StartDate)
                 .ToListAsync();
 
             return Ok(_converterHelper.ToTripResponse(tripEntities));
