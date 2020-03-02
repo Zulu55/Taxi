@@ -124,7 +124,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Taxi.Prism\Taxi.Prism.csproj">
-      <Project>{A682884C-CB44-4A89-B752-27BB634E0ABE}</Project>
+      <Project>{85C316E0-3752-412D-A24B-3A2069FDEAD6}</Project>
       <Name>Taxi.Prism</Name>
     </ProjectReference>
   </ItemGroup>

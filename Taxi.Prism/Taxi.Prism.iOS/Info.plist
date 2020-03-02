@@ -71,5 +71,7 @@
 	<string>This app needs access to the photo gallery.</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
+	<key>CFBundleName</key>
+	<string>Taxi</string>
 </dict>
 </plist>
