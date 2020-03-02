@@ -423,4 +423,7 @@
   <data name="Confirmation" xml:space="preserve">
     <value>Confirmación</value>
   </data>
+  <data name="MyTrips" xml:space="preserve">
+    <value>Mis Viajes</value>
+  </data>
 </root>

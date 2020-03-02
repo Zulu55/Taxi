@@ -403,4 +403,7 @@
   <data name="Confirmation" xml:space="preserve">
     <value>Confirmation</value>
   </data>
+  <data name="MyTrips" xml:space="preserve">
+    <value>My Trips</value>
+  </data>
 </root>
