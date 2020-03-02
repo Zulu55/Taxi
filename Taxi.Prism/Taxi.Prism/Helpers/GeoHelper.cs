@@ -28,29 +28,37 @@ namespace Taxi.Prism.Helpers
 
         public static TripSummary GetTripSummary(TripResponse trip)
         {
-            double distance = 0;
-
-            if (trip.TripDetails == null || trip.TripDetails.Count < 2)
+            try
             {
-                return new TripSummary();
+                double distance = 0;
+
+                if (trip.TripDetails == null || trip.TripDetails.Count < 2)
+                {
+                    return new TripSummary();
+                }
+
+                List<TripDetailResponse> details = trip.TripDetails.ToList();
+                for (int i = 0; i < details.Count - 1; i++)
+                {
+                    Position a = new Position(details[i].Latitude, details[i].Longitude);
+                    Position b = new Position(details[i + 1].Latitude, details[i + 1].Longitude);
+                    distance += GetDistance(a, b, UnitOfLength.Kilometers) * 1000;
+                }
+
+                decimal value = (decimal)(3600 + Math.Truncate(distance / 78) * 110);
+
+                return new TripSummary
+                {
+                    Distance = distance,
+                    Time = details[details.Count - 1].Date.Subtract(details[0].Date),
+                    Value = value < 5600 ? 5600 : value
+                };
+
             }
-
-            List<TripDetailResponse> details = trip.TripDetails.ToList();
-            for (int i = 0; i < details.Count - 1; i++)
+            catch
             {
-                Position a = new Position(details[i].Latitude, details[i].Longitude);
-                Position b = new Position(details[i + 1].Latitude, details[i + 1].Longitude);
-                distance += GetDistance(a, b, UnitOfLength.Kilometers) * 1000;
+                return new TripSummary { Value = 5600 };
             }
-
-            decimal value = (decimal)(3600 + Math.Truncate(distance / 78) * 110);
-
-            return new TripSummary
-            {
-                Distance = distance,
-                Time = details[details.Count - 1].Date.Subtract(details[0].Date),
-                Value = value < 5600 ? 5600 : value
-            };
         }
     }
 }

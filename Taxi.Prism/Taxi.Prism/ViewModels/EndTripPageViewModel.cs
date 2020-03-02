@@ -3,7 +3,6 @@ using Prism.Commands;
 using Prism.Navigation;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using Taxi.Common.Helpers;
 using Taxi.Common.Models;
 using Taxi.Common.Services;
@@ -205,11 +204,7 @@ namespace Taxi.Prism.ViewModels
                 TripId = _tripId
             };
 
-            Task.Run(async () =>
-            {
-                await _apiService.CompleteTripAsync(url, "/api", "/Trips/CompleteTrip", completeTripRequest, "bearer", token.Token);
-            }).Start();
-
+            _apiService.CompleteTripAsync(url, "/api", "/Trips/CompleteTrip", completeTripRequest, "bearer", token.Token);
             await _navigationService.GoBackToRootAsync();
         }
     }

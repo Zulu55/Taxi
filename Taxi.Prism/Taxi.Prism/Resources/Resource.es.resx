@@ -199,13 +199,13 @@
     <value>Debes ingresar un correo electrónico...</value>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Contraseña</value>
+    <value>Clave</value>
   </data>
   <data name="PasswordPlaceHolder" xml:space="preserve">
-    <value>Entra tu contraseña...</value>
+    <value>Entra tu clave...</value>
   </data>
   <data name="PasswordError" xml:space="preserve">
-    <value>Debe escribir una contraseña.</value>
+    <value>Debe escribir una clave.</value>
   </data>
   <data name="Register" xml:space="preserve">
     <value>Registrar</value>
@@ -262,16 +262,16 @@
     <value>Debes poner un número de teléfono</value>
   </data>
   <data name="PasswordConfirm" xml:space="preserve">
-    <value>Confirmar contraseña</value>
+    <value>Confirmación de clave</value>
   </data>
   <data name="PasswordConfirmError1" xml:space="preserve">
-    <value>Debes ingresar una contraseña</value>
+    <value>Debes ingresar una clave</value>
   </data>
   <data name="PasswordConfirmError2" xml:space="preserve">
-    <value>La nueva contraseña y la confirmación de contraseña no son iguales.</value>
+    <value>La nueva clave y la confirmación no son iguales.</value>
   </data>
   <data name="PasswordConfirmPlaceHolder" xml:space="preserve">
-    <value>Ingrese la confirmación de contraseña.</value>
+    <value>Ingrese la confirmación de la clave.</value>
   </data>
   <data name="RegisterAs" xml:space="preserve">
     <value>Registrarse como</value>
@@ -310,7 +310,7 @@
     <value>Recuperar la clave</value>
   </data>
   <data name="ForgotPassword" xml:space="preserve">
-    <value>¿Olvidó su contraseña?</value>
+    <value>¿Olvidó su clave?</value>
   </data>
   <data name="Error002" xml:space="preserve">
     <value>Este correo electrónico no está asignado a ningún usuario.</value>

@@ -4,6 +4,8 @@
              xmlns:prism="http://prismlibrary.com"
              xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
            	 xmlns:i18n="clr-namespace:Taxi.Prism.Helpers"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Taxi.Prism.Views.TripDetailPage"
              BackgroundColor="{StaticResource ColorBackgroud}"

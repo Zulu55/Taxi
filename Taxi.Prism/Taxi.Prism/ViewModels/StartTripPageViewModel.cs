@@ -3,6 +3,7 @@ using Prism.Commands;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Timers;
@@ -32,7 +33,7 @@ namespace Taxi.Prism.ViewModels
         private TokenResponse _token;
         private string _url;
         private Timer _timer;
-        private Geocoder _geoCoder;
+        private readonly Geocoder _geoCoder;
         private readonly TripDetailsRequest _tripDetailsRequest;
         private DelegateCommand _getAddressCommand;
         private DelegateCommand _startTripCommand;
@@ -120,10 +121,7 @@ namespace Taxi.Prism.ViewModels
                 return;
             }
 
-            Task.Run(async () =>
-            {
-                await _apiService.DeleteAsync(_url, "/api", "/Trips", _tripResponse.Id, "bearer", _token.Token);
-            }).Start();
+            _apiService.DeleteAsync(_url, "/api", "/Trips", _tripResponse.Id, "bearer", _token.Token);
 
             IsRunning = false;
             IsEnabled = true;
@@ -260,10 +258,10 @@ namespace Taxi.Prism.ViewModels
             _position = new Position(_geolocatorService.Latitude, _geolocatorService.Longitude);
             double distance = GeoHelper.GetDistance(previousPosition, _position, UnitOfLength.Kilometers);
 
-            //if (distance < 0.003 || double.IsNaN(distance))
-            //{
-            //    return;
-            //}
+            if (distance < 0.003 || double.IsNaN(distance))
+            {
+                return;
+            }
 
             MainThread.BeginInvokeOnMainThread(() =>
             {
@@ -279,16 +277,16 @@ namespace Taxi.Prism.ViewModels
 
             if (_tripDetailsRequest.TripDetails.Count > 9)
             {
-                Task.Run(async () =>
-                {
-                    await SendTripDetailsAsync();
-                }).Start();
+                SendTripDetailsAsync();
             }
         }
 
         private async Task SendTripDetailsAsync()
         {
-            foreach (var tripDetailRequest in _tripDetailsRequest.TripDetails)
+            TripDetailsRequest tripDetailsRequestCloned = CloneTripDetailsRequest(_tripDetailsRequest);
+            _tripDetailsRequest.TripDetails.Clear();
+
+            foreach (TripDetailRequest tripDetailRequest in tripDetailsRequestCloned.TripDetails)
             {
                 IEnumerable<string> sources = await _geoCoder.GetAddressesForPositionAsync(_position);
                 List<string> addresses = new List<string>(sources);
@@ -298,8 +296,23 @@ namespace Taxi.Prism.ViewModels
                 }
             }
 
-            await _apiService.AddTripDetailsAsync(_url, "/api", "/Trips/AddTripDetails", _tripDetailsRequest, "bearer", _token.Token);
-            _tripDetailsRequest.TripDetails.Clear();
+            await _apiService.AddTripDetailsAsync(_url, "/api", "/Trips/AddTripDetails", tripDetailsRequestCloned, "bearer", _token.Token);
+        }
+
+        private TripDetailsRequest CloneTripDetailsRequest(TripDetailsRequest tripDetailsRequest)
+        {
+            TripDetailsRequest tripDetailsRequestCloned = new TripDetailsRequest
+            {
+                TripDetails = tripDetailsRequest.TripDetails.Select(d => new TripDetailRequest
+                {
+                    Address = d.Address,
+                    Latitude = d.Latitude,
+                    Longitude = d.Longitude,
+                    TripId = d.TripId
+                }).ToList()
+            };
+
+            return tripDetailsRequestCloned;
         }
 
         private async Task<bool> ValidateDataAsync()
