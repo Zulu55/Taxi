@@ -2,7 +2,6 @@
 using Plugin.Permissions.Abstractions;
 using System.Threading.Tasks;
 using Taxi.Common.Services;
-using Taxi.Prism.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 
@@ -77,9 +76,7 @@ namespace Taxi.Prism.Views
 
         private void MoveMap(Position position)
         {
-            MyMap.MoveToRegion(MapSpan.FromCenterAndRadius(
-                position,
-                Distance.FromKilometers(.2)));
+            MyMap.MoveToRegion(MapSpan.FromCenterAndRadius(position, Distance.FromKilometers(.2)));
         }
 
         private async Task<bool> CheckLocationPermisionsAsync()

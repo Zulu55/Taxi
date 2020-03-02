@@ -32,6 +32,7 @@ namespace Taxi.Prism.ViewModels
         private TokenResponse _token;
         private string _url;
         private Timer _timer;
+        private Geocoder _geoCoder;
         private readonly TripDetailsRequest _tripDetailsRequest;
         private DelegateCommand _getAddressCommand;
         private DelegateCommand _startTripCommand;
@@ -44,6 +45,7 @@ namespace Taxi.Prism.ViewModels
             _geolocatorService = geolocatorService;
             _apiService = apiService;
             _tripDetailsRequest = new TripDetailsRequest { TripDetails = new List<TripDetailRequest>() };
+            _geoCoder = new Geocoder();
             Title = Languages.StartTrip;
             ButtonLabel = Languages.StartTrip;
             IsEnabled = true;
@@ -221,7 +223,7 @@ namespace Taxi.Prism.ViewModels
 
             _timer = new Timer
             {
-                Interval = 1000
+                Interval = 2000
             };
 
             _timer.Elapsed += Timer_Elapsed;
@@ -234,8 +236,7 @@ namespace Taxi.Prism.ViewModels
 
             if (_tripDetailsRequest.TripDetails.Count > 0)
             {
-                await _apiService.AddTripDetailsAsync(_url, "/api", "/Trips/AddTripDetails", _tripDetailsRequest, "bearer", _token.Token);
-                _tripDetailsRequest.TripDetails = new List<TripDetailRequest>();
+                await SendTripDetailsAsync(true);
             }
 
             NavigationParameters parameters = new NavigationParameters
@@ -263,13 +264,13 @@ namespace Taxi.Prism.ViewModels
                 return;
             }
 
-            Geocoder geoCoder = new Geocoder();
-            IEnumerable<string> sources = await geoCoder.GetAddressesForPositionAsync(_position);
-            List<string> addresses = new List<string>(sources);
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                StartTripPage.GetInstance().DrawLine(previousPosition, _position);
+            });
 
             _tripDetailsRequest.TripDetails.Add(new TripDetailRequest
             {
-                Address = addresses.Count > 0 ? addresses[0] : null,
                 Latitude = _position.Latitude,
                 Longitude = _position.Longitude,
                 TripId = _tripResponse.Id
@@ -277,15 +278,33 @@ namespace Taxi.Prism.ViewModels
 
             if (_tripDetailsRequest.TripDetails.Count > 9)
             {
-                _apiService.AddTripDetailsAsync(_url, "/api", "/Trips/AddTripDetails", _tripDetailsRequest, "bearer", _token.Token);
-                System.Threading.Thread.Sleep(100);
-                _tripDetailsRequest.TripDetails = new List<TripDetailRequest>();
+                SendTripDetailsAsync(false);
+            }
+        }
+
+        private async Task SendTripDetailsAsync(bool isLast)
+        {
+            foreach (var tripDetailRequest in _tripDetailsRequest.TripDetails)
+            {
+                IEnumerable<string> sources = await _geoCoder.GetAddressesForPositionAsync(_position);
+                List<string> addresses = new List<string>(sources);
+                if (addresses.Count > 0)
+                {
+                    tripDetailRequest.Address = addresses[0];
+                }
             }
 
-            MainThread.BeginInvokeOnMainThread(() =>
+            if (isLast)
             {
-                StartTripPage.GetInstance().DrawLine(previousPosition, _position);
-            });
+                await _apiService.AddTripDetailsAsync(_url, "/api", "/Trips/AddTripDetails", _tripDetailsRequest, "bearer", _token.Token);
+            }
+            else
+            {
+                _apiService.AddTripDetailsAsync(_url, "/api", "/Trips/AddTripDetails", _tripDetailsRequest, "bearer", _token.Token);
+                System.Threading.Thread.Sleep(1000);
+            }
+
+            _tripDetailsRequest.TripDetails = new List<TripDetailRequest>();
         }
 
         private async Task<bool> ValidateDataAsync()
