@@ -95,6 +95,26 @@ namespace Taxi.Web.Controllers.API
             return Ok(_converterHelper.ToTripResponse(tripEntity));
         }
 
+
+        [HttpGet]
+        [Route("GetMyTrips/{id}")]
+        public async Task<IActionResult> GetMyTrips([FromRoute] string id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var tripEntities = await _context.Trips
+                .Include(t => t.User)
+                .Include(t => t.TripDetails)
+                .Include(t => t.Taxi)
+                .Where(t => t.User.Id == id)
+                .ToListAsync();
+
+            return Ok(_converterHelper.ToTripResponse(tripEntities));
+        }
+
         [HttpPost]
         [Route("AddTripDetail")]
         public async Task<IActionResult> AddTripDetail([FromBody] TripDetailRequest tripDetailRequest)
