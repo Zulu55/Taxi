@@ -120,7 +120,11 @@ namespace Taxi.Prism.ViewModels
                 return;
             }
 
-            _apiService.DeleteAsync(_url, "/api", "/Trips", _tripResponse.Id, "bearer", _token.Token);
+            Task.Run(async () =>
+            {
+                await _apiService.DeleteAsync(_url, "/api", "/Trips", _tripResponse.Id, "bearer", _token.Token);
+            }).Start();
+
             IsRunning = false;
             IsEnabled = true;
 
@@ -129,13 +133,11 @@ namespace Taxi.Prism.ViewModels
 
         private async void LoadSourceAsync()
         {
-            IsRunning = true;
             IsEnabled = false;
             await _geolocatorService.GetLocationAsync();
 
             if (_geolocatorService.Latitude == 0 && _geolocatorService.Longitude == 0)
             {
-                IsRunning = false;
                 IsEnabled = true;
                 await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.GeolocationError, Languages.Accept);
                 await _navigationService.GoBackAsync();
@@ -152,7 +154,6 @@ namespace Taxi.Prism.ViewModels
                 Source = addresses[0];
             }
 
-            IsRunning = false;
             IsEnabled = true;
         }
 
@@ -278,7 +279,10 @@ namespace Taxi.Prism.ViewModels
 
             if (_tripDetailsRequest.TripDetails.Count > 9)
             {
-                SendTripDetailsAsync(false);
+                Task.Run(async () =>
+                {
+                    await SendTripDetailsAsync(false);
+                }).Start();
             }
         }
 
@@ -300,7 +304,11 @@ namespace Taxi.Prism.ViewModels
             }
             else
             {
-                _apiService.AddTripDetailsAsync(_url, "/api", "/Trips/AddTripDetails", _tripDetailsRequest, "bearer", _token.Token);
+                Task.Run(async () =>
+                {
+                    await _apiService.AddTripDetailsAsync(_url, "/api", "/Trips/AddTripDetails", _tripDetailsRequest, "bearer", _token.Token);
+                }).Start();
+
                 System.Threading.Thread.Sleep(1000);
             }
 
