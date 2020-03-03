@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29721.120
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taxi.Common", "Taxi.Common\Taxi.Common.csproj", "{D9C7A7E3-5297-40BE-84A7-FE7CAE8A227B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Taxi.Common", "Taxi.Common\Taxi.Common.csproj", "{D9C7A7E3-5297-40BE-84A7-FE7CAE8A227B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taxi.Web", "Taxi.Web\Taxi.Web.csproj", "{D3504853-668A-4470-93EC-823AAFC3BADB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Taxi.Web", "Taxi.Web\Taxi.Web.csproj", "{D3504853-668A-4470-93EC-823AAFC3BADB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taxi.Prism", "Taxi.Prism\Taxi.Prism\Taxi.Prism.csproj", "{85C316E0-3752-412D-A24B-3A2069FDEAD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Taxi.Prism", "Taxi.Prism\Taxi.Prism\Taxi.Prism.csproj", "{85C316E0-3752-412D-A24B-3A2069FDEAD6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taxi.Prism.Android", "Taxi.Prism\Taxi.Prism.Android\Taxi.Prism.Android.csproj", "{DEEAADA7-0CA3-4C0E-B4B2-9C0E6BDAEFBB}"
 EndProject
@@ -152,6 +152,7 @@ Global
 		{7BE32C45-C911-4414-9028-F8EBC950D8D3}.AppStore|iPhoneSimulator.ActiveCfg = AppStore|iPhoneSimulator
 		{7BE32C45-C911-4414-9028-F8EBC950D8D3}.AppStore|iPhoneSimulator.Build.0 = AppStore|iPhoneSimulator
 		{7BE32C45-C911-4414-9028-F8EBC950D8D3}.Debug|Any CPU.ActiveCfg = Debug|iPhone
+		{7BE32C45-C911-4414-9028-F8EBC950D8D3}.Debug|Any CPU.Build.0 = Debug|iPhone
 		{7BE32C45-C911-4414-9028-F8EBC950D8D3}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{7BE32C45-C911-4414-9028-F8EBC950D8D3}.Debug|iPhone.Build.0 = Debug|iPhone
 		{7BE32C45-C911-4414-9028-F8EBC950D8D3}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
@@ -180,8 +181,6 @@ Global
 		{1E1D45C6-2E5A-4BBE-90D3-2A2BF6DD6C3F}.AppStore|iPhoneSimulator.Build.0 = Release|Any CPU
 		{1E1D45C6-2E5A-4BBE-90D3-2A2BF6DD6C3F}.AppStore|iPhoneSimulator.Deploy.0 = Release|Any CPU
 		{1E1D45C6-2E5A-4BBE-90D3-2A2BF6DD6C3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1E1D45C6-2E5A-4BBE-90D3-2A2BF6DD6C3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1E1D45C6-2E5A-4BBE-90D3-2A2BF6DD6C3F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{1E1D45C6-2E5A-4BBE-90D3-2A2BF6DD6C3F}.Debug|iPhone.ActiveCfg = Debug|Any CPU
 		{1E1D45C6-2E5A-4BBE-90D3-2A2BF6DD6C3F}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{1E1D45C6-2E5A-4BBE-90D3-2A2BF6DD6C3F}.Debug|iPhone.Deploy.0 = Debug|Any CPU
