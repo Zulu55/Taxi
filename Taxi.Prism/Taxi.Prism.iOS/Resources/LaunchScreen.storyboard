@@ -16,7 +16,7 @@
                     <view key="view" contentMode="scaleToFill" id="yd7-JS-zBw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" colorSpace="custom" customColorSpace="sRGB" red="0.9994240403" green="0.9855536819" blue="0" alpha="1"/>
+                        <color key="backgroundColor" colorSpace="calibratedRGB" red="1" green="1" blue="0.0196078431372549" alpha="1"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="245" translatesAutoresizingMaskIntoConstraints="NO" image="taxi.png">
                                 <rect key="frame" x="87" y="283" width="240" height="241"/>
