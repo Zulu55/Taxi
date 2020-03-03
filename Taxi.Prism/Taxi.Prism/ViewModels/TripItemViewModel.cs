@@ -1,6 +1,5 @@
 ﻿using Prism.Commands;
 using Prism.Navigation;
-using System;
 using Taxi.Common.Models;
 using Taxi.Prism.Views;
 

@@ -13,22 +13,22 @@
 
     <StackLayout Padding="5">
         <rating:SfRating HorizontalOptions="Center" 
-                         IsEnabled="False"
-                         Margin="0,5"
-                         Precision="Exact"
-                         Value="{Binding Trip.Qualification}">
+                            IsEnabled="False"
+                            Margin="0,5"
+                            Precision="Exact"
+                            Value="{Binding Trip.Qualification}">
             <rating:SfRating.RatingSettings>
                 <rating:SfRatingSettings RatedFill="{StaticResource ColorDanger}"/>
             </rating:SfRating.RatingSettings>
         </rating:SfRating>
         <StackLayout HorizontalOptions="Center" 
-                     Orientation="Horizontal">
+                        Orientation="Horizontal">
             <Label FontAttributes="Bold" 
-                   FontSize="Large"
-                   Text="{i18n:Translate Qualification}"/>
+                    FontSize="Large"
+                    Text="{i18n:Translate Qualification}"/>
             <Label FontAttributes="Bold" 
-                   FontSize="Large"
-                   Text="{Binding Trip.Qualification, StringFormat='{0:N2}'}"/>
+                    FontSize="Large"
+                    Text="{Binding Trip.Qualification, StringFormat='{0:N2}'}"/>
         </StackLayout>
         <Grid>
             <Grid.RowDefinitions>
@@ -40,19 +40,19 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" 
-                   Grid.Row="0"
-                   FontAttributes="Bold" 
-                   Text="{i18n:Translate StartDate}"/>
+                    Grid.Row="0"
+                    FontAttributes="Bold" 
+                    Text="{i18n:Translate StartDate}"/>
             <Label Grid.Column="1" 
-                   Grid.Row="0"
-                   Text="{Binding Trip.StartDateLocal, StringFormat='{0:yyyy/MM/dd}'}"/>
+                    Grid.Row="0"
+                    Text="{Binding Trip.StartDateLocal, StringFormat='{0:yyyy/MM/dd}'}"/>
             <Label Grid.Column="0" 
-                   Grid.Row="1"
-                   FontAttributes="Bold" 
-                   Text="{i18n:Translate Remarks}"/>
+                    Grid.Row="1"
+                    FontAttributes="Bold" 
+                    Text="{i18n:Translate Remarks}"/>
             <Label Grid.Column="1" 
-                   Grid.Row="1"
-                   Text="{Binding Trip.Remarks}"/>
+                    Grid.Row="1"
+                    Text="{Binding Trip.Remarks}"/>
         </Grid>
     </StackLayout>
 </ContentPage>

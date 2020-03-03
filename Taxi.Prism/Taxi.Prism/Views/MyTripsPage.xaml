@@ -19,14 +19,20 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width=".5*" />
+                    <ColumnDefinition Width="2*" />
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="4*" />
                     <ColumnDefinition Width="48" />
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0"
                        FontAttributes="Bold"
                        Text="{i18n:Translate StartDate}"/>
                 <Label Grid.Column="1"
+                       FontAttributes="Bold"
+                       MaxLines="1"
+                       LineBreakMode="TailTruncation"
+                       Text="*"/>
+                <Label Grid.Column="2"
                        FontAttributes="Bold"
                        Text="{i18n:Translate Source}"/>
             </Grid>
@@ -42,19 +48,20 @@
                                 <TapGestureRecognizer Command="{Binding SelectTrip2Command}"/>
                             </Grid.GestureRecognizers>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width=".5*" />
+                                <ColumnDefinition Width="2*" />
                                 <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="4*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0"
-                                   Text="{Binding StartDateLocal, StringFormat='{0:yyyy/MM/dd HH:mm}'}"
-                                   VerticalOptions="Center"/>
+                                   Text="{Binding StartDateLocal, StringFormat='{0:yyyy/MM/dd HH:mm}'}"/>
                             <Label Grid.Column="1"
+                                   Text="{Binding Qualification, StringFormat='{0:N2}'}"/>
+                            <Label Grid.Column="2"
                                    LineBreakMode="TailTruncation"
                                    MaxLines="2"
-                                   Text="{Binding Source}"
-                                   VerticalOptions="Center"/>
-                            <Image Grid.Column="2" 
+                                   Text="{Binding Source}"/>
+                            <Image Grid.Column="3" 
                                    Source="ic_more_vert"/>
                         </Grid>
                     </DataTemplate>
