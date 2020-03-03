@@ -286,15 +286,15 @@ namespace Taxi.Prism.ViewModels
             TripDetailsRequest tripDetailsRequestCloned = CloneTripDetailsRequest(_tripDetailsRequest);
             _tripDetailsRequest.TripDetails.Clear();
 
-            foreach (TripDetailRequest tripDetailRequest in tripDetailsRequestCloned.TripDetails)
-            {
-                IEnumerable<string> sources = await _geoCoder.GetAddressesForPositionAsync(_position);
-                List<string> addresses = new List<string>(sources);
-                if (addresses.Count > 0)
-                {
-                    tripDetailRequest.Address = addresses[0];
-                }
-            }
+            //foreach (TripDetailRequest tripDetailRequest in tripDetailsRequestCloned.TripDetails)
+            //{
+            //    IEnumerable<string> sources = await _geoCoder.GetAddressesForPositionAsync(_position);
+            //    List<string> addresses = new List<string>(sources);
+            //    if (addresses.Count > 0)
+            //    {
+            //        tripDetailRequest.Address = addresses[0];
+            //    }
+            //}
 
             await _apiService.AddTripDetailsAsync(_url, "/api", "/Trips/AddTripDetails", tripDetailsRequestCloned, "bearer", _token.Token);
         }
