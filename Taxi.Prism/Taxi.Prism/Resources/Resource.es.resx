@@ -426,4 +426,13 @@
   <data name="MyTrips" xml:space="preserve">
     <value>Mis Viajes</value>
   </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>Fecha de finalización</value>
+  </data>
+  <data name="Target" xml:space="preserve">
+    <value>Destino</value>
+  </data>
+  <data name="MyTrip" xml:space="preserve">
+    <value>Mi viaje</value>
+  </data>
 </root>

@@ -412,4 +412,7 @@
   <data name="Target" xml:space="preserve">
     <value>Target</value>
   </data>
+  <data name="MyTrip" xml:space="preserve">
+    <value>My Trip</value>
+  </data>
 </root>

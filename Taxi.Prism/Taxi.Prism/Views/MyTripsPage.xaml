@@ -19,9 +19,7 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width=".5*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="48" />
                 </Grid.ColumnDefinitions>
@@ -30,13 +28,7 @@
                        Text="{i18n:Translate StartDate}"/>
                 <Label Grid.Column="1"
                        FontAttributes="Bold"
-                       Text="{i18n:Translate EndDate}"/>
-                <Label Grid.Column="2"
-                       FontAttributes="Bold"
                        Text="{i18n:Translate Source}"/>
-                <Label Grid.Column="3"
-                       FontAttributes="Bold"
-                       Text="{i18n:Translate Target}"/>
             </Grid>
 
             <CollectionView ItemsSource="{Binding Trips}">
@@ -47,11 +39,10 @@
                     <DataTemplate>
                         <Grid>
                             <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding SelectTripCommand}"/>
+                                <TapGestureRecognizer Command="{Binding SelectTrip2Command}"/>
                             </Grid.GestureRecognizers>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width=".5*" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
@@ -59,19 +50,11 @@
                                    Text="{Binding StartDateLocal, StringFormat='{0:yyyy/MM/dd HH:mm}'}"
                                    VerticalOptions="Center"/>
                             <Label Grid.Column="1"
-                                   Text="{Binding EndDateLocal, StringFormat='{0:yyyy/MM/dd HH:mm}'}"
-                                   VerticalOptions="Center"/>
-                            <Label Grid.Column="2"
                                    LineBreakMode="TailTruncation"
                                    MaxLines="2"
                                    Text="{Binding Source}"
                                    VerticalOptions="Center"/>
-                            <Label Grid.Column="2"
-                                   LineBreakMode="TailTruncation"
-                                   MaxLines="2"
-                                   Text="{Binding Source}"
-                                   VerticalOptions="Center"/>
-                            <Image Grid.Column="3" 
+                            <Image Grid.Column="2" 
                                    Source="ic_more_vert"/>
                         </Grid>
                     </DataTemplate>

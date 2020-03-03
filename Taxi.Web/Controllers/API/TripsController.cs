@@ -95,10 +95,9 @@ namespace Taxi.Web.Controllers.API
             return Ok(_converterHelper.ToTripResponse(tripEntity));
         }
 
-
-        [HttpGet]
-        [Route("GetMyTrips/{id}")]
-        public async Task<IActionResult> GetMyTrips([FromRoute] string id)
+        [HttpPost]
+        [Route("GetMyTrips")]
+        public async Task<IActionResult> GetMyTrips([FromBody] MyTripsRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -109,7 +108,7 @@ namespace Taxi.Web.Controllers.API
                 .Include(t => t.User)
                 .Include(t => t.TripDetails)
                 .Include(t => t.Taxi)
-                .Where(t => t.User.Id == id)
+                .Where(t => t.User.Id == request.UserId)
                 .OrderByDescending(t => t.StartDate)
                 .ToListAsync();
 
