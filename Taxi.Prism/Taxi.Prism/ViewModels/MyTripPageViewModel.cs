@@ -1,6 +1,7 @@
 ﻿using Prism.Navigation;
 using Taxi.Common.Models;
 using Taxi.Prism.Helpers;
+using Taxi.Prism.Views;
 
 namespace Taxi.Prism.ViewModels
 {
@@ -48,6 +49,7 @@ namespace Taxi.Prism.ViewModels
             TripSummary tripSummary = GeoHelper.GetTripSummary(Trip);
             Distance = tripSummary.Distance;
             Time = $"{tripSummary.Time.ToString().Substring(0, 8)}";
+            
             if (tripSummary.Value == 5600)
             {
                 Value = $"{tripSummary.Value:C0}";
@@ -56,6 +58,8 @@ namespace Taxi.Prism.ViewModels
             {
                 Value = $"{tripSummary.Value:C0}";
             }
+
+            MyTripPage.GetInstance().DrawMap(Trip);
         }
     }
 }
