@@ -11,12 +11,15 @@ namespace Taxi.Prism.Views
     {
         private readonly IGeolocatorService _geolocatorService;
         private static StartTripPage _instance;
+        private double _distance;
+        private Position _position;
 
         public StartTripPage(IGeolocatorService geolocatorService)
         {
             InitializeComponent();
             _geolocatorService = geolocatorService;
             _instance = this;
+            _distance = .2;
         }
 
         protected override void OnAppearing()
@@ -32,6 +35,7 @@ namespace Taxi.Prism.Views
 
         public void AddPin(Position position, string address, string label, PinType pinType)
         {
+            _position = position;
             MyMap.Pins.Add(new Pin
             {
                 Address = address,
@@ -60,7 +64,8 @@ namespace Taxi.Prism.Views
                 AddPin(b, string.Empty, string.Empty, PinType.SavedPin);
             }
 
-            MoveMap(b);
+            _position = b;
+            MoveMap();
         }
 
         private async void MoveMapToCurrentPositionAsync()
@@ -74,17 +79,17 @@ namespace Taxi.Prism.Views
                 await _geolocatorService.GetLocationAsync();
                 if (_geolocatorService.Latitude != 0 && _geolocatorService.Longitude != 0)
                 {
-                    Position position = new Position(
+                    _position = new Position(
                         _geolocatorService.Latitude,
                         _geolocatorService.Longitude);
-                    MoveMap(position);
+                    MoveMap();
                 }
             }
         }
 
-        private void MoveMap(Position position)
+        private void MoveMap()
         {
-            MyMap.MoveToRegion(MapSpan.FromCenterAndRadius(position, Distance.FromKilometers(.2)));
+            MyMap.MoveToRegion(MapSpan.FromCenterAndRadius(_position, Distance.FromKilometers(_distance)));
         }
 
         private async Task<bool> CheckLocationPermisionsAsync()
@@ -108,6 +113,12 @@ namespace Taxi.Prism.Views
             return permissionLocation == PermissionStatus.Granted ||
                    permissionLocationAlways == PermissionStatus.Granted ||
                    permissionLocationWhenInUse == PermissionStatus.Granted;
+        }
+
+        private void MySlider_ValueChanged(object sender, ValueChangedEventArgs e)
+        {
+            _distance = e.NewValue;
+            MyMap.MoveToRegion(MapSpan.FromCenterAndRadius(_position, Distance.FromKilometers(_distance)));
         }
     }
 }

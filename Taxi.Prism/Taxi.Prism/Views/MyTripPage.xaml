@@ -115,10 +115,15 @@
                         <Label Grid.Column="1" 
                                Grid.Row="7"
                                Text="{Binding Trip.Remarks}"/>
-                    </Grid>
-                    <maps:Map x:Name="MyMap"
-                              HeightRequest="500"
-                              MapType="Street"/>
+                        </Grid>
+                        <Slider x:Name="MySlider"
+                                Minimum="0"
+                                Maximum="2"
+                                Value="1"
+                                ValueChanged="MySlider_ValueChanged"/>
+                        <maps:Map x:Name="MyMap"
+                                    HeightRequest="500"
+                                    MapType="Street"/>
                 </StackLayout>
             </ScrollView>
         </StackLayout>

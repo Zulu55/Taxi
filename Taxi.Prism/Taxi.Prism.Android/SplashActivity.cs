@@ -12,7 +12,7 @@ namespace Taxi.Prism.Droid
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            System.Threading.Thread.Sleep(1800);
+            System.Threading.Thread.Sleep(1);
             StartActivity(typeof(MainActivity));
         }
     }

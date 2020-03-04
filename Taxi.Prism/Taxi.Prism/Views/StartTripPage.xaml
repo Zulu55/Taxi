@@ -50,6 +50,11 @@
                                  Source="ic_airport_shuttle"/>
                 </StackLayout>
             </Grid>
+            <Slider x:Name="MySlider"
+                    Minimum="0"
+                    Maximum=".4"
+                    Value=".2"
+                    ValueChanged="MySlider_ValueChanged"/>
             <maps:Map x:Name="MyMap"
                         MapType="Street"/>
             <StackLayout Orientation="Horizontal">
