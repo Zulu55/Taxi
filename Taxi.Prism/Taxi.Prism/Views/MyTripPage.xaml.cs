@@ -25,14 +25,14 @@ namespace Taxi.Prism.Views
             if (trip.SourceLatitude != 0 && trip.SourceLongitude != 0)
             {
                 Position position = new Position(trip.SourceLatitude, trip.SourceLongitude);
-                AddPin(position, trip.Source, Languages.StartTrip);
+                AddPin(position, trip.Source, Languages.StartTrip, PinType.Place);
                 MoveMap(position);
             }
 
             if (trip.TargetLatitude != 0 && trip.TargetLongitude != 0)
             {
                 Position position = new Position(trip.TargetLatitude, trip.TargetLongitude);
-                AddPin(position, trip.Target, Languages.EndTrip);
+                AddPin(position, trip.Target, Languages.EndTrip, PinType.Place);
                 MoveMap(position);
             }
 
@@ -46,26 +46,33 @@ namespace Taxi.Prism.Views
 
         public void DrawLine(Position a, Position b)
         {
-            Polygon polygon = new Polygon
+            if (Device.RuntimePlatform == Device.Android)
             {
-                StrokeWidth = 10,
-                StrokeColor = Color.FromHex("#8D07F6"),
-                FillColor = Color.FromHex("#8D07F6"),
-                Geopath = { a, b }
-            };
+                Polygon polygon = new Polygon
+                {
+                    StrokeWidth = 10,
+                    StrokeColor = Color.FromHex("#8D07F6"),
+                    FillColor = Color.FromHex("#8D07F6"),
+                    Geopath = { a, b }
+                };
 
-            MyMap.MapElements.Add(polygon);
+                MyMap.MapElements.Add(polygon);
+            }
+            else
+            {
+                AddPin(b, string.Empty, string.Empty, PinType.SavedPin);
+            }
         }
 
 
-        private void AddPin(Position position, string address, string label)
+        private void AddPin(Position position, string address, string label, PinType pinType)
         {
             MyMap.Pins.Add(new Pin
             {
                 Address = address,
                 Label = label,
                 Position = position,
-                Type = PinType.Place
+                Type = pinType
             });
         }
 

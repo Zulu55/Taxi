@@ -30,28 +30,36 @@ namespace Taxi.Prism.Views
             return _instance;
         }
 
-        public void AddPin(Position position, string address, string label)
+        public void AddPin(Position position, string address, string label, PinType pinType)
         {
             MyMap.Pins.Add(new Pin
             {
                 Address = address,
                 Label = label,
                 Position = position,
-                Type = PinType.Place
+                Type = pinType
             });
         }
 
         public void DrawLine(Position a, Position b)
         {
-            Polygon polygon = new Polygon
+            if (Device.RuntimePlatform == Device.Android)
             {
-                StrokeWidth = 10,
-                StrokeColor = Color.FromHex("#8D07F6"),
-                FillColor = Color.FromHex("#8D07F6"),
-                Geopath = { a, b }
-            };
+                Polygon polygon = new Polygon
+                {
+                    StrokeWidth = 10,
+                    StrokeColor = Color.FromHex("#8D07F6"),
+                    FillColor = Color.FromHex("#8D07F6"),
+                    Geopath = { a, b }
+                };
 
-            MyMap.MapElements.Add(polygon);
+                MyMap.MapElements.Add(polygon);
+            }
+            else
+            {
+                AddPin(b, string.Empty, string.Empty, PinType.SavedPin);
+            }
+
             MoveMap(b);
         }
 
