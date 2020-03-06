@@ -64,7 +64,8 @@ namespace Taxi.Prism.ViewModels
                 {
                     Icon = "ic_people",
                     PageName = "GroupPage",
-                    Title = Languages.AdminMyUserGroup
+                    Title = Languages.AdminMyUserGroup,
+                    IsLoginRequired = true
                 },
                 new Menu
                 {

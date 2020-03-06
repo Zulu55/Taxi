@@ -2,11 +2,76 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-             ios:Page.UseSafeArea="true"
              prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+         	 xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+           	 xmlns:i18n="clr-namespace:Taxi.Prism.Helpers"
+             ios:Page.UseSafeArea="true"
              x:Class="Taxi.Prism.Views.GroupPage"
              BackgroundColor="{StaticResource ColorBackgroud}"
              Title="{Binding Title}">
-  
+    
+    <AbsoluteLayout>
+        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                     AbsoluteLayout.LayoutFlags="All" 
+                     Padding="5">
+
+            <CollectionView ItemsSource="{Binding Users}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                     VerticalItemSpacing="5"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame CornerRadius="10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <ffimageloading:CachedImage x:Name="Picture"
+                                                            Grid.Column="0"
+                                                            Aspect="AspectFill"
+                                                            Source="{Binding User.PictureFullPath}" 
+                                                            CacheDuration= "50"
+                                                            Margin="5"
+                                                            RetryCount= "3"
+                                                            RetryDelay= "600"
+                                                            WidthRequest="70">
+                                    <ffimageloading:CachedImage.Transformations>
+                                        <fftransformations:CircleTransformation />
+                                    </ffimageloading:CachedImage.Transformations>
+                                </ffimageloading:CachedImage>
+                                <StackLayout Grid.Column="1">
+                                    <Label FontAttributes="Bold" 
+                                           FontSize="Medium"
+                                           Text="{Binding User.FullName}"/>
+                                    <Label Text="{Binding User.Email}"
+                                           TextColor="{StaticResource ColorAccent}"/>
+                                    <Label Text="{Binding User.PhoneNumber}"/>
+                                </StackLayout>
+                                <Image Grid.Column="2" 
+                                       Source="ic_more_vert"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+        <busyindicator:SfBusyIndicator AnimationType="Gear" 
+                                        AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+                	                    AbsoluteLayout.LayoutFlags="All"
+                	                    BackgroundColor="{StaticResource ColorAccent}"
+                	                    HorizontalOptions="Center"
+                	                    TextColor="{StaticResource ColorFontInverse}"
+                	                    IsVisible="{Binding IsRunning}"
+                	                    Title="{i18n:Translate Loading}"
+                	                    VerticalOptions="Center"
+                	                    ViewBoxWidth="80"
+                	                    ViewBoxHeight="80" />
+    </AbsoluteLayout>
+
 </ContentPage>
