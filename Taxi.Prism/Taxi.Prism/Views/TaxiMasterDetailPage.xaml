@@ -11,7 +11,7 @@
 
     <MasterDetailPage.Master>
         <ContentPage Title="Menu"
-                     BackgroundColor="{StaticResource ColorBackgroud}">
+                     BackgroundColor="{StaticResource ColorSecondary}">
             <StackLayout Padding="20">
                 <RelativeLayout>
                     <Image x:Name="Logo" HorizontalOptions="Center"

@@ -108,7 +108,9 @@ namespace Taxi.Web.Controllers.API
                 .Include(t => t.User)
                 .Include(t => t.TripDetails)
                 .Include(t => t.Taxi)
-                .Where(t => t.User.Id == request.UserId)
+                .Where(t => t.User.Id == request.UserId && 
+                            t.StartDate >= request.StartDate &&
+                            t.StartDate <= request.EndDate)
                 .OrderByDescending(t => t.StartDate)
                 .ToListAsync();
 
