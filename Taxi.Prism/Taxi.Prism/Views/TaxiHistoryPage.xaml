@@ -20,9 +20,18 @@
                 <Label Text="{i18n:Translate Plaque}"
                        VerticalOptions="Center"/>
                 <Entry HorizontalOptions="FillAndExpand" 
-                        Placeholder="{i18n:Translate PlaquePlaceHolder}" 
-                        Text="{Binding Plaque}"
-                        VerticalOptions="Center"/>
+                       MaxLength="3"
+                       Placeholder="ABC" 
+                       Text="{Binding PlaqueLetters}"
+                       VerticalOptions="Center"/>
+                <Label Text="-"
+                       VerticalOptions="Center"/>
+                <Entry HorizontalOptions="FillAndExpand" 
+                       Keyboard="Numeric"
+                       MaxLength="3"
+                       Placeholder="123" 
+                       Text="{Binding PlaqueNumbers}"
+                       VerticalOptions="Center"/>
                 <Button Command="{Binding CheckPlaqueCommand}"
                         Text="{i18n:Translate CheckPlaque}"/>
             </StackLayout>

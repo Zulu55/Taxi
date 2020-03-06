@@ -4,7 +4,6 @@ using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Timers;
 using Taxi.Common.Helpers;
@@ -59,7 +58,9 @@ namespace Taxi.Prism.ViewModels
 
         public DelegateCommand StartTripCommand => _startTripCommand ?? (_startTripCommand = new DelegateCommand(StartTripAsync));
 
-        public string Plaque { get; set; }
+        public string PlaqueLetters { get; set; }
+
+        public int? PlaqueNumbers { get; set; }
 
         public bool IsSecondButtonVisible
         {
@@ -199,7 +200,7 @@ namespace Taxi.Prism.ViewModels
                 Address = Source,
                 Latitude = _geolocatorService.Latitude,
                 Longitude = _geolocatorService.Longitude,
-                Plaque = Plaque,
+                Plaque = $"{PlaqueLetters}{PlaqueNumbers}",
                 UserId = new Guid(_user.Id)
             };
 
@@ -306,16 +307,12 @@ namespace Taxi.Prism.ViewModels
 
         private async Task<bool> ValidateDataAsync()
         {
-            if (string.IsNullOrEmpty(Plaque))
+            if (string.IsNullOrEmpty(PlaqueLetters) || PlaqueNumbers == 0)
             {
-                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.PlaqueError1, Languages.Accept);
-                return false;
-            }
-
-            Regex regex = new Regex(@"^([A-Za-z]{3}\d{3})$");
-            if (!regex.IsMatch(Plaque))
-            {
-                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.PlaqueError2, Languages.Accept);
+                await App.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    Languages.PlaqueError1,
+                    Languages.Accept);
                 return false;
             }
 

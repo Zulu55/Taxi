@@ -2,7 +2,6 @@
 using Prism.Navigation;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using Taxi.Common.Models;
 using Taxi.Common.Services;
 using Taxi.Prism.Helpers;
@@ -27,7 +26,7 @@ namespace Taxi.Prism.ViewModels
             Title = Languages.TaxiHistory;
         }
 
-        public List<TripItemViewModel> Trips 
+        public List<TripItemViewModel> Trips
         {
             get => _trips;
             set => SetProperty(ref _trips, value);
@@ -45,27 +44,19 @@ namespace Taxi.Prism.ViewModels
             set => SetProperty(ref _isRunning, value);
         }
 
-        public string Plaque { get; set; }
+        public string PlaqueLetters { get; set; }
+
+        public int? PlaqueNumbers { get; set; }
 
         public DelegateCommand CheckPlaqueCommand => _checkPlaqueCommand ?? (_checkPlaqueCommand = new DelegateCommand(CheckPlaqueAsync));
 
         private async void CheckPlaqueAsync()
         {
-            if (string.IsNullOrEmpty(Plaque))
+            if (string.IsNullOrEmpty(PlaqueLetters) || PlaqueNumbers == 0)
             {
                 await App.Current.MainPage.DisplayAlert(
                     Languages.Error,
                     Languages.PlaqueError1,
-                    Languages.Accept);
-                return;
-            }
-
-            Regex regex = new Regex(@"^([A-Za-z]{3}\d{3})$");
-            if (!regex.IsMatch(Plaque))
-            {
-                await App.Current.MainPage.DisplayAlert(
-                    Languages.Error,
-                    Languages.PlaqueError2,
                     Languages.Accept);
                 return;
             }
@@ -77,13 +68,13 @@ namespace Taxi.Prism.ViewModels
             {
                 IsRunning = false;
                 await App.Current.MainPage.DisplayAlert(
-                    Languages.Error, 
-                    Languages.ConnectionError, 
+                    Languages.Error,
+                    Languages.ConnectionError,
                     Languages.Accept);
                 return;
             }
 
-            Response response = await _apiService.GetTaxiAsync(Plaque, url, "api", "/Taxis");
+            Response response = await _apiService.GetTaxiAsync($"{PlaqueLetters}{PlaqueNumbers}", url, "api", "/Taxis");
             IsRunning = false;
 
             if (!response.IsSuccess)
