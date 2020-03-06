@@ -1,4 +1,7 @@
-﻿namespace Taxi.Web.Data.Entities
+﻿using System;
+using Taxi.Common.Enums;
+
+namespace Taxi.Web.Data.Entities
 {
     public class UserGroupRequestEntity
     {
@@ -8,6 +11,8 @@
 
         public UserEntity RequiredUser { get; set; }
 
-        public bool WasAccepted { get; set; }
+        public UserGroupStatus Status { get; set; }
+
+        public Guid Token { get; set; }
     }
 }

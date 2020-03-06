@@ -12,6 +12,11 @@
              x:Class="Taxi.Prism.Views.GroupPage"
              BackgroundColor="{StaticResource ColorBackgroud}"
              Title="{Binding Title}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding AddUserCommand}" 
+                     IconImageSource="ic_action_person_add"/>
+    </ContentPage.ToolbarItems>
     
     <AbsoluteLayout>
         <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"

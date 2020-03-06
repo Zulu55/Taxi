@@ -435,4 +435,7 @@
   <data name="MyTrip" xml:space="preserve">
     <value>Mi viaje</value>
   </data>
+  <data name="Message004" xml:space="preserve">
+    <value>Se ha enviado un correo electrónico al usuario con su solicitud, ¡esperamos que responda pronto!</value>
+  </data>
 </root>

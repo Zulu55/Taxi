@@ -592,6 +592,15 @@ namespace Taxi.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An email has been sent to the user with your request, we hope to respond soon!.
+        /// </summary>
+        public static string Message004 {
+            get {
+                return ResourceManager.GetString("Message004", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Modify User.
         /// </summary>
         public static string ModifyUser {
