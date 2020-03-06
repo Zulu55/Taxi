@@ -1,0 +1,35 @@
+﻿@model Taxi.Web.Models.EditUserViewModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>User</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="ChangeUser" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="PicturePath" />
+
+            <partial name="_User" />
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-action="ChangePassword" class="btn btn-warning">Change Password</a>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4">
+        @if (!string.IsNullOrEmpty(Model.PicturePath))
+        {
+            <img src="@Url.Content(Model.PicturePath)" alt="Image" style="width:300px;height:300px;max-width: 100%; height: auto;" />
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
