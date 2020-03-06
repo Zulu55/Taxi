@@ -26,5 +26,9 @@ namespace Taxi.Web.Data
         public DbSet<TripDetailEntity> TripDetails { get; set; }
 
         public DbSet<UserGroupEntity> UserGroups { get; set; }
+
+        public DbSet<UserGroupDetailEntity> UserGroupDetails { get; set; }
+
+        public DbSet<UserGroupRequestEntity> UserGroupRequests { get; set; }
     }
 }

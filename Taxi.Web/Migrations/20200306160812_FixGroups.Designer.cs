@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Taxi.Web.Data;
 
 namespace Taxi.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200306160812_FixGroups")]
+    partial class FixGroups
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -268,6 +270,8 @@ namespace Taxi.Web.Migrations
 
                     b.Property<bool>("TwoFactorEnabled");
 
+                    b.Property<string>("UserEntityId");
+
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
 
@@ -283,41 +287,9 @@ namespace Taxi.Web.Migrations
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
+                    b.HasIndex("UserEntityId");
+
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("Taxi.Web.Data.Entities.UserGroupDetailEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("UserGroupId");
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserGroupId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserGroupDetails");
-                });
-
-            modelBuilder.Entity("Taxi.Web.Data.Entities.UserGroupEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserGroups");
                 });
 
             modelBuilder.Entity("Taxi.Web.Data.Entities.UserGroupRequestEntity", b =>
@@ -411,22 +383,11 @@ namespace Taxi.Web.Migrations
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("Taxi.Web.Data.Entities.UserGroupDetailEntity", b =>
+            modelBuilder.Entity("Taxi.Web.Data.Entities.UserEntity", b =>
                 {
-                    b.HasOne("Taxi.Web.Data.Entities.UserGroupEntity", "UserGroup")
+                    b.HasOne("Taxi.Web.Data.Entities.UserEntity")
                         .WithMany("Users")
-                        .HasForeignKey("UserGroupId");
-
-                    b.HasOne("Taxi.Web.Data.Entities.UserEntity", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("Taxi.Web.Data.Entities.UserGroupEntity", b =>
-                {
-                    b.HasOne("Taxi.Web.Data.Entities.UserEntity", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserEntityId");
                 });
 
             modelBuilder.Entity("Taxi.Web.Data.Entities.UserGroupRequestEntity", b =>

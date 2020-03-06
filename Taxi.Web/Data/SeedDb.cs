@@ -26,10 +26,43 @@ namespace Taxi.Web.Data
             await _dataContext.Database.EnsureCreatedAsync();
             await CheckRolesAsync();
             await CheckUserAsync("1010", "Juan", "Zuluaga", "jzuluaga55@gmail.com", "350 634 2747", "Calle Luna Calle Sol", UserType.Admin);
-            var driver = await CheckUserAsync("2020", "Juan", "Zuluaga", "jzuluaga55@hotmail.com", "350 634 2747", "Calle Luna Calle Sol", UserType.Driver);
-            var user1 = await CheckUserAsync("3030", "Juan", "Zuluaga", "carlos.zuluaga@globant.com", "350 634 2747", "Calle Luna Calle Sol", UserType.User);
-            var user2 = await CheckUserAsync("4040", "Juan", "Zuluaga", "juanzuluaga2480@correo.itm.edu.co", "350 634 2747", "Calle Luna Calle Sol", UserType.User);
+            UserEntity driver = await CheckUserAsync("2020", "Juan", "Zuluaga", "jzuluaga55@hotmail.com", "350 634 2747", "Calle Luna Calle Sol", UserType.Driver);
+            UserEntity user1 = await CheckUserAsync("3030", "Juan", "Zuluaga", "carlos.zuluaga@globant.com", "350 634 2747", "Calle Luna Calle Sol", UserType.User);
+            UserEntity user2 = await CheckUserAsync("5050", "Camila", "Cifuentes", "camila@yopmail.com", "350 634 2747", "Calle Luna Calle Sol", UserType.User);
+            UserEntity user3 = await CheckUserAsync("6060", "Sandra", "Usuga", "sandra@yopmail.com", "350 634 2747", "Calle Luna Calle Sol", UserType.User);
+            UserEntity user4 = await CheckUserAsync("7070", "Lisa", "Marin", "luisa@yopmail.com", "350 634 2747", "Calle Luna Calle Sol", UserType.User);
             await CheckTaxisAsync(driver, user1, user2);
+            await CheckUserGroups(user1, user2, user3, user4);
+        }
+
+        private async Task CheckUserGroups(UserEntity user1, UserEntity user2, UserEntity user3, UserEntity user4)
+        {
+            if (!_dataContext.UserGroups.Any())
+            {
+                _dataContext.UserGroups.Add(new UserGroupEntity
+                {
+                    User = user1,
+                    Users = new List<UserGroupDetailEntity>
+                    {
+                        new UserGroupDetailEntity { User = user2 },
+                        new UserGroupDetailEntity { User = user3 },
+                        new UserGroupDetailEntity { User = user4 }
+                    }
+                });
+
+                _dataContext.UserGroups.Add(new UserGroupEntity
+                {
+                    User = user2,
+                    Users = new List<UserGroupDetailEntity>
+                    {
+                        new UserGroupDetailEntity { User = user1 },
+                        new UserGroupDetailEntity { User = user3 },
+                        new UserGroupDetailEntity { User = user4 }
+                    }
+                });
+
+                await _dataContext.SaveChangesAsync();
+            }
         }
 
         private async Task<UserEntity> CheckUserAsync(
@@ -41,7 +74,7 @@ namespace Taxi.Web.Data
             string address,
             UserType userType)
         {
-            var user = await _userHelper.GetUserAsync(email);
+            UserEntity user = await _userHelper.GetUserAsync(email);
             if (user == null)
             {
                 user = new UserEntity
@@ -59,7 +92,7 @@ namespace Taxi.Web.Data
                 await _userHelper.AddUserAsync(user, "123456");
                 await _userHelper.AddUserToRoleAsync(user, userType.ToString());
 
-                var token = await _userHelper.GenerateEmailConfirmationTokenAsync(user);
+                string token = await _userHelper.GenerateEmailConfirmationTokenAsync(user);
                 await _userHelper.ConfirmEmailAsync(user, token);
             }
 
@@ -74,8 +107,8 @@ namespace Taxi.Web.Data
         }
 
         private async Task CheckTaxisAsync(
-            UserEntity driver, 
-            UserEntity user1, 
+            UserEntity driver,
+            UserEntity user1,
             UserEntity user2)
         {
             if (!_dataContext.Taxis.Any())
