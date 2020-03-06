@@ -17,6 +17,36 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0"
+                       Grid.Row="0"
+                       FontAttributes="Bold"
+                       Text="{i18n:Translate StartDate}"/>
+                <Label Grid.Column="1"
+                       Grid.Row="0"
+                       FontAttributes="Bold"
+                       Text="{i18n:Translate EndDate}"/>
+                <DatePicker  Grid.Column="0"
+                             Grid.Row="1"
+                             Date="{Binding StartDate}"/>
+                <DatePicker  Grid.Column="1"
+                             Grid.Row="1"
+                             Date="{Binding EndDate}"/>
+                <ImageButton Grid.Column="2"
+                             Grid.Row="0"
+                             Grid.RowSpan="2"
+                             Command="{Binding RefreshCommand}" 
+                             Source="ic_refresh"/>
+            </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*" />

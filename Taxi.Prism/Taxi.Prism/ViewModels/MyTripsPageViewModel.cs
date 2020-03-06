@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
+using Prism.Commands;
 using Prism.Navigation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Taxi.Common.Helpers;
@@ -15,6 +17,7 @@ namespace Taxi.Prism.ViewModels
         private readonly IApiService _apiService;
         private bool _isRunning;
         private List<TripItemViewModel> _trips;
+        private DelegateCommand _refreshCommand;
 
         public MyTripsPageViewModel(INavigationService navigationService, IApiService apiService)
             : base(navigationService)
@@ -22,8 +25,16 @@ namespace Taxi.Prism.ViewModels
             _navigationService = navigationService;
             _apiService = apiService;
             Title = Languages.MyTrips;
+            StartDate = DateTime.Today.AddDays(-7);
+            EndDate = DateTime.Today;
             LoadTripsAsync();
         }
+
+        public DelegateCommand RefreshCommand => _refreshCommand ?? (_refreshCommand = new DelegateCommand(LoadTripsAsync));
+
+        public DateTime StartDate { get; set; }
+
+        public DateTime EndDate { get; set; }
 
         public bool IsRunning
         {
@@ -52,7 +63,13 @@ namespace Taxi.Prism.ViewModels
 
             TokenResponse token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
             UserResponse user = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
-            MyTripsRequest request = new MyTripsRequest { UserId = user.Id };
+            MyTripsRequest request = new MyTripsRequest 
+            {
+                EndDate = EndDate.AddDays(1).ToUniversalTime(),
+                StartDate = StartDate.ToUniversalTime(),
+                UserId = user.Id 
+            };
+            
             Response response = await _apiService.GetMyTrips(url, "api", "/Trips/GetMyTrips", "bearer", token.Token, request);
 
             IsRunning = false;

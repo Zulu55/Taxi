@@ -32,6 +32,10 @@
                 <Setter Property="BackgroundColor" Value="{StaticResource ColorFontInverse}" />
             </Style>
 
+            <Style TargetType="DatePicker">
+                <Setter Property="BackgroundColor" Value="{StaticResource ColorFontInverse}" />
+            </Style>
+
             <Style TargetType="Editor">
                 <Setter Property="BackgroundColor" Value="{StaticResource ColorFontInverse}" />
             </Style>

@@ -277,5 +277,8 @@
   <ItemGroup>
     <BundleResource Include="ic_location_on.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_refresh.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
