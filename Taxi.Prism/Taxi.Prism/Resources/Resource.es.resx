@@ -447,4 +447,7 @@
   <data name="SendInvitation" xml:space="preserve">
     <value>Enviar invitación</value>
   </data>
+  <data name="Error003" xml:space="preserve">
+    <value>El usuario ya pertenece a su grupo.</value>
+  </data>
 </root>

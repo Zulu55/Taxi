@@ -19,7 +19,9 @@ namespace Taxi.Prism.Helpers
 
         public static string AddUserToMyGroup => Resource.AddUserToMyGroup;
 
-        public static string Message004 => Resource.Message004;
+        public static string Error003 => Resource.Error003;
+
+        public static string Message004 => Resource.Error;
 
         public static string MyTrip => Resource.MyTrip;
 

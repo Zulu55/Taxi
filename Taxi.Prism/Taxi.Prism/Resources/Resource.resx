@@ -427,4 +427,7 @@
   <data name="SendInvitation" xml:space="preserve">
     <value>Send Invitation</value>
   </data>
+  <data name="Error003" xml:space="preserve">
+    <value>The user already belongs to your group.</value>
+  </data>
 </root>

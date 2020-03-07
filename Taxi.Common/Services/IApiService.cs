@@ -36,5 +36,7 @@ namespace Taxi.Common.Services
         Task<Response> GetMyTrips(string urlBase, string servicePrefix, string controller, string tokenType, string accessToken, MyTripsRequest model);
 
         Task<Response> GetListAsync<T>(string urlBase, string servicePrefix, string controller, string tokenType, string accessToken);
+
+        Task<Response> AddUserGroupAsync(string urlBase, string servicePrefix, string controller, AddUserGroupRequest model, string tokenType, string accessToken);
     }
 }

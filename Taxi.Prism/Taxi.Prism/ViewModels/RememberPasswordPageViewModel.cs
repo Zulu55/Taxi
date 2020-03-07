@@ -54,12 +54,21 @@ namespace Taxi.Prism.ViewModels
             IsRunning = true;
             IsEnabled = false;
 
+            string url = App.Current.Resources["UrlAPI"].ToString();
+            bool connection = await _apiService.CheckConnectionAsync(url);
+            if (!connection)
+            {
+                IsRunning = false;
+                IsEnabled = true;
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ConnectionError, Languages.Accept);
+                return;
+            }
+
             EmailRequest request = new EmailRequest
             {
                 Email = Email
             };
 
-            string url = App.Current.Resources["UrlAPI"].ToString();
             Response response = await _apiService.RecoverPasswordAsync(url, "/api", "/Account/RecoverPassword", request);
 
             IsRunning = false;

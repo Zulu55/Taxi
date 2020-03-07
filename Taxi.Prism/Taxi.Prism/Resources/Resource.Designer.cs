@@ -448,6 +448,15 @@ namespace Taxi.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The user already belongs to your group..
+        /// </summary>
+        public static string Error003 {
+            get {
+                return ResourceManager.GetString("Error003", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to First name.
         /// </summary>
         public static string FirstName {

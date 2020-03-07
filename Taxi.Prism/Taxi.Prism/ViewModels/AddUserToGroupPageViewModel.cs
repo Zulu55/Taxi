@@ -1,7 +1,10 @@
-﻿using Prism.Commands;
+﻿using Newtonsoft.Json;
+using Prism.Commands;
 using Prism.Navigation;
+using System;
 using System.Threading.Tasks;
 using Taxi.Common.Helpers;
+using Taxi.Common.Models;
 using Taxi.Common.Services;
 using Taxi.Prism.Helpers;
 
@@ -49,6 +52,53 @@ namespace Taxi.Prism.ViewModels
             {
                 return;
             }
+
+            IsRunning = true;
+            IsEnabled = false;
+
+            string url = App.Current.Resources["UrlAPI"].ToString();
+            bool connection = await _apiService.CheckConnectionAsync(url);
+            if (!connection)
+            {
+                IsRunning = false;
+                IsEnabled = true;
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ConnectionError, Languages.Accept);
+                return;
+            }
+
+            UserResponse user = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
+            TokenResponse token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
+
+            AddUserGroupRequest request = new AddUserGroupRequest
+            {
+                Email = Email,
+                UserId = new Guid(user.Id)
+            };
+
+            Response response = await _apiService.AddUserGroupAsync(url, "/api", "/UserGroups", request, "bearer", token.Token);
+
+            IsRunning = false;
+            IsEnabled = true;
+
+            if (!response.IsSuccess)
+            {
+                if (response.Message == "Error002")
+                {
+                    await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.Error002, Languages.Accept);
+                }
+                else if (response.Message == "Error003")
+                {
+                    await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.Error003, Languages.Accept);
+                }
+                else
+                {
+                    await App.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
+                }
+                return;
+            }
+
+            await App.Current.MainPage.DisplayAlert(Languages.Ok, Languages.Message004, Languages.Accept);
+            await _navigationService.GoBackAsync();
         }
 
         private async Task<bool> ValidateDataAsync()
