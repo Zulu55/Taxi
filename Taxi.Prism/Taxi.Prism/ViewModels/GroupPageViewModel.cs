@@ -71,8 +71,11 @@ namespace Taxi.Prism.ViewModels
                 return;
             }
 
-            List<UserGroupDetailResponse> users = (List<UserGroupDetailResponse>)response.Result;
-            Users = new ObservableCollection<UserGroupDetailResponse>(users);
+            if (response.Result != null)
+            {
+                List<UserGroupDetailResponse> users = (List<UserGroupDetailResponse>)response.Result;
+                Users = new ObservableCollection<UserGroupDetailResponse>(users);
+            }
         }
     }
 }

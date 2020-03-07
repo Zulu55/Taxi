@@ -614,8 +614,7 @@ namespace Taxi.Common.Services
                     };
                 }
 
-                Response obj = JsonConvert.DeserializeObject<Response>(answer);
-                return obj;
+                return new Response { IsSuccess = true };
             }
             catch (Exception ex)
             {

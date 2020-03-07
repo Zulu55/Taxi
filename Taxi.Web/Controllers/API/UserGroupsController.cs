@@ -76,8 +76,15 @@ namespace Taxi.Web.Controllers.API
                 Token = Guid.NewGuid()
             };
 
-            _context.UserGroupRequests.Add(userGroupRequest);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.UserGroupRequests.Add(userGroupRequest);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
 
             string linkConfirm = Url.Action("ConfirmUserGroup", "Account", new
             {
@@ -91,10 +98,15 @@ namespace Taxi.Web.Controllers.API
                 token = userGroupRequest.Token
             }, protocol: HttpContext.Request.Scheme);
 
-            _mailHelper.SendMail(request.Email, "Request to join a group", $"<h1>Request to join a group</h1>" +
+            Response response = _mailHelper.SendMail(request.Email, "Request to join a group", $"<h1>Request to join a group</h1>" +
                 $"The user: {proposalUser.FullName} ({proposalUser.Email}), has requested that you be a member of their user group in the TAXI application." +
                 $"</hr></br></br>If you wish to accept, click here: <a href = \"{linkConfirm}\">Confirm</a>" +
                 $"</hr></br></br>If you wish to reject, click here: <a href = \"{linkReject}\">Reject</a>");
+
+            if (!response.IsSuccess)
+            {
+                return BadRequest(response.Message);
+            }
 
             return Ok("Message004");
         }
@@ -111,6 +123,11 @@ namespace Taxi.Web.Controllers.API
                 .Include(ug => ug.Users)
                 .ThenInclude(u => u.User)
                 .FirstOrDefaultAsync(u => u.User.Id == id);
+
+            if (userGroup == null || userGroup?.Users == null)
+            {
+                return Ok();
+            }
 
             return Ok(_converterHelper.ToUserGroupResponse(userGroup.Users.ToList()));
         }
