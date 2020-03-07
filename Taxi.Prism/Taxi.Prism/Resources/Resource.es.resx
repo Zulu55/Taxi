@@ -438,4 +438,13 @@
   <data name="Message004" xml:space="preserve">
     <value>Se ha enviado un correo electrónico al usuario con su solicitud, ¡esperamos que responda pronto!</value>
   </data>
+  <data name="AddUserToMyGroup" xml:space="preserve">
+    <value>Añadir usuario a grupo</value>
+  </data>
+  <data name="EmailSendInvitationPlaceHolder" xml:space="preserve">
+    <value>Ingrese el correo electrónico para enviar la invitación ...</value>
+  </data>
+  <data name="SendInvitation" xml:space="preserve">
+    <value>Enviar invitación</value>
+  </data>
 </root>

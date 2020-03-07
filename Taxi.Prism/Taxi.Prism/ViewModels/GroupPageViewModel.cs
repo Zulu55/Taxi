@@ -1,11 +1,14 @@
 ﻿using Newtonsoft.Json;
+using Prism.Commands;
 using Prism.Navigation;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Taxi.Common.Helpers;
 using Taxi.Common.Models;
 using Taxi.Common.Services;
 using Taxi.Prism.Helpers;
+using Taxi.Prism.Views;
 
 namespace Taxi.Prism.ViewModels
 {
@@ -15,6 +18,7 @@ namespace Taxi.Prism.ViewModels
         private readonly IApiService _apiService;
         private bool _isRunning;
         private ObservableCollection<UserGroupDetailResponse> _users;
+        private DelegateCommand _addUserCommand;
 
         public GroupPageViewModel(INavigationService navigationService, IApiService apiService)
             : base(navigationService)
@@ -24,6 +28,8 @@ namespace Taxi.Prism.ViewModels
             Title = Languages.AdminMyUserGroup;
             LoadUsersAsync();
         }
+
+        public DelegateCommand AddUserCommand => _addUserCommand ?? (_addUserCommand = new DelegateCommand(AddUserAsync));
 
         public bool IsRunning
         {
@@ -35,6 +41,11 @@ namespace Taxi.Prism.ViewModels
         {
             get => _users;
             set => SetProperty(ref _users, value);
+        }
+
+        private async void AddUserAsync()
+        {
+            await _navigationService.NavigateAsync(nameof(AddUserToGroupPage));
         }
 
         private async void LoadUsersAsync()

@@ -47,6 +47,7 @@ namespace Taxi.Prism
             containerRegistry.RegisterForNavigation<EndTripPage, EndTripPageViewModel>();
             containerRegistry.RegisterForNavigation<MyTripsPage, MyTripsPageViewModel>();
             containerRegistry.RegisterForNavigation<MyTripPage, MyTripPageViewModel>();
+            containerRegistry.RegisterForNavigation<AddUserToGroupPage, AddUserToGroupPageViewModel>();
         }
     }
 }

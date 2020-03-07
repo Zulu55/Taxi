@@ -7,7 +7,7 @@
            	 xmlns:i18n="clr-namespace:Taxi.Prism.Helpers"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              ios:Page.UseSafeArea="true"
-             x:Class="Taxi.Prism.Views.RememberPasswordPage"
+             x:Class="Taxi.Prism.Views.AddUserToGroupPage"
              BackgroundColor="{StaticResource ColorBackgroud}"
              Title="{Binding Title}">
 
@@ -18,13 +18,13 @@
             <Label Text="{i18n:Translate Email}"/>
             <Entry Keyboard="Email"
                     HorizontalOptions="FillAndExpand"
-            	    Placeholder="{i18n:Translate EmailPlaceHolder}"
+            	    Placeholder="{i18n:Translate EmailSendInvitationPlaceHolder}"
             	    Text="{Binding Email}"/>
             <Button
-            	Command="{Binding RecoverCommand}"
+            	Command="{Binding SendInvitationCommand}"
             	IsEnabled="{Binding IsEnabled}"
                 HorizontalOptions="FillAndExpand"
-            	Text="{i18n:Translate PasswordRecover}"
+            	Text="{i18n:Translate SendInvitation}"
                 VerticalOptions="EndAndExpand"/>
         </StackLayout>
         <busyindicator:SfBusyIndicator AnimationType="Gear" 

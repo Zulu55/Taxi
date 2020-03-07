@@ -17,7 +17,6 @@ namespace Taxi.Prism.ViewModels
         private bool _isEnabled;
         private DelegateCommand _recoverCommand;
 
-
         public RememberPasswordPageViewModel(INavigationService navigationService, IApiService apiService, IRegexHelper regexHelper)
             : base(navigationService)
         {

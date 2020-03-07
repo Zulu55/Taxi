@@ -97,6 +97,15 @@ namespace Taxi.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add user to my group.
+        /// </summary>
+        public static string AddUserToMyGroup {
+            get {
+                return ResourceManager.GetString("AddUserToMyGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Admin my user group.
         /// </summary>
         public static string AdminMyUserGroup {
@@ -381,6 +390,15 @@ namespace Taxi.Prism.Resources {
         public static string EmailPlaceHolder {
             get {
                 return ResourceManager.GetString("EmailPlaceHolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the email to send the invitation....
+        /// </summary>
+        public static string EmailSendInvitationPlaceHolder {
+            get {
+                return ResourceManager.GetString("EmailSendInvitationPlaceHolder", resourceCulture);
             }
         }
         
@@ -930,6 +948,15 @@ namespace Taxi.Prism.Resources {
         public static string SeeTaxiHistory {
             get {
                 return ResourceManager.GetString("SeeTaxiHistory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send Invitation.
+        /// </summary>
+        public static string SendInvitation {
+            get {
+                return ResourceManager.GetString("SendInvitation", resourceCulture);
             }
         }
         
