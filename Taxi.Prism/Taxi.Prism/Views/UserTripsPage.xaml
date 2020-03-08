@@ -5,8 +5,111 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              ios:Page.UseSafeArea="true"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+         	 xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+           	 xmlns:i18n="clr-namespace:Taxi.Prism.Helpers"
              x:Class="Taxi.Prism.Views.UserTripsPage"
              BackgroundColor="{StaticResource ColorBackgroud}"
              Title="{Binding Title}">
-  
+
+    <AbsoluteLayout>
+        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                     AbsoluteLayout.LayoutFlags="All" 
+                     Padding="5">
+            <StackLayout Orientation="Horizontal">
+                <ffimageloading:CachedImage x:Name="Picture"
+                                            Grid.Column="0"
+                                            Aspect="AspectFill"
+                                            Source="{Binding User.User.PictureFullPath}" 
+                                            CacheDuration= "50"
+                                            Margin="5"
+                                            RetryCount= "3"
+                                            RetryDelay= "600"
+                                            WidthRequest="120">
+                    <ffimageloading:CachedImage.Transformations>
+                        <fftransformations:CircleTransformation />
+                    </ffimageloading:CachedImage.Transformations>
+                </ffimageloading:CachedImage>
+                <StackLayout VerticalOptions="Center">
+                    <Label FontAttributes="Bold" 
+                           FontSize="Large" 
+                           Text="{Binding User.User.FullName}"/>
+                    <Label Text="{Binding User.User.Email}"
+                           TextColor="{StaticResource ColorAccent}"/>
+                    <Label Text="{Binding User.User.PhoneNumber}"/>
+                </StackLayout>
+            </StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0"
+                       Grid.Row="0"
+                       FontAttributes="Bold"
+                       Text="{i18n:Translate StartDate}"/>
+                <Label Grid.Column="1"
+                       Grid.Row="0"
+                       FontAttributes="Bold"
+                       Text="{i18n:Translate EndDate}"/>
+                <DatePicker  Grid.Column="0"
+                             Grid.Row="1"
+                             Date="{Binding StartDate}"/>
+                <DatePicker  Grid.Column="1"
+                             Grid.Row="1"
+                             Date="{Binding EndDate}"/>
+                <ImageButton Grid.Column="2"
+                             Grid.Row="0"
+                             Grid.RowSpan="2"
+                             Command="{Binding RefreshCommand}" 
+                             Source="ic_refresh"/>
+            </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="48" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0"
+                       FontAttributes="Bold"
+                       Text="{i18n:Translate StartDate}"/>
+                <Label Grid.Column="1"
+                       FontAttributes="Bold"
+                       MaxLines="1"
+                       LineBreakMode="TailTruncation"
+                       Text="*"/>
+                <Label Grid.Column="2"
+                       FontAttributes="Bold"
+                       Text="{i18n:Translate Source}"/>
+            </Grid>
+
+            <CollectionView ItemsSource="{Binding Trips}" 
+                            ItemTemplate="{StaticResource TripTemplate}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>
+            </CollectionView>
+        </StackLayout>
+        <busyindicator:SfBusyIndicator AnimationType="Gear" 
+                                       AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+                	                   AbsoluteLayout.LayoutFlags="All"
+                	                   BackgroundColor="{StaticResource ColorAccent}"
+                	                   HorizontalOptions="Center"
+                	                   TextColor="{StaticResource ColorFontInverse}"
+                	                   IsVisible="{Binding IsRunning}"
+                	                   Title="{i18n:Translate Loading}"
+                	                   VerticalOptions="Center"
+                	                   ViewBoxWidth="80"
+                	                   ViewBoxHeight="80" />
+    </AbsoluteLayout>
 </ContentPage>

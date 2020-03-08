@@ -12,6 +12,14 @@
     <MasterDetailPage.Master>
         <ContentPage Title="Menu"
                      BackgroundColor="{StaticResource ColorSecondary}">
+            
+            <ContentPage.Padding>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="Android, UWP">0</On>
+                    <On Platform="iOS">0,20,0,0</On>
+                </OnPlatform>
+            </ContentPage.Padding>
+
             <StackLayout Padding="20">
                 <RelativeLayout>
                     <Image x:Name="Logo" HorizontalOptions="Center"

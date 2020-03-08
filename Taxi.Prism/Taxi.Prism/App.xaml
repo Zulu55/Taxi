@@ -56,6 +56,32 @@
                 <Setter Property="BackgroundColor" Value="{StaticResource ColorDanger}" />
             </Style>
 
+            <!-- Data Templates -->
+            <DataTemplate x:Key="TripTemplate">
+                <Grid>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SelectTrip2Command}"/>
+                    </Grid.GestureRecognizers>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="4*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0"
+                            Text="{Binding StartDateLocal, StringFormat='{0:yyyy/MM/dd HH:mm}'}"/>
+                    <Label Grid.Column="1"
+                            Text="{Binding Qualification, StringFormat='{0:N2}'}"/>
+                    <Label Grid.Column="2"
+                            LineBreakMode="TailTruncation"
+                            MaxLines="2"
+                            Text="{Binding Source}"/>
+                    <Image Grid.Column="3" 
+                            Source="ic_more_vert"/>
+                </Grid>
+            </DataTemplate>
+
+
         </ResourceDictionary>
 
     </Application.Resources>
