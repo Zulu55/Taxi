@@ -430,4 +430,7 @@
   <data name="Error003" xml:space="preserve">
     <value>The user already belongs to your group.</value>
   </data>
+  <data name="TripsOf" xml:space="preserve">
+    <value>Trips of</value>
+  </data>
 </root>

@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Navigation;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Taxi.Common.Helpers;
 using Taxi.Common.Models;
 using Taxi.Common.Services;
@@ -17,7 +17,7 @@ namespace Taxi.Prism.ViewModels
         private readonly INavigationService _navigationService;
         private readonly IApiService _apiService;
         private bool _isRunning;
-        private ObservableCollection<UserGroupDetailResponse> _users;
+        private ObservableCollection<UserGroupDetailItemViewModel> _users;
         private DelegateCommand _addUserCommand;
 
         public GroupPageViewModel(INavigationService navigationService, IApiService apiService)
@@ -37,7 +37,7 @@ namespace Taxi.Prism.ViewModels
             set => SetProperty(ref _isRunning, value);
         }
 
-        public ObservableCollection<UserGroupDetailResponse> Users
+        public ObservableCollection<UserGroupDetailItemViewModel> Users
         {
             get => _users;
             set => SetProperty(ref _users, value);
@@ -74,7 +74,11 @@ namespace Taxi.Prism.ViewModels
             if (response.Result != null)
             {
                 List<UserGroupDetailResponse> users = (List<UserGroupDetailResponse>)response.Result;
-                Users = new ObservableCollection<UserGroupDetailResponse>(users);
+                Users = new ObservableCollection<UserGroupDetailItemViewModel>(users.Select(u => new UserGroupDetailItemViewModel(_navigationService)
+                {
+                    Id = u.Id,
+                    User = u.User
+                }).ToList());
             }
         }
     }

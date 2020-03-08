@@ -450,4 +450,7 @@
   <data name="Error003" xml:space="preserve">
     <value>El usuario ya pertenece a su grupo.</value>
   </data>
+  <data name="TripsOf" xml:space="preserve">
+    <value>Viajes de</value>
+  </data>
 </root>
