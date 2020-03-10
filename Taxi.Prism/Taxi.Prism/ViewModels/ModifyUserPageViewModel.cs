@@ -120,6 +120,7 @@ namespace Taxi.Prism.ViewModels
             }
 
             Settings.User = JsonConvert.SerializeObject(User);
+            TaxiMasterDetailPageViewModel.GetInstance().ReloadUser();
             await App.Current.MainPage.DisplayAlert(Languages.Ok, Languages.UserUpdated, Languages.Accept);
         }
 
