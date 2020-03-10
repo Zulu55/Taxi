@@ -430,33 +430,6 @@ namespace Taxi.Prism.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This email is already registered..
-        /// </summary>
-        public static string Error001 {
-            get {
-                return ResourceManager.GetString("Error001", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This email is not assigned to any user..
-        /// </summary>
-        public static string Error002 {
-            get {
-                return ResourceManager.GetString("Error002", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The user already belongs to your group..
-        /// </summary>
-        public static string Error003 {
-            get {
-                return ResourceManager.GetString("Error003", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to First name.
         /// </summary>
         public static string FirstName {
@@ -529,6 +502,15 @@ namespace Taxi.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An incident is a negative experience that you had with a taxi and that affects the rating of the taxi..
+        /// </summary>
+        public static string IncidentDescription {
+            get {
+                return ResourceManager.GetString("IncidentDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Last name.
         /// </summary>
         public static string LastName {
@@ -588,42 +570,6 @@ namespace Taxi.Prism.Resources {
         public static string Logout {
             get {
                 return ResourceManager.GetString("Logout", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A Confirmation email was sent. Please confirm your account and log into the App..
-        /// </summary>
-        public static string Message001 {
-            get {
-                return ResourceManager.GetString("Message001", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to An email with instructions to change the password was sent..
-        /// </summary>
-        public static string Message002 {
-            get {
-                return ResourceManager.GetString("Message002", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The password was changed successfully!.
-        /// </summary>
-        public static string Message003 {
-            get {
-                return ResourceManager.GetString("Message003", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to An email has been sent to the user with your request, we hope to respond soon!.
-        /// </summary>
-        public static string Message004 {
-            get {
-                return ResourceManager.GetString("Message004", resourceCulture);
             }
         }
         
@@ -921,6 +867,15 @@ namespace Taxi.Prism.Resources {
         public static string Remarks {
             get {
                 return ResourceManager.GetString("Remarks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must enter your comments..
+        /// </summary>
+        public static string RemarksError {
+            get {
+                return ResourceManager.GetString("RemarksError", resourceCulture);
             }
         }
         

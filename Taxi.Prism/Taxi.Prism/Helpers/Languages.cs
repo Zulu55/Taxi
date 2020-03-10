@@ -16,6 +16,10 @@ namespace Taxi.Prism.Helpers
 
         public static string Culture { get; set; }
 
+        public static string RemarksError => Resource.RemarksError;
+
+        public static string IncidentDescription => Resource.IncidentDescription;
+
         public static string TripsOf => Resource.TripsOf;
 
         public static string SendInvitation => Resource.SendInvitation;

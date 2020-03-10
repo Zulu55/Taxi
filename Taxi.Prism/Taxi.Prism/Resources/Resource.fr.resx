@@ -432,4 +432,10 @@
   <data name="TripsOf" xml:space="preserve">
     <value>Voyages de</value>
   </data>
+  <data name="IncidentDescription" xml:space="preserve">
+    <value>Un incident est une expérience négative que vous avez eue avec un taxi et qui affecte la cote du taxi.</value>
+  </data>
+  <data name="RemarksError" xml:space="preserve">
+    <value>Vous devez saisir vos commentaires.</value>
+  </data>
 </root>

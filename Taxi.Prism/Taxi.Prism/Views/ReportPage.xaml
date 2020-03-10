@@ -5,8 +5,76 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              ios:Page.UseSafeArea="true"
+         	 xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+           	 xmlns:i18n="clr-namespace:Taxi.Prism.Helpers"
              x:Class="Taxi.Prism.Views.ReportPage"
              BackgroundColor="{StaticResource ColorBackgroud}"
              Title="{Binding Title}">
-  
+    <AbsoluteLayout>
+        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                     AbsoluteLayout.LayoutFlags="All" 
+                     Padding="5">
+            <Label FontAttributes="Bold" 
+                   FontSize="Medium"
+                   Margin="10"
+                   Text="{i18n:Translate IncidentDescription}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0"
+                       Grid.Column="0" 
+                       Text="{i18n:Translate Plaque}"
+                       VerticalOptions="Center"/>
+                <StackLayout Grid.Row="0"
+                             Grid.Column="1" 
+                             Orientation="Horizontal">
+                    <Entry HorizontalOptions="FillAndExpand" 
+                           MaxLength="3"
+                           Placeholder="ABC" 
+                           Text="{Binding PlaqueLetters}"
+                           VerticalOptions="Center"/>
+                    <Label Text="-"
+                           VerticalOptions="Center"/>
+                    <Entry HorizontalOptions="FillAndExpand" 
+                           Keyboard="Numeric"
+                           MaxLength="3"
+                           Placeholder="123" 
+                           Text="{Binding PlaqueNumbers}"
+                           VerticalOptions="Center"/>
+                </StackLayout>
+
+                <Label Grid.Row="1"
+                       Grid.Column="0" 
+                       Text="{i18n:Translate Comment}"
+                       VerticalOptions="Center"/>
+                <Editor Grid.Row="1"
+                        Grid.Column="1"
+                        HeightRequest="150"
+                        Text="{Binding Remark}"/>
+            </Grid>
+            <Button Command="{Binding ReportCommand}"
+                    IsEnabled="{Binding IsEnabled}"
+                    Text="{i18n:Translate ReportAnIncident}"
+                    VerticalOptions="EndAndExpand"/>
+        </StackLayout>
+        <busyindicator:SfBusyIndicator AnimationType="Gear" 
+                                       AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+                                       AbsoluteLayout.LayoutFlags="All"
+                                       BackgroundColor="{StaticResource ColorDanger}"
+                                       HorizontalOptions="Center"
+                                       TextColor="White"
+                                       IsVisible="{Binding IsRunning}"
+                                       Title="{i18n:Translate Loading}"
+                                       VerticalOptions="Center"
+                                       ViewBoxWidth="80"
+                                       ViewBoxHeight="80" />
+    </AbsoluteLayout>
+
 </ContentPage>
