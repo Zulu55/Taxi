@@ -42,7 +42,7 @@ namespace Taxi.Web.Controllers.API
                 .FirstOrDefaultAsync(t => t.Id == id);
             if (tripEntity == null)
             {
-                return BadRequest("Error002");
+                return BadRequest("Trip not found.");
             }
 
             return Ok(_converterHelper.ToTripResponse(tripEntity));
@@ -131,7 +131,7 @@ namespace Taxi.Web.Controllers.API
                 .FirstOrDefaultAsync(t => t.Id == tripDetailRequest.TripId);
             if (trip == null)
             {
-                return BadRequest("Error002");
+                return BadRequest("Trip not found.");
             }
 
             if (trip.TripDetails == null)
@@ -171,7 +171,7 @@ namespace Taxi.Web.Controllers.API
                 .FirstOrDefaultAsync(t => t.Id == tripDetailsRequest.TripDetails.FirstOrDefault().TripId);
             if (trip == null)
             {
-                return BadRequest("Error002");
+                return BadRequest("Trip not found.");
             }
 
             if (trip.TripDetails == null)
@@ -209,7 +209,7 @@ namespace Taxi.Web.Controllers.API
                 .FirstOrDefaultAsync(t => t.Id == completeTripRequest.TripId);
             if (trip == null)
             {
-                return BadRequest("Error002");
+                return BadRequest("Trip not found.");
             }
 
             trip.EndDate = DateTime.UtcNow;

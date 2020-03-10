@@ -98,7 +98,8 @@ namespace Taxi.Prism.ViewModels
                 Password = "123456", // It doesn't matter what is sent here. It is only for the model to be valid
                 Phone = User.PhoneNumber,
                 PictureArray = imageArray,
-                UserTypeId = User.UserType == UserType.User ? 1 : 2
+                UserTypeId = User.UserType == UserType.User ? 1 : 2,
+                CultureInfo = Languages.Culture
             };
 
             TokenResponse token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);

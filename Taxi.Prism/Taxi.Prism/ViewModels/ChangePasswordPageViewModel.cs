@@ -65,7 +65,8 @@ namespace Taxi.Prism.ViewModels
             {
                 Email = user.Email,
                 NewPassword = NewPassword,
-                OldPassword = CurrentPassword
+                OldPassword = CurrentPassword,
+                CultureInfo = Languages.Culture
             };
 
             string url = App.Current.Resources["UrlAPI"].ToString();
@@ -76,19 +77,11 @@ namespace Taxi.Prism.ViewModels
 
             if (!response.IsSuccess)
             {
-                if (response.Message == "Error002")
-                {
-                    await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.Error002, Languages.Accept);
-                }
-                else
-                {
-                    await App.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
-                }
-
+                await App.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
                 return;
             }
 
-            await App.Current.MainPage.DisplayAlert(Languages.Ok, Languages.Message003, Languages.Accept);
+            await App.Current.MainPage.DisplayAlert(Languages.Ok, response.Message, Languages.Accept);
             await _navigationService.GoBackAsync();
         }
 

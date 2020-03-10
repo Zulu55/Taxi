@@ -10,8 +10,11 @@ namespace Taxi.Prism.Helpers
         {
             var ci = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
             Resource.Culture = ci;
+            Culture = ci.Name;
             DependencyService.Get<ILocalize>().SetLocale(ci);
         }
+
+        public static string Culture { get; set; }
 
         public static string TripsOf => Resource.TripsOf;
 
@@ -20,10 +23,6 @@ namespace Taxi.Prism.Helpers
         public static string EmailSendInvitationPlaceHolder => Resource.EmailSendInvitationPlaceHolder;
 
         public static string AddUserToMyGroup => Resource.AddUserToMyGroup;
-
-        public static string Error003 => Resource.Error003;
-
-        public static string Message004 => Resource.Message004;
 
         public static string MyTrip => Resource.MyTrip;
 
@@ -70,8 +69,6 @@ namespace Taxi.Prism.Helpers
         public static string Source => Resource.Source;
 
         public static string ConfirmAddress => Resource.ConfirmAddress;
-
-        public static string Message003 => Resource.Message003;
 
         public static string ConfirmNewPassword => Resource.ConfirmNewPassword;
 
@@ -194,14 +191,6 @@ namespace Taxi.Prism.Helpers
         public static string FirstNameError => Resource.FirstNameError;
 
         public static string LastNameError => Resource.LastNameError;
-
-        public static string Error001 => Resource.Error001;
-
-        public static string Message001 => Resource.Message001;
-
-        public static string Error002 => Resource.Error002;
-
-        public static string Message002 => Resource.Message002;
 
         public static string Ok => Resource.Ok;
 

@@ -114,24 +114,18 @@ namespace Taxi.Prism.ViewModels
 
             User.PictureArray = imageArray;
             User.UserTypeId = Role.Id;
+            User.CultureInfo = Languages.Culture;
             Response response = await _apiService.RegisterUserAsync(url, "/api", "/Account", User);
             IsRunning = false;
             IsEnabled = true;
 
             if (!response.IsSuccess)
             {
-                if (response.Message == "Error001")
-                {
-                    await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.Error001, Languages.Accept);
-                }
-                else
-                {
-                    await App.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
-                }
+                await App.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
                 return;
             }
 
-            await App.Current.MainPage.DisplayAlert(Languages.Ok, Languages.Message001, Languages.Accept);
+            await App.Current.MainPage.DisplayAlert(Languages.Ok, response.Message, Languages.Accept);
             await _navigationService.GoBackAsync();
         }
 

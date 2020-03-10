@@ -72,7 +72,8 @@ namespace Taxi.Prism.ViewModels
             AddUserGroupRequest request = new AddUserGroupRequest
             {
                 Email = Email,
-                UserId = new Guid(user.Id)
+                UserId = new Guid(user.Id),
+                CultureInfo = Languages.Culture
             };
 
             Response response = await _apiService.AddUserGroupAsync(url, "/api", "/UserGroups", request, "bearer", token.Token);
@@ -82,22 +83,11 @@ namespace Taxi.Prism.ViewModels
 
             if (!response.IsSuccess)
             {
-                if (response.Message == "Error002")
-                {
-                    await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.Error002, Languages.Accept);
-                }
-                else if (response.Message == "Error003")
-                {
-                    await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.Error003, Languages.Accept);
-                }
-                else
-                {
-                    await App.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
-                }
+                await App.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
                 return;
             }
 
-            await App.Current.MainPage.DisplayAlert(Languages.Ok, Languages.Message004, Languages.Accept);
+            await App.Current.MainPage.DisplayAlert(Languages.Ok, response.Message, Languages.Accept);
             await _navigationService.GoBackAsync();
         }
 

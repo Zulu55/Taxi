@@ -66,7 +66,8 @@ namespace Taxi.Prism.ViewModels
 
             EmailRequest request = new EmailRequest
             {
-                Email = Email
+                Email = Email,
+                CultureInfo = Languages.Culture
             };
 
             Response response = await _apiService.RecoverPasswordAsync(url, "/api", "/Account/RecoverPassword", request);
@@ -76,18 +77,11 @@ namespace Taxi.Prism.ViewModels
 
             if (!response.IsSuccess)
             {
-                if (response.Message == "Error002")
-                {
-                    await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.Error002, Languages.Accept);
-                }
-                else
-                {
-                    await App.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
-                }
+                await App.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
                 return;
             }
 
-            await App.Current.MainPage.DisplayAlert(Languages.Ok, Languages.Message002, Languages.Accept);
+            await App.Current.MainPage.DisplayAlert(Languages.Ok, response.Message, Languages.Accept);
             await _navigationService.GoBackAsync();
         }
 

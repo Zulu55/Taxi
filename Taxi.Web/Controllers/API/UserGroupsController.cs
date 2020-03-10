@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Taxi.Common.Enums;
@@ -10,6 +11,7 @@ using Taxi.Common.Models;
 using Taxi.Web.Data;
 using Taxi.Web.Data.Entities;
 using Taxi.Web.Helpers;
+using Taxi.Web.Resources;
 
 namespace Taxi.Web.Controllers.API
 {
@@ -43,16 +45,19 @@ namespace Taxi.Web.Controllers.API
                 return BadRequest(ModelState);
             }
 
+            CultureInfo cultureInfo = new CultureInfo(request.CultureInfo);
+            Resource.Culture = cultureInfo;
+
             UserEntity proposalUser = await _userHelper.GetUserAsync(request.UserId);
             if (proposalUser == null)
             {
-                return BadRequest("User doesn't exists.");
+                return BadRequest(Resource.UserNotFoundError);
             }
 
             UserEntity requiredUser = await _userHelper.GetUserAsync(request.Email);
             if (requiredUser == null)
             {
-                return BadRequest("Error002");
+                return BadRequest(Resource.UserNotFoundError);
             }
 
             UserGroupEntity userGroup = await _context.UserGroups
@@ -64,7 +69,7 @@ namespace Taxi.Web.Controllers.API
                 UserGroupDetailEntity user = userGroup.Users.FirstOrDefault(u => u.User.Email == request.Email);
                 if (user != null)
                 {
-                    return BadRequest("Error003");
+                    return BadRequest(Resource.UserAlreadyBelogToGroup);
                 }
             }
 
@@ -98,17 +103,17 @@ namespace Taxi.Web.Controllers.API
                 token = userGroupRequest.Token
             }, protocol: HttpContext.Request.Scheme);
 
-            Response response = _mailHelper.SendMail(request.Email, "Request to join a group", $"<h1>Request to join a group</h1>" +
-                $"The user: {proposalUser.FullName} ({proposalUser.Email}), has requested that you be a member of their user group in the TAXI application." +
-                $"</hr></br></br>If you wish to accept, click here: <a href = \"{linkConfirm}\">Confirm</a>" +
-                $"</hr></br></br>If you wish to reject, click here: <a href = \"{linkReject}\">Reject</a>");
+            Response response = _mailHelper.SendMail(request.Email, Resource.RequestJoinGroupSubject, $"<h1>{Resource.RequestJoinGroupSubject}</h1>" +
+                $"{Resource.TheUser}: {proposalUser.FullName} ({proposalUser.Email}), {Resource.RequestJoinGroupBody}" +
+                $"</hr></br></br>{Resource.WishToAccept} <a href = \"{linkConfirm}\">{Resource.Confirm}</a>" +
+                $"</hr></br></br>{Resource.WishToReject} <a href = \"{linkReject}\">{Resource.Reject}</a>");
 
             if (!response.IsSuccess)
             {
                 return BadRequest(response.Message);
             }
 
-            return Ok("Message004");
+            return Ok(Resource.RequestJoinGroupEmailSent);
         }
 
         [HttpGet("{id}")]

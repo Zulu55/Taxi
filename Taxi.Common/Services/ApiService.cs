@@ -148,11 +148,10 @@ namespace Taxi.Common.Services
             string controller,
             string tokenType,
             string accessToken,
-            string email)
+            EmailRequest request)
         {
             try
             {
-                EmailRequest request = new EmailRequest { Email = email };
                 string requestString = JsonConvert.SerializeObject(request);
                 StringContent content = new StringContent(requestString, Encoding.UTF8, "application/json");
                 HttpClient client = new HttpClient
@@ -614,7 +613,11 @@ namespace Taxi.Common.Services
                     };
                 }
 
-                return new Response { IsSuccess = true };
+                return new Response
+                {
+                    IsSuccess = true,
+                    Message = answer,
+                };
             }
             catch (Exception ex)
             {

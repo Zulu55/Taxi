@@ -32,5 +32,8 @@ namespace Taxi.Common.Models
         public byte[] PictureArray { get; set; }
 
         public string PasswordConfirm { get; set; }
+
+        [Required]
+        public string CultureInfo { get; set; }
     }
 }

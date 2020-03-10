@@ -2,12 +2,14 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Taxi.Common.Enums;
 using Taxi.Common.Models;
 using Taxi.Web.Data.Entities;
 using Taxi.Web.Helpers;
+using Taxi.Web.Resources;
 
 namespace Taxi.Web.Controllers.API
 {
@@ -39,9 +41,13 @@ namespace Taxi.Web.Controllers.API
                 return BadRequest(new Response
                 {
                     IsSuccess = false,
-                    Message = "Bad request"
+                    Message = "Bad request",
+                    Result = ModelState
                 });
             }
+
+            CultureInfo cultureInfo = new CultureInfo(request.CultureInfo);
+            Resource.Culture = cultureInfo;
 
             UserEntity user = await _userHelper.GetUserAsync(request.Email);
             if (user != null)
@@ -49,7 +55,7 @@ namespace Taxi.Web.Controllers.API
                 return BadRequest(new Response
                 {
                     IsSuccess = false,
-                    Message = "Error001"
+                    Message = Resource.UserAlreadyExists
                 });
             }
 
@@ -88,14 +94,13 @@ namespace Taxi.Web.Controllers.API
                 token = myToken
             }, protocol: HttpContext.Request.Scheme);
 
-            _mailHelper.SendMail(request.Email, "Email confirmation", $"<h1>Email Confirmation</h1>" +
-                $"To allow the user, " +
-                $"please click on this link:</br></br><a href = \"{tokenLink}\">Confirm Email</a>");
+            _mailHelper.SendMail(request.Email, Resource.EmailConfirmationSubject, $"<h1>{Resource.EmailConfirmationSubject}</h1>" +
+                $"{Resource.EmailConfirmationBody}</br></br><a href = \"{tokenLink}\">{Resource.ConfirmEmail}</a>");
 
             return Ok(new Response
             {
                 IsSuccess = true,
-                Message = "Message001"
+                Message = Resource.EmailConfirmationSent
             });
         }
 
@@ -108,9 +113,13 @@ namespace Taxi.Web.Controllers.API
                 return BadRequest(new Response
                 {
                     IsSuccess = false,
-                    Message = "Bad request"
+                    Message = "Bad request",
+                    Result = ModelState
                 });
             }
+
+            CultureInfo cultureInfo = new CultureInfo(request.CultureInfo);
+            Resource.Culture = cultureInfo;
 
             UserEntity user = await _userHelper.GetUserAsync(request.Email);
             if (user == null)
@@ -118,20 +127,19 @@ namespace Taxi.Web.Controllers.API
                 return BadRequest(new Response
                 {
                     IsSuccess = false,
-                    Message = "Error002"
+                    Message = Resource.UserNotFoundError
                 });
             }
 
             string myToken = await _userHelper.GeneratePasswordResetTokenAsync(user);
             string link = Url.Action("ResetPassword", "Account", new { token = myToken }, protocol: HttpContext.Request.Scheme);
-            _mailHelper.SendMail(request.Email, "Password Reset", $"<h1>Recover Password</h1>" +
-                $"To reset the password click in this link:</br></br>" +
-                $"<a href = \"{link}\">Reset Password</a>");
+            _mailHelper.SendMail(request.Email, Resource.RecoverPasswordSubject, $"<h1>{Resource.RecoverPasswordSubject}</h1>" +
+                $"{Resource.RecoverPasswordBody}</br></br><a href = \"{link}\">{Resource.RecoverPasswordSubject}</a>");
 
             return Ok(new Response
             {
                 IsSuccess = true,
-                Message = "Message002"
+                Message = Resource.RecoverPasswordEmailSent
             });
         }
 
@@ -143,10 +151,13 @@ namespace Taxi.Web.Controllers.API
                 return BadRequest(ModelState);
             }
 
+            CultureInfo cultureInfo = new CultureInfo(request.CultureInfo);
+            Resource.Culture = cultureInfo;
+
             UserEntity userEntity = await _userHelper.GetUserAsync(request.Email);
             if (userEntity == null)
             {
-                return BadRequest("User not found.");
+                return BadRequest(Resource.UserNotFoundError);
             }
 
             string picturePath = userEntity.PicturePath;
@@ -182,9 +193,13 @@ namespace Taxi.Web.Controllers.API
                 return BadRequest(new Response
                 {
                     IsSuccess = false,
-                    Message = "Bad request"
+                    Message = "Bad request",
+                    Result = ModelState
                 });
             }
+
+            CultureInfo cultureInfo = new CultureInfo(request.CultureInfo);
+            Resource.Culture = cultureInfo;
 
             UserEntity user = await _userHelper.GetUserAsync(request.Email);
             if (user == null)
@@ -192,7 +207,7 @@ namespace Taxi.Web.Controllers.API
                 return BadRequest(new Response
                 {
                     IsSuccess = false,
-                    Message = "Error002"
+                    Message = Resource.UserNotFoundError
                 });
             }
 
@@ -209,7 +224,7 @@ namespace Taxi.Web.Controllers.API
             return Ok(new Response
             {
                 IsSuccess = true,
-                Message = "Message003"
+                Message = Resource.ChangePasswordSuccess
             });
         }
 
@@ -223,10 +238,13 @@ namespace Taxi.Web.Controllers.API
                 return BadRequest();
             }
 
+            CultureInfo cultureInfo = new CultureInfo(emailRequest.CultureInfo);
+            Resource.Culture = cultureInfo;
+
             UserEntity userEntity = await _userHelper.GetUserAsync(emailRequest.Email);
             if (userEntity == null)
             {
-                return NotFound("Error002");
+                return NotFound(Resource.UserNotFoundError);
             }
 
             return Ok(_converterHelper.ToUserResponse(userEntity));

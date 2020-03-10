@@ -265,12 +265,6 @@
   <data name="User" xml:space="preserve">
     <value>User</value>
   </data>
-  <data name="Error001" xml:space="preserve">
-    <value>This email is already registered.</value>
-  </data>
-  <data name="Message001" xml:space="preserve">
-    <value>A Confirmation email was sent. Please confirm your account and log into the App.</value>
-  </data>
   <data name="Ok" xml:space="preserve">
     <value>Ok</value>
   </data>
@@ -291,12 +285,6 @@
   </data>
   <data name="ForgotPassword" xml:space="preserve">
     <value>Forgot your password?</value>
-  </data>
-  <data name="Error002" xml:space="preserve">
-    <value>This email is not assigned to any user.</value>
-  </data>
-  <data name="Message002" xml:space="preserve">
-    <value>An email with instructions to change the password was sent.</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
@@ -336,9 +324,6 @@
   </data>
   <data name="ConfirmNewPasswordError2" xml:space="preserve">
     <value>The password and the confirm does not match.</value>
-  </data>
-  <data name="Message003" xml:space="preserve">
-    <value>The password was changed successfully!</value>
   </data>
   <data name="Source" xml:space="preserve">
     <value>Source</value>
@@ -415,9 +400,6 @@
   <data name="MyTrip" xml:space="preserve">
     <value>My Trip</value>
   </data>
-  <data name="Message004" xml:space="preserve">
-    <value>An email has been sent to the user with your request, we hope to respond soon!</value>
-  </data>
   <data name="AddUserToMyGroup" xml:space="preserve">
     <value>Add user to my group</value>
   </data>
@@ -426,9 +408,6 @@
   </data>
   <data name="SendInvitation" xml:space="preserve">
     <value>Send Invitation</value>
-  </data>
-  <data name="Error003" xml:space="preserve">
-    <value>The user already belongs to your group.</value>
   </data>
   <data name="TripsOf" xml:space="preserve">
     <value>Trips of</value>

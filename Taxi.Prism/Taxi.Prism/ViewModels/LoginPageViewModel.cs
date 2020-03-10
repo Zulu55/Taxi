@@ -20,7 +20,7 @@ namespace Taxi.Prism.ViewModels
         private DelegateCommand _registerCommand;
         private DelegateCommand _forgotPasswordCommand;
 
-        public LoginPageViewModel(INavigationService navigationService, IApiService apiService) 
+        public LoginPageViewModel(INavigationService navigationService, IApiService apiService)
             : base(navigationService)
         {
             _navigationService = navigationService;
@@ -106,7 +106,13 @@ namespace Taxi.Prism.ViewModels
             }
 
             TokenResponse token = (TokenResponse)response.Result;
-            Response response2 = await _apiService.GetUserByEmail(url, "api", "/Account/GetUserByEmail", "bearer", token.Token, Email);
+            EmailRequest emailRequest = new EmailRequest
+            {
+                CultureInfo = Languages.Culture,
+                Email = Email
+            };
+
+            Response response2 = await _apiService.GetUserByEmail(url, "api", "/Account/GetUserByEmail", "bearer", token.Token, emailRequest);
             UserResponse userResponse = (UserResponse)response2.Result;
 
             Settings.User = JsonConvert.SerializeObject(userResponse);
