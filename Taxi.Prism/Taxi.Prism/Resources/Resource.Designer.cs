@@ -502,6 +502,15 @@ namespace Taxi.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Incident.
+        /// </summary>
+        public static string Incident {
+            get {
+                return ResourceManager.GetString("Incident", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An incident is a negative experience that you had with a taxi and that affects the rating of the taxi..
         /// </summary>
         public static string IncidentDescription {

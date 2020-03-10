@@ -438,4 +438,7 @@
   <data name="RemarksError" xml:space="preserve">
     <value>Debes ingresar tus comentarios.</value>
   </data>
+  <data name="Incident" xml:space="preserve">
+    <value>Incidente</value>
+  </data>
 </root>

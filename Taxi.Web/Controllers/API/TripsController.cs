@@ -49,42 +49,103 @@ namespace Taxi.Web.Controllers.API
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostTripEntity([FromBody] TripRequest tripRequest)
+        [Route("AddIncident")]
+        public async Task<IActionResult> AddIncident([FromBody] IncidentRequest request)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            UserEntity userEntity = await _userHelper.GetUserAsync(tripRequest.UserId);
+            UserEntity userEntity = await _userHelper.GetUserAsync(request.UserId);
             if (userEntity == null)
             {
                 return BadRequest("User doesn't exists.");
             }
 
-            TaxiEntity taxiEntity = await _context.Taxis.FirstOrDefaultAsync(t => t.Plaque == tripRequest.Plaque);
+            TaxiEntity taxiEntity = await _context.Taxis.FirstOrDefaultAsync(t => t.Plaque == request.Plaque);
             if (taxiEntity == null)
             {
-                _context.Taxis.Add(new TaxiEntity { Plaque = tripRequest.Plaque.ToUpper() });
+                _context.Taxis.Add(new TaxiEntity { Plaque = request.Plaque.ToUpper() });
                 await _context.SaveChangesAsync();
-                taxiEntity = await _context.Taxis.FirstOrDefaultAsync(t => t.Plaque == tripRequest.Plaque);
+                taxiEntity = await _context.Taxis.FirstOrDefaultAsync(t => t.Plaque == request.Plaque);
             }
 
             TripEntity tripEntity = new TripEntity
             {
-                Source = tripRequest.Address,
-                SourceLatitude = tripRequest.Latitude,
-                SourceLongitude = tripRequest.Longitude,
+                Source = request.Address,
+                SourceLatitude = request.Latitude,
+                SourceLongitude = request.Longitude,
+                StartDate = DateTime.UtcNow,
+                Taxi = taxiEntity,
+                EndDate = DateTime.UtcNow,
+                Qualification = 1,
+                Remarks = request.Remarks,
+                Target = request.Address,
+                TargetLatitude = request.Latitude,
+                TargetLongitude = request.Longitude,
+                TripDetails = new List<TripDetailEntity>
+                {
+                    new TripDetailEntity
+                    {
+                        Address = request.Address,
+                        Date = DateTime.UtcNow,
+                        Latitude = request.Latitude,
+                        Longitude = request.Longitude
+                    },
+                    new TripDetailEntity
+                    {
+                        Address = request.Address,
+                        Date = DateTime.UtcNow,
+                        Latitude = request.Latitude,
+                        Longitude = request.Longitude
+                    }
+                },
+                User = userEntity,
+            };
+
+            _context.Trips.Add(tripEntity);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PostTripEntity([FromBody] TripRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            UserEntity userEntity = await _userHelper.GetUserAsync(request.UserId);
+            if (userEntity == null)
+            {
+                return BadRequest("User doesn't exists.");
+            }
+
+            TaxiEntity taxiEntity = await _context.Taxis.FirstOrDefaultAsync(t => t.Plaque == request.Plaque);
+            if (taxiEntity == null)
+            {
+                _context.Taxis.Add(new TaxiEntity { Plaque = request.Plaque.ToUpper() });
+                await _context.SaveChangesAsync();
+                taxiEntity = await _context.Taxis.FirstOrDefaultAsync(t => t.Plaque == request.Plaque);
+            }
+
+            TripEntity tripEntity = new TripEntity
+            {
+                Source = request.Address,
+                SourceLatitude = request.Latitude,
+                SourceLongitude = request.Longitude,
                 StartDate = DateTime.UtcNow,
                 Taxi = taxiEntity,
                 TripDetails = new List<TripDetailEntity>
                 {
                     new TripDetailEntity
                     {
-                        Address = tripRequest.Address,
+                        Address = request.Address,
                         Date = DateTime.UtcNow,
-                        Latitude = tripRequest.Latitude,
-                        Longitude = tripRequest.Longitude
+                        Latitude = request.Latitude,
+                        Longitude = request.Longitude
                     }
                 },
                 User = userEntity,
