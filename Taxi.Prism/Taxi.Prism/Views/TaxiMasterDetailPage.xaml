@@ -28,13 +28,14 @@
                            Source="taxi"/>
                     <ffimageloading:CachedImage x:Name="Picture" 
                                                 RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=Logo,Property=Y,Factor=1,Constant=30}"
-                                                Aspect="AspectFit"
+                                                Aspect="AspectFill"
                                                 Source="{Binding User.PictureFullPath}" 
                                                 CacheDuration= "50"
                                                 HeightRequest="100"
                                                 Margin="5"
                                                 RetryCount= "3"
-                                                RetryDelay= "600">
+                                                RetryDelay= "600"
+                                                WidthRequest="100">
                         <ffimageloading:CachedImage.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding ModifyUserCommand}"/>
                         </ffimageloading:CachedImage.GestureRecognizers>

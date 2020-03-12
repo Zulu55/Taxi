@@ -22,6 +22,7 @@ namespace Taxi.Prism.ViewModels
         private readonly IApiService _apiService;
         private bool _isRunning;
         private bool _isEnabled;
+        private bool _isTaxiUser;
         private ImageSource _image;
         private UserResponse _user;
         private MediaFile _file;
@@ -38,6 +39,7 @@ namespace Taxi.Prism.ViewModels
             Title = Languages.ModifyUser;
             IsEnabled = true;
             User = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
+            IsTaxiUser = User.LoginType == LoginType.Taxi;
             Image = User.PictureFullPath;
         }
 
@@ -46,6 +48,12 @@ namespace Taxi.Prism.ViewModels
         public DelegateCommand ChangeImageCommand => _changeImageCommand ?? (_changeImageCommand = new DelegateCommand(ChangeImageAsync));
 
         public DelegateCommand SaveCommand => _saveCommand ?? (_saveCommand = new DelegateCommand(SaveAsync));
+
+        public bool IsTaxiUser
+        {
+            get => _isTaxiUser;
+            set => SetProperty(ref _isTaxiUser, value);
+        }
 
         public ImageSource Image
         {
@@ -161,6 +169,12 @@ namespace Taxi.Prism.ViewModels
 
         private async void ChangeImageAsync()
         {
+            if (!IsTaxiUser)
+            {
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ChangePhotoNoTaxiUser, Languages.Accept);
+                return;
+            }
+
             await CrossMedia.Current.Initialize();
 
             string source = await Application.Current.MainPage.DisplayActionSheet(
@@ -204,6 +218,12 @@ namespace Taxi.Prism.ViewModels
 
         private async void ChangePasswordAsync()
         {
+            if (!IsTaxiUser)
+            {
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ChangePhotoNoTaxiUser, Languages.Accept);
+                return;
+            }
+
             await _navigationService.NavigateAsync(nameof(ChangePasswordPage));
         }
     }

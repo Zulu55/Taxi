@@ -65,6 +65,7 @@
                                VerticalOptions="Center"/>
                         <Entry Grid.Row="1"
                                Grid.Column="1"
+                               IsEnabled="{Binding IsTaxiUser}"
                                Placeholder="{i18n:Translate FirstNamePlaceHolder}"
                                Text="{Binding User.FirstName}"/>
 
@@ -74,6 +75,7 @@
                                VerticalOptions="Center"/>
                         <Entry Grid.Row="2"
                                Grid.Column="1"
+                               IsEnabled="{Binding IsTaxiUser}"
                                Placeholder="{i18n:Translate LastNamePlaceHolder}"
                                Text="{Binding User.LastName}"/>
 

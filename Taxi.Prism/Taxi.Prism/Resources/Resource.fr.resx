@@ -441,4 +441,10 @@
   <data name="Incident" xml:space="preserve">
     <value>Incident</value>
   </data>
+  <data name="LoginFacebook" xml:space="preserve">
+    <value>Se connecter avec Facebook</value>
+  </data>
+  <data name="ChangePhotoNoTaxiUser" xml:space="preserve">
+    <value>Les utilisateurs créés par les réseaux sociaux, doivent changer la photo ou mot de passe sur le réseau social.</value>
+  </data>
 </root>

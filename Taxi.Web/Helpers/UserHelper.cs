@@ -2,6 +2,7 @@
 using System;
 using System.Threading.Tasks;
 using Taxi.Common.Enums;
+using Taxi.Common.Models;
 using Taxi.Web.Data.Entities;
 using Taxi.Web.Models;
 
@@ -21,6 +22,33 @@ namespace Taxi.Web.Helpers
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
+        }
+
+        public async Task<UserEntity> AddUserAsync(FacebookProfile model)
+        {
+            UserEntity userEntity = new UserEntity
+            {
+                Address = "...",
+                Document = "...",
+                Email = model.Email,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                PicturePath = model.Picture?.Data?.Url,
+                PhoneNumber = "...",
+                UserName = model.Email,
+                UserType = UserType.User,
+                LoginType = LoginType.Facebook
+            };
+
+            IdentityResult result = await _userManager.CreateAsync(userEntity, model.Id);
+            if (result != IdentityResult.Success)
+            {
+                return null;
+            }
+
+            UserEntity newUser = await GetUserAsync(model.Email);
+            await AddUserToRoleAsync(newUser, userEntity.UserType.ToString());
+            return newUser;
         }
 
         public async Task<SignInResult> LoginAsync(LoginViewModel model)

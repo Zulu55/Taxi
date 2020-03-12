@@ -16,6 +16,10 @@ namespace Taxi.Prism.Helpers
 
         public static string Culture { get; set; }
 
+        public static string ChangePhotoNoTaxiUser => Resource.ChangePhotoNoTaxiUser;
+        
+        public static string LoginFacebook => Resource.LoginFacebook;
+        
         public static string Incident => Resource.Incident;
 
         public static string RemarksError => Resource.RemarksError;

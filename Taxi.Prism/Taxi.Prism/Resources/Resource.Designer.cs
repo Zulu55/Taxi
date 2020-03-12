@@ -151,6 +151,15 @@ namespace Taxi.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Users created by social networks, must change the photo or password on the social network..
+        /// </summary>
+        public static string ChangePhotoNoTaxiUser {
+            get {
+                return ResourceManager.GetString("ChangePhotoNoTaxiUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Check Plaque.
         /// </summary>
         public static string CheckPlaque {
@@ -570,6 +579,15 @@ namespace Taxi.Prism.Resources {
         public static string LoginError {
             get {
                 return ResourceManager.GetString("LoginError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login With Facebook.
+        /// </summary>
+        public static string LoginFacebook {
+            get {
+                return ResourceManager.GetString("LoginFacebook", resourceCulture);
             }
         }
         

@@ -10,6 +10,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Taxi.Common.Enums;
+using Taxi.Common.Models;
 using Taxi.Web.Data;
 using Taxi.Web.Data.Entities;
 using Taxi.Web.Helpers;
@@ -221,6 +222,31 @@ namespace Taxi.Web.Controllers
         }
 
         [HttpPost]
+        public async Task<IActionResult> LoginFacebook([FromBody] FacebookProfile model)
+        {
+            if (ModelState.IsValid)
+            {
+                UserEntity user = await _userHelper.GetUserAsync(model.Email);
+                if (user == null)
+                {
+                    await _userHelper.AddUserAsync(model);
+                }
+                else
+                {
+                    user.PicturePath = model.Picture.Data.Url;
+                    user.FirstName = model.FirstName;
+                    user.LastName = model.LastName;
+                    await _userHelper.UpdateUserAsync(user);
+                }
+
+                object results = GetToken(model.Email);
+                return Created(string.Empty, results);
+            }
+
+            return BadRequest();
+        }
+
+        [HttpPost]
         public async Task<IActionResult> CreateToken([FromBody] LoginViewModel model)
         {
             if (ModelState.IsValid)
@@ -232,32 +258,36 @@ namespace Taxi.Web.Controllers
 
                     if (result.Succeeded)
                     {
-                        Claim[] claims = new[]
-                        {
-                            new Claim(JwtRegisteredClaimNames.Sub, user.Email),
-                            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-                        };
-
-                        SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Tokens:Key"]));
-                        SigningCredentials credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-                        JwtSecurityToken token = new JwtSecurityToken(
-                            _configuration["Tokens:Issuer"],
-                            _configuration["Tokens:Audience"],
-                            claims,
-                            expires: DateTime.UtcNow.AddDays(15),
-                            signingCredentials: credentials);
-                        var results = new
-                        {
-                            token = new JwtSecurityTokenHandler().WriteToken(token),
-                            expiration = token.ValidTo
-                        };
-
+                        object results = GetToken(user.Email);
                         return Created(string.Empty, results);
                     }
                 }
             }
 
             return BadRequest();
+        }
+
+        private object GetToken(string email)
+        {
+            Claim[] claims = new[]
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, email),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+            };
+
+            SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Tokens:Key"]));
+            SigningCredentials credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            JwtSecurityToken token = new JwtSecurityToken(
+                _configuration["Tokens:Issuer"],
+                _configuration["Tokens:Audience"],
+                claims,
+                expires: DateTime.UtcNow.AddDays(15),
+                signingCredentials: credentials);
+            return new
+            {
+                token = new JwtSecurityTokenHandler().WriteToken(token),
+                expiration = token.ValidTo
+            };
         }
 
         public async Task<IActionResult> ConfirmEmail(string userId, string token)

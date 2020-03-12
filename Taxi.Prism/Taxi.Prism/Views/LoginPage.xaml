@@ -58,6 +58,13 @@
                 <Button Command="{Binding LoginCommand}" 
                         IsEnabled="{Binding IsEnabled}"
                         Text="{i18n:Translate LogIn}"/>
+                <Button BackgroundColor="#4768AD" 
+                        Command="{Binding LoginFacebookCommand}"
+                        HeightRequest="45"
+                        IsEnabled="{Binding IsEnabled}"
+                        ImageSource="ic_fb"
+                        Text="{i18n:Translate LoginFacebook}"
+                        TextColor="#FFFFFF"/>
                 <Button Command="{Binding RegisterCommand}" 
                         IsEnabled="{Binding IsEnabled}"
                         Text="{i18n:Translate Register}"

@@ -11,6 +11,8 @@ namespace Taxi.Common.Services
 
         Task<Response> GetTokenAsync(string urlBase, string servicePrefix, string controller, TokenRequest request);
 
+        Task<Response> GetTokenAsync(string urlBase, string servicePrefix, string controller, FacebookProfile request);
+
         Task<Response> GetUserByEmail(string urlBase, string servicePrefix, string controller, string tokenType, string accessToken, EmailRequest request);
 
         Task<Response> RegisterUserAsync(string urlBase, string servicePrefix, string controller, UserRequest userRequest);
