@@ -102,5 +102,44 @@ namespace Taxi.Web.Controllers.API
                 Message = Resource.EmailConfirmationSent
             });
         }
+
+        [HttpPost]
+        [Route("RecoverPassword")]
+        public async Task<IActionResult> RecoverPassword([FromBody] EmailRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new Response
+                {
+                    IsSuccess = false,
+                    Message = "Bad request",
+                    Result = ModelState
+                });
+            }
+
+            CultureInfo cultureInfo = new CultureInfo(request.CultureInfo);
+            Resource.Culture = cultureInfo;
+
+            UserEntity user = await _userHelper.GetUserAsync(request.Email);
+            if (user == null)
+            {
+                return BadRequest(new Response
+                {
+                    IsSuccess = false,
+                    Message = Resource.UserNotFoundError
+                });
+            }
+
+            string myToken = await _userHelper.GeneratePasswordResetTokenAsync(user);
+            string link = Url.Action("ResetPassword", "Account", new { token = myToken }, protocol: HttpContext.Request.Scheme);
+            _mailHelper.SendMail(request.Email, Resource.RecoverPasswordSubject, $"<h1>{Resource.RecoverPasswordSubject}</h1>" +
+                $"{Resource.RecoverPasswordBody}</br></br><a href = \"{link}\">{Resource.RecoverPasswordSubject}</a>");
+
+            return Ok(new Response
+            {
+                IsSuccess = true,
+                Message = Resource.RecoverPasswordEmailSent
+            });
+        }
     }
 }
