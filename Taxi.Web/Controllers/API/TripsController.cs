@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Taxi.Common.Models;
 using Taxi.Web.Data;
@@ -26,6 +27,48 @@ namespace Taxi.Web.Controllers.API
             _context = context;
             _userHelper = userHelper;
             _converterHelper = converterHelper;
+        }
+
+        [HttpPost]
+        [Route("AddTripDetails")]
+        public async Task<IActionResult> AddTripDetails([FromBody] TripDetailsRequest tripDetailsRequest)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (tripDetailsRequest.TripDetails == null || tripDetailsRequest.TripDetails.Count == 0)
+            {
+                return NoContent();
+            }
+
+            TripEntity trip = await _context.Trips
+                .Include(t => t.TripDetails)
+                .FirstOrDefaultAsync(t => t.Id == tripDetailsRequest.TripDetails.FirstOrDefault().TripId);
+            if (trip == null)
+            {
+                return BadRequest("Trip not found.");
+            }
+
+            if (trip.TripDetails == null)
+            {
+                trip.TripDetails = new List<TripDetailEntity>();
+            }
+
+            foreach (TripDetailRequest tripDetailRequest in tripDetailsRequest.TripDetails)
+            {
+                trip.TripDetails.Add(new TripDetailEntity
+                {
+                    Date = DateTime.UtcNow,
+                    Latitude = tripDetailRequest.Latitude,
+                    Longitude = tripDetailRequest.Longitude
+                });
+            }
+
+            _context.Trips.Update(trip);
+            await _context.SaveChangesAsync();
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
