@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "81009864645",
+    "firebase_url": "https://taxi-4ba1d.firebaseio.com",
+    "project_id": "taxi-4ba1d",
+    "storage_bucket": "taxi-4ba1d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:81009864645:android:0cad28c20c83e95514a5ac",
+        "android_client_info": {
+          "package_name": "com.zulu.taxi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "81009864645-f5i96qkespquk565jrura1qukaes401g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6a4YJBQSZmKgfJXi03gy9hWYC7wdu-Cc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "81009864645-f5i96qkespquk565jrura1qukaes401g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

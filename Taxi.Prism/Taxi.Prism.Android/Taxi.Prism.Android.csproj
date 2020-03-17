@@ -61,6 +61,12 @@
     <PackageReference Include="Syncfusion.Xamarin.SfRating">
       <Version>17.4.0.51</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Azure.NotificationHubs.Android">
+      <Version>0.6.0</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Firebase.Messaging">
+      <Version>71.1740.0</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="4.4.0.991640" />
     <PackageReference Include="Xamarin.Android.Support.CustomTabs" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.3" />
@@ -72,8 +78,15 @@
     <PackageReference Include="Xamarin.Forms.Maps">
       <Version>4.4.0.991640</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.GooglePlayServices.Base">
+      <Version>71.1610.0</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.GooglePlayServices.Basement">
+      <Version>71.1620.0</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FirebaseService.cs" />
     <Compile Include="Implementations\Localize.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -81,6 +94,7 @@
     <Compile Include="SplashActivity.cs" />
   </ItemGroup>
   <ItemGroup>
+    <GoogleServicesJson Include="google-services.json" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>
@@ -102,6 +116,10 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Taxi.Common\Taxi.Common.csproj">
+      <Project>{D9C7A7E3-5297-40BE-84A7-FE7CAE8A227B}</Project>
+      <Name>Taxi.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Taxi.Prism\Taxi.Prism.csproj">
       <Project>{A682884C-CB44-4A89-B752-27BB634E0ABE}</Project>
       <Name>Taxi.Prism</Name>
@@ -133,6 +151,12 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\taxi_splash.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_launcher.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
