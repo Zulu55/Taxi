@@ -30,6 +30,65 @@ namespace Taxi.Web.Controllers.API
         }
 
         [HttpPost]
+        [Route("AddIncident")]
+        public async Task<IActionResult> AddIncident([FromBody] IncidentRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            UserEntity userEntity = await _userHelper.GetUserAsync(request.UserId);
+            if (userEntity == null)
+            {
+                return BadRequest("User doesn't exists.");
+            }
+
+            TaxiEntity taxiEntity = await _context.Taxis.FirstOrDefaultAsync(t => t.Plaque == request.Plaque);
+            if (taxiEntity == null)
+            {
+                _context.Taxis.Add(new TaxiEntity { Plaque = request.Plaque.ToUpper() });
+                await _context.SaveChangesAsync();
+                taxiEntity = await _context.Taxis.FirstOrDefaultAsync(t => t.Plaque == request.Plaque);
+            }
+
+            TripEntity tripEntity = new TripEntity
+            {
+                Source = request.Address,
+                SourceLatitude = request.Latitude,
+                SourceLongitude = request.Longitude,
+                StartDate = DateTime.UtcNow,
+                Taxi = taxiEntity,
+                EndDate = DateTime.UtcNow,
+                Qualification = 1,
+                Remarks = request.Remarks,
+                Target = request.Address,
+                TargetLatitude = request.Latitude,
+                TargetLongitude = request.Longitude,
+                TripDetails = new List<TripDetailEntity>
+                {
+                    new TripDetailEntity
+                    {
+                        Date = DateTime.UtcNow,
+                        Latitude = request.Latitude,
+                        Longitude = request.Longitude
+                    },
+                    new TripDetailEntity
+                    {
+                        Date = DateTime.UtcNow,
+                        Latitude = request.Latitude,
+                        Longitude = request.Longitude
+                    }
+                },
+                User = userEntity,
+            };
+
+            _context.Trips.Add(tripEntity);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpPost]
         [Route("GetMyTrips")]
         public async Task<IActionResult> GetMyTrips([FromBody] MyTripsRequest request)
         {
