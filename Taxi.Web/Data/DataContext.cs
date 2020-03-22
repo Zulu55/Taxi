@@ -18,6 +18,10 @@ namespace Taxi.Web.Data
 
         public DbSet<UserGroupEntity> UserGroups { get; set; }
 
+        public DbSet<UserGroupDetailEntity> UserGroupDetails { get; set; }
+
+        public DbSet<UserGroupRequestEntity> UserGroupRequests { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
