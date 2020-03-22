@@ -30,6 +30,28 @@ namespace Taxi.Web.Controllers.API
         }
 
         [HttpPost]
+        [Route("GetMyTrips")]
+        public async Task<IActionResult> GetMyTrips([FromBody] MyTripsRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var tripEntities = await _context.Trips
+                .Include(t => t.User)
+                .Include(t => t.TripDetails)
+                .Include(t => t.Taxi)
+                .Where(t => t.User.Id == request.UserId &&
+                            t.StartDate >= request.StartDate &&
+                            t.StartDate <= request.EndDate)
+                .OrderByDescending(t => t.StartDate)
+                .ToListAsync();
+
+            return Ok(_converterHelper.ToTripResponse(tripEntities));
+        }
+
+        [HttpPost]
         [Route("AddTripDetails")]
         public async Task<IActionResult> AddTripDetails([FromBody] TripDetailsRequest tripDetailsRequest)
         {
