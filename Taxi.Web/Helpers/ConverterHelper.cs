@@ -7,6 +7,15 @@ namespace Taxi.Web.Helpers
 {
     public class ConverterHelper : IConverterHelper
     {
+        public List<UserGroupDetailResponse> ToUserGroupResponse(List<UserGroupDetailEntity> users)
+        {
+            return users.Select(u => new UserGroupDetailResponse
+            {
+                Id = u.Id,
+                User = ToUserResponse(u.User)
+            }).ToList();
+        }
+
         public List<TripResponseWithTaxi> ToTripResponse(List<TripEntity> tripEntities)
         {
             return tripEntities.Select(t => new TripResponseWithTaxi
