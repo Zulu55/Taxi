@@ -186,4 +186,31 @@
   <data name="LogIn" xml:space="preserve">
     <value>Iniciar sesión</value>
   </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="EmailPlaceHolder" xml:space="preserve">
+    <value>Entra tu email...</value>
+  </data>
+  <data name="EmailError" xml:space="preserve">
+    <value>Debes ingresar un correo electrónico...</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+  <data name="PasswordPlaceHolder" xml:space="preserve">
+    <value>Entra tu contraseña...</value>
+  </data>
+  <data name="PasswordError" xml:space="preserve">
+    <value>Debe escribir una contraseña.</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Registrar</value>
+  </data>
+  <data name="LoginError" xml:space="preserve">
+    <value>Email o clave incorrectos.</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Cerrar sesión</value>
+  </data>
 </root>

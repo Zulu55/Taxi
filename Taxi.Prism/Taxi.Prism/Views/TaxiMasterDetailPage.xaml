@@ -19,6 +19,10 @@
             <StackLayout Padding="20">
                 <Image HeightRequest="150"
                        Source="taxi"/>
+                <Label FontAttributes="Bold"
+                       FontSize="Large"
+                       Text="{Binding User.FullName}"
+                       TextColor="Black"/>
                 <ListView BackgroundColor="Transparent"
                 	      ItemsSource="{Binding Menus}"
                 	      HasUnevenRows="True"

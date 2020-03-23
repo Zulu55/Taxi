@@ -2,11 +2,69 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-             ios:Page.UseSafeArea="true"
+         	 xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+           	 xmlns:i18n="clr-namespace:Taxi.Prism.Helpers"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Taxi.Prism.Views.LoginPage"
              BackgroundColor="{StaticResource ColorBackgroud}"
              Title="{Binding Title}">
-  
+
+    <AbsoluteLayout>
+        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                     AbsoluteLayout.LayoutFlags="All" 
+                     Padding="5">
+            <Image HeightRequest="150"
+                   Margin="0,20,0,0"
+                   Source="taxi"/>
+            <Grid Margin="20" 
+                  VerticalOptions="CenterAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" 
+                       Grid.Row="0"
+                       HorizontalTextAlignment="End"
+                       Text="{i18n:Translate Email}"
+                       VerticalOptions="Center"/>
+                <Entry Grid.Column="1"
+                       Grid.Row="0"
+                       BackgroundColor="{StaticResource ColorFontInverse}"
+                       Keyboard="Email"
+                       Placeholder="{i18n:Translate EmailPlaceHolder}"
+                       Text="{Binding Email}"/>
+                <Label Grid.Column="0" 
+                       Grid.Row="1"
+                       HorizontalTextAlignment="End"
+                       Text="{i18n:Translate Password}"
+                       VerticalOptions="Center"/>
+                <Entry Grid.Column="1"
+                       Grid.Row="1"
+                       BackgroundColor="{StaticResource ColorFontInverse}"
+                       IsPassword="True"
+                       Placeholder="{i18n:Translate PasswordPlaceHolder}"
+                       Text="{Binding Password}"/>
+            </Grid>
+            <StackLayout>
+                <Button Command="{Binding LoginCommand}" 
+                        IsEnabled="{Binding IsEnabled}"
+                        Text="{i18n:Translate LogIn}"/>
+                <Button Command="{Binding RegisterCommand}" 
+                        IsEnabled="{Binding IsEnabled}"
+                        Text="{i18n:Translate Register}"
+                        Style="{StaticResource DangerButton}"/>
+            </StackLayout>
+        </StackLayout>
+        <busyindicator:SfBusyIndicator AnimationType="Gear" 
+                                       AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+                	                   AbsoluteLayout.LayoutFlags="All"
+                	                   BackgroundColor="{StaticResource ColorAccent}"
+                	                   HorizontalOptions="Center"
+                	                   TextColor="{StaticResource ColorFontInverse}"
+                	                   IsVisible="{Binding IsRunning}"
+                	                   Title="{i18n:Translate Loading}"
+                	                   VerticalOptions="Center"
+                	                   ViewBoxWidth="80"
+                	                   ViewBoxHeight="80" />
+    </AbsoluteLayout>
 </ContentPage>

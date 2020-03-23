@@ -184,6 +184,33 @@
     <value>Report an incident</value>
   </data>
   <data name="LogIn" xml:space="preserve">
-    <value>Log in</value>
+    <value>Login</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="EmailPlaceHolder" xml:space="preserve">
+    <value>Enter your email...</value>
+  </data>
+  <data name="EmailError" xml:space="preserve">
+    <value>You must enter an email.</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PasswordPlaceHolder" xml:space="preserve">
+    <value>Enter your password...</value>
+  </data>
+  <data name="PasswordError" xml:space="preserve">
+    <value>You must enter a password.</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="LoginError" xml:space="preserve">
+    <value>Email or password incorrect.</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Logout</value>
   </data>
 </root>
