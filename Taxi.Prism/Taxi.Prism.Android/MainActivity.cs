@@ -27,6 +27,7 @@ namespace Taxi.Prism.Droid
 
             CrossCurrentActivity.Current.Init(this, bundle);
             global::Xamarin.Forms.Forms.Init(this, bundle);
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
             new SfBusyIndicatorRenderer();
             new SfRatingRenderer();
             LoadApplication(new App(new AndroidInitializer()));

@@ -4,6 +4,8 @@
                   xmlns:prism="http://prismlibrary.com"
                   xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
                   ios:Page.UseSafeArea="true"
+                  xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                  xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
                   prism:ViewModelLocator.AutowireViewModel="True"
                   x:Class="Taxi.Prism.Views.TaxiMasterDetailPage">
 
@@ -17,12 +19,31 @@
                 </OnPlatform>
             </ContentPage.Padding>
             <StackLayout Padding="20">
-                <Image HeightRequest="150"
-                       Source="taxi"/>
-                <Label FontAttributes="Bold"
-                       FontSize="Large"
-                       Text="{Binding User.FullName}"
-                       TextColor="Black"/>
+                <RelativeLayout>
+                    <Image x:Name="Logo" HorizontalOptions="Center"
+                           RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=X,Factor=1,Constant=60}"
+                           HeightRequest="150"
+                           Source="taxi"/>
+                    <ffimageloading:CachedImage x:Name="Picture" 
+                                                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=Logo,Property=Y,Factor=1,Constant=30}"
+                                                Aspect="AspectFill"
+                                                Source="{Binding User.PictureFullPath}" 
+                                                CacheDuration= "50"
+                                                HeightRequest="110"
+                                                Margin="5"
+                                                RetryCount= "3"
+                                                RetryDelay= "600"
+                                                WidthRequest="110">
+                        <ffimageloading:CachedImage.Transformations>
+                            <fftransformations:CircleTransformation />
+                        </ffimageloading:CachedImage.Transformations>
+                    </ffimageloading:CachedImage>
+                    <Label RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=Picture,Property=Y,Factor=1,Constant=110}"
+                           FontAttributes="Bold"
+                           FontSize="Large"
+                           Text="{Binding User.FullName}"
+                           TextColor="Black"/>
+                </RelativeLayout>
                 <ListView BackgroundColor="Transparent"
                 	      ItemsSource="{Binding Menus}"
                 	      HasUnevenRows="True"
