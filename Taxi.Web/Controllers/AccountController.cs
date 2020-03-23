@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -8,6 +9,8 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Taxi.Common.Enums;
+using Taxi.Web.Data;
 using Taxi.Web.Data.Entities;
 using Taxi.Web.Helpers;
 using Taxi.Web.Models;
@@ -21,19 +24,98 @@ namespace Taxi.Web.Controllers
         private readonly ICombosHelper _combosHelper;
         private readonly IConfiguration _configuration;
         private readonly IMailHelper _mailHelper;
+        private readonly DataContext _context;
 
         public AccountController(
             IUserHelper userHelper,
             IImageHelper imageHelper,
             ICombosHelper combosHelper,
             IConfiguration configuration,
-            IMailHelper mailHelper)
+            IMailHelper mailHelper,
+            DataContext context)
         {
             _userHelper = userHelper;
             _imageHelper = imageHelper;
             _combosHelper = combosHelper;
             _configuration = configuration;
             _mailHelper = mailHelper;
+            _context = context;
+        }
+
+        public async Task<IActionResult> ConfirmUserGroup(int requestId, string token)
+        {
+            if (requestId == 0 || string.IsNullOrEmpty(token))
+            {
+                return NotFound();
+            }
+
+            UserGroupRequestEntity userGroupRequest = await _context.UserGroupRequests
+                .Include(ugr => ugr.ProposalUser)
+                .Include(ugr => ugr.RequiredUser)
+                .FirstOrDefaultAsync(ugr => ugr.Id == requestId &&
+                                            ugr.Token == new Guid(token));
+            if (userGroupRequest == null)
+            {
+                return NotFound();
+            }
+
+            await AddGroupAsync(userGroupRequest.ProposalUser, userGroupRequest.RequiredUser);
+            await AddGroupAsync(userGroupRequest.RequiredUser, userGroupRequest.ProposalUser);
+
+            userGroupRequest.Status = UserGroupStatus.Accepted;
+            _context.UserGroupRequests.Update(userGroupRequest);
+            await _context.SaveChangesAsync();
+            return View();
+        }
+
+        private async Task AddGroupAsync(UserEntity proposalUser, UserEntity requiredUser)
+        {
+            UserGroupEntity userGroup = await _context.UserGroups
+                .Include(ug => ug.Users)
+                .ThenInclude(u => u.User)
+                .FirstOrDefaultAsync(ug => ug.User.Id == proposalUser.Id);
+            if (userGroup != null)
+            {
+                UserGroupDetailEntity user = userGroup.Users.FirstOrDefault(u => u.User.Id == requiredUser.Id);
+                if (user == null)
+                {
+                    userGroup.Users.Add(new UserGroupDetailEntity { User = requiredUser });
+                }
+
+                _context.UserGroups.Update(userGroup);
+            }
+            else
+            {
+                _context.UserGroups.Add(new UserGroupEntity
+                {
+                    User = proposalUser,
+                    Users = new List<UserGroupDetailEntity>
+            {
+                new UserGroupDetailEntity { User = requiredUser }
+            }
+                });
+            }
+        }
+
+        public async Task<IActionResult> RejectUserGroup(int requestId, string token)
+        {
+            if (requestId == 0 || string.IsNullOrEmpty(token))
+            {
+                return NotFound();
+            }
+
+            UserGroupRequestEntity userGroupRequest = await _context
+                .UserGroupRequests.FirstOrDefaultAsync(ugr => ugr.Id == requestId &&
+                                                        ugr.Token == new Guid(token));
+            if (userGroupRequest == null)
+            {
+                return NotFound();
+            }
+
+            userGroupRequest.Status = UserGroupStatus.Rejected;
+            _context.UserGroupRequests.Update(userGroupRequest);
+            await _context.SaveChangesAsync();
+            return View();
         }
 
         public IActionResult RecoverPasswordMVC()
