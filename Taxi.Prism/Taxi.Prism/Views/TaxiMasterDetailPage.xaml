@@ -8,8 +8,14 @@
                   x:Class="Taxi.Prism.Views.TaxiMasterDetailPage">
 
     <MasterDetailPage.Master>
-        <ContentPage BackgroundColor="{StaticResource ColorBackgroud}"
+        <ContentPage BackgroundColor="{StaticResource ColorSecondary}"
                      Title="Menu">
+            <ContentPage.Padding>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="Android, UWP">0</On>
+                    <On Platform="iOS">0,20,0,0</On>
+                </OnPlatform>
+            </ContentPage.Padding>
             <StackLayout Padding="20">
                 <Image HeightRequest="150"
                        Source="taxi"/>

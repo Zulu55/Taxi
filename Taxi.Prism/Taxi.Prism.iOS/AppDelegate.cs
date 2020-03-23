@@ -13,6 +13,7 @@ namespace Taxi.Prism.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+            Xamarin.FormsMaps.Init();
             new SfBusyIndicatorRenderer();
             new SfRatingRenderer();
             LoadApplication(new App(new iOSInitializer()));
