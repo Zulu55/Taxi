@@ -213,4 +213,76 @@
   <data name="Logout" xml:space="preserve">
     <value>Logout</value>
   </data>
+  <data name="User" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="Document" xml:space="preserve">
+    <value>Document</value>
+  </data>
+  <data name="DocumentPlaceHolder" xml:space="preserve">
+    <value>Enter your document number...</value>
+  </data>
+  <data name="DocumentError" xml:space="preserve">
+    <value>You must enter a document.</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>First name</value>
+  </data>
+  <data name="FirstNamePlaceHolder" xml:space="preserve">
+    <value>Enter your first name...</value>
+  </data>
+  <data name="FirstNameError" xml:space="preserve">
+    <value>You must enter a first name.</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Last name</value>
+  </data>
+  <data name="LastNamePlaceHolder" xml:space="preserve">
+    <value>Enter your last name...</value>
+  </data>
+  <data name="LastNameError" xml:space="preserve">
+    <value>You must enter a last name.</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="AddressPlaceHolder" xml:space="preserve">
+    <value>Enter your address...</value>
+  </data>
+  <data name="AddressError" xml:space="preserve">
+    <value>You must enter an address.</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="PhoneError" xml:space="preserve">
+    <value>Enter your phone...</value>
+  </data>
+  <data name="PhonePlaceHolder" xml:space="preserve">
+    <value>You must enter a phone.</value>
+  </data>
+  <data name="PasswordConfirm" xml:space="preserve">
+    <value>Password confirm</value>
+  </data>
+  <data name="PasswordConfirmError1" xml:space="preserve">
+    <value>You must enter a password confirm.</value>
+  </data>
+  <data name="PasswordConfirmError2" xml:space="preserve">
+    <value>The password and confirm does not match.</value>
+  </data>
+  <data name="PasswordConfirmPlaceHolder" xml:space="preserve">
+    <value>Enter the password confirm...</value>
+  </data>
+  <data name="RegisterAs" xml:space="preserve">
+    <value>Register as</value>
+  </data>
+  <data name="RegisterAsError" xml:space="preserve">
+    <value>You must select a role.</value>
+  </data>
+  <data name="RegisterAsPlaceHolder" xml:space="preserve">
+    <value>Select a role...</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Ok</value>
+  </data>
 </root>

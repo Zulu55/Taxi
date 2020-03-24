@@ -213,4 +213,76 @@
   <data name="Logout" xml:space="preserve">
     <value>Cerrar sesión</value>
   </data>
+  <data name="User" xml:space="preserve">
+    <value>Usuario</value>
+  </data>
+  <data name="Document" xml:space="preserve">
+    <value>Documento</value>
+  </data>
+  <data name="DocumentPlaceHolder" xml:space="preserve">
+    <value>Ingrese su número de documento ...</value>
+  </data>
+  <data name="DocumentError" xml:space="preserve">
+    <value>Debe ingresar un documento.</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="FirstNamePlaceHolder" xml:space="preserve">
+    <value>Escribir nombre</value>
+  </data>
+  <data name="FirstNameError" xml:space="preserve">
+    <value>Debe escribir un nombre</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Apellidos</value>
+  </data>
+  <data name="LastNamePlaceHolder" xml:space="preserve">
+    <value>Escribir apellidos</value>
+  </data>
+  <data name="LastNameError" xml:space="preserve">
+    <value>Debe escribir apellidos</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Dirección</value>
+  </data>
+  <data name="AddressPlaceHolder" xml:space="preserve">
+    <value>Introduzca su dirección</value>
+  </data>
+  <data name="AddressError" xml:space="preserve">
+    <value>Debe especificar una dirección.</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Teléfono</value>
+  </data>
+  <data name="PhoneError" xml:space="preserve">
+    <value>Ingresa tu teléfono</value>
+  </data>
+  <data name="PhonePlaceHolder" xml:space="preserve">
+    <value>Debes poner un número de teléfono</value>
+  </data>
+  <data name="PasswordConfirm" xml:space="preserve">
+    <value>Confirmar contraseña</value>
+  </data>
+  <data name="PasswordConfirmError1" xml:space="preserve">
+    <value>Debes ingresar una contraseña</value>
+  </data>
+  <data name="PasswordConfirmError2" xml:space="preserve">
+    <value>La nueva contraseña y la confirmación de contraseña no son iguales.</value>
+  </data>
+  <data name="PasswordConfirmPlaceHolder" xml:space="preserve">
+    <value>Ingrese la confirmación de contraseña.</value>
+  </data>
+  <data name="RegisterAs" xml:space="preserve">
+    <value>Registrarse como</value>
+  </data>
+  <data name="RegisterAsError" xml:space="preserve">
+    <value>Debe seleccionar un rol.</value>
+  </data>
+  <data name="RegisterAsPlaceHolder" xml:space="preserve">
+    <value>Seleccionar un rol...</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Ok</value>
+  </data>
 </root>

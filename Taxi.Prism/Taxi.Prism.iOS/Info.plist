@@ -63,5 +63,7 @@
 	<string>en</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
+	<key>UIMainStoryboardFile</key>
+	<string>LaunchScreen</string>
 </dict>
 </plist>

@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+         	 xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+           	 xmlns:i18n="clr-namespace:Taxi.Prism.Helpers"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="Taxi.Prism.Views.RegisterPage"
+             BackgroundColor="{StaticResource ColorBackgroud}"
+             Title="{Binding Title}">
+
+    <AbsoluteLayout>
+        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                     AbsoluteLayout.LayoutFlags="All"
+                     Padding="5">
+            <ScrollView>
+                <StackLayout>
+                    <ffimageloading:CachedImage Aspect="AspectFit"
+                                                Source="{Binding Image}" 
+                                                CacheDuration= "50"
+                                                HeightRequest="150"
+                                                Margin="5"
+                                                RetryCount= "3"
+                                                RetryDelay= "600">
+                        <ffimageloading:CachedImage.Transformations>
+                            <fftransformations:CircleTransformation />
+                        </ffimageloading:CachedImage.Transformations>
+                    </ffimageloading:CachedImage>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0"
+                               Grid.Column="0"
+                               Text="{i18n:Translate Document}"
+                               VerticalOptions="Center"/>
+                        <Entry Grid.Row="0"
+                               Grid.Column="1"
+                               Keyboard="Numeric"
+                               Placeholder="{i18n:Translate DocumentPlaceHolder}"
+                               Text="{Binding User.Document}"/>
+
+                        <Label Grid.Row="1"
+                               Grid.Column="0"
+                               Text="{i18n:Translate FirstName}"
+                               VerticalOptions="Center"/>
+                        <Entry Grid.Row="1"
+                               Grid.Column="1"
+                               Placeholder="{i18n:Translate FirstNamePlaceHolder}"
+                               Text="{Binding User.FirstName}"/>
+
+                        <Label Grid.Row="2"
+                               Grid.Column="0"
+                               Text="{i18n:Translate LastName}"
+                               VerticalOptions="Center"/>
+                        <Entry Grid.Row="2"
+                               Grid.Column="1"
+                               Placeholder="{i18n:Translate LastNamePlaceHolder}"
+                               Text="{Binding User.LastName}"/>
+
+                        <Label Grid.Row="3"
+                               Grid.Column="0"
+                               Text="{i18n:Translate Address}"
+                               VerticalOptions="Center"/>
+                        <Entry Grid.Row="3"
+                               Grid.Column="1"
+                               Placeholder="{i18n:Translate AddressPlaceHolder}"
+                               Text="{Binding User.Address}"/>
+                        
+                        <Label Grid.Row="4"
+                               Grid.Column="0"
+                               Text="{i18n:Translate Email}"
+                               VerticalOptions="Center"/>
+                        <Entry Grid.Row="4"
+                               Grid.Column="1"
+                               Keyboard="Email"
+                               Placeholder="{i18n:Translate EmailPlaceHolder}"
+                               Text="{Binding User.Email}"/>
+
+                        <Label Grid.Row="5"
+                               Grid.Column="0"
+                               Text="{i18n:Translate Phone}"
+                               VerticalOptions="Center"/>
+                        <Entry Grid.Row="5" 
+                               Grid.Column="1"
+                               Keyboard="Telephone"
+                               Placeholder="{i18n:Translate PhonePlaceHolder}"
+                               Text="{Binding User.Phone}"/>
+
+                        <Label Grid.Row="6"
+                               Grid.Column="0"
+                               Text="{i18n:Translate Password}"
+                               VerticalOptions="Center"/>
+                        <Entry Grid.Row="6"
+                               Grid.Column="1"
+                               IsPassword="True"
+                               Placeholder="{i18n:Translate PasswordPlaceHolder}"
+                               Text="{Binding User.Password}"/>
+
+                        <Label Grid.Row="7"
+                               Grid.Column="0"
+                               Text="{i18n:Translate PasswordConfirm}"
+                               VerticalOptions="Center"/>
+                        <Entry Grid.Row="7"
+                               Grid.Column="1"
+                               IsPassword="True"
+                               Placeholder="{i18n:Translate PasswordConfirmPlaceHolder}"
+                               Text="{Binding User.PasswordConfirm}"/>
+
+                        <Label Grid.Row="8"
+                               Grid.Column="0"
+                               Text="{i18n:Translate RegisterAs}"
+                               VerticalOptions="Center"/>
+                        <Picker Grid.Row="8"
+                                Grid.Column="1"
+                                ItemDisplayBinding="{Binding Name}"
+                                ItemsSource="{Binding Roles}"
+                                SelectedItem="{Binding Role}"
+                                Title="{i18n:Translate RegisterAsPlaceHolder}">
+                        </Picker>
+                    </Grid>
+                </StackLayout>
+            </ScrollView>
+            <Button Command="{Binding RegisterCommand}"
+                    IsEnabled="{Binding IsEnabled}"
+                    Text="{i18n:Translate Register}"/>
+        </StackLayout>
+        <busyindicator:SfBusyIndicator AnimationType="Gear" 
+                                       AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+                	                   AbsoluteLayout.LayoutFlags="All"
+                	                   BackgroundColor="{StaticResource ColorAccent}"
+                	                   HorizontalOptions="Center"
+                	                   TextColor="{StaticResource ColorFontInverse}"
+                	                   IsVisible="{Binding IsRunning}"
+                	                   Title="{i18n:Translate Loading}"
+                	                   VerticalOptions="Center"
+                	                   ViewBoxWidth="80"
+                	                   ViewBoxHeight="80" />
+    </AbsoluteLayout>
+</ContentPage>
