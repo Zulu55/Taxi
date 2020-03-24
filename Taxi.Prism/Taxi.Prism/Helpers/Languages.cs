@@ -17,6 +17,14 @@ namespace Taxi.Prism.Helpers
 
         public static string Culture { get; set; }
 
+        public static string PictureSource => Resource.PictureSource;
+
+        public static string Cancel => Resource.Cancel;
+
+        public static string FromCamera => Resource.FromCamera;
+
+        public static string FromGallery => Resource.FromGallery;
+
         public static string Ok => Resource.Ok;
 
         public static string Address => Resource.Address;

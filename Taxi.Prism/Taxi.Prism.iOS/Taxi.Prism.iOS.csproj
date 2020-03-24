@@ -187,6 +187,9 @@
     <PackageReference Include="Syncfusion.Xamarin.SfRating">
       <Version>17.4.0.51</Version>
     </PackageReference>
+    <PackageReference Include="Xam.Plugin.Media">
+      <Version>4.0.1.5</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.FFImageLoading.Forms">
       <Version>2.4.11.982</Version>
     </PackageReference>

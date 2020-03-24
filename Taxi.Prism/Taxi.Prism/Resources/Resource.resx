@@ -285,4 +285,16 @@
   <data name="Ok" xml:space="preserve">
     <value>Ok</value>
   </data>
+  <data name="PictureSource" xml:space="preserve">
+    <value>Where do you want to take the picture?</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="FromCamera" xml:space="preserve">
+    <value>From camera</value>
+  </data>
+  <data name="FromGallery" xml:space="preserve">
+    <value>From gallery</value>
+  </data>
 </root>
