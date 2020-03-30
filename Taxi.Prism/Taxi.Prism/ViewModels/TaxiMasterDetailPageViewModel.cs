@@ -1,31 +1,74 @@
 ﻿using Newtonsoft.Json;
+using Prism.Commands;
 using Prism.Navigation;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Taxi.Common.Helpers;
 using Taxi.Common.Models;
+using Taxi.Common.Services;
 using Taxi.Prism.Helpers;
+using Taxi.Prism.Views;
 
 namespace Taxi.Prism.ViewModels
 {
     public class TaxiMasterDetailPageViewModel : ViewModelBase
     {
         private readonly INavigationService _navigationService;
+        private readonly IApiService _apiService;
         private UserResponse _user;
+        private DelegateCommand _modifyUserCommand;
+        private static TaxiMasterDetailPageViewModel _instance;
 
-        public TaxiMasterDetailPageViewModel(INavigationService navigationService)
+        public TaxiMasterDetailPageViewModel(INavigationService navigationService, IApiService apiService)
             : base(navigationService)
         {
+            _instance = this;
             _navigationService = navigationService;
+            this._apiService = apiService;
             LoadUser();
             LoadMenus();
         }
+
+        public DelegateCommand ModifyUserCommand => _modifyUserCommand ?? (_modifyUserCommand = new DelegateCommand(ModifyUserAsync));
 
         public UserResponse User
         {
             get => _user;
             set => SetProperty(ref _user, value);
+        }
+
+        public static TaxiMasterDetailPageViewModel GetInstance()
+        {
+            return _instance;
+        }
+
+        public async void ReloadUser()
+        {
+            string url = App.Current.Resources["UrlAPI"].ToString();
+            bool connection = await _apiService.CheckConnectionAsync(url);
+            if (!connection)
+            {
+                return;
+            }
+
+            UserResponse user = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
+            TokenResponse token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
+            EmailRequest emailRequest = new EmailRequest
+            {
+                CultureInfo = Languages.Culture,
+                Email = user.Email
+            };
+
+            Response response = await _apiService.GetUserByEmail(url, "api", "/Account/GetUserByEmail", "bearer", token.Token, emailRequest);
+            UserResponse userResponse = (UserResponse)response.Result;
+            Settings.User = JsonConvert.SerializeObject(userResponse);
+            LoadUser();
+        }
+
+        private async void ModifyUserAsync()
+        {
+            await _navigationService.NavigateAsync($"/TaxiMasterDetailPage/NavigationPage/{nameof(ModifyUserPage)}");
         }
 
         private void LoadUser()

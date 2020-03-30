@@ -34,6 +34,9 @@
                                                 RetryCount= "3"
                                                 RetryDelay= "600"
                                                 WidthRequest="110">
+                        <ffimageloading:CachedImage.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ModifyUserCommand}"/>
+                        </ffimageloading:CachedImage.GestureRecognizers>
                         <ffimageloading:CachedImage.Transformations>
                             <fftransformations:CircleTransformation />
                         </ffimageloading:CachedImage.Transformations>
