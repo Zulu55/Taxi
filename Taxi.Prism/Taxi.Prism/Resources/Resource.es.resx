@@ -312,4 +312,34 @@
   <data name="UserUpdated" xml:space="preserve">
     <value>Actualizado correctamente</value>
   </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>Confirmar la nueva calve</value>
+  </data>
+  <data name="ConfirmNewPasswordError" xml:space="preserve">
+    <value>Ingresa la confirmación de tu clave.</value>
+  </data>
+  <data name="ConfirmNewPasswordError2" xml:space="preserve">
+    <value>La calve y la confirmación no coinciden</value>
+  </data>
+  <data name="ConfirmNewPasswordPlaceHolder" xml:space="preserve">
+    <value>Introduzca la confirmación de la nueva calve.</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Calve actual</value>
+  </data>
+  <data name="CurrentPasswordError" xml:space="preserve">
+    <value>Debe introducir su clave actual.</value>
+  </data>
+  <data name="CurrentPasswordPlaceHolder" xml:space="preserve">
+    <value>Escriba la calve actual.</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Nueva clave</value>
+  </data>
+  <data name="NewPasswordError" xml:space="preserve">
+    <value>Debes ingresar una nueva clave.</value>
+  </data>
+  <data name="NewPasswordPlaceHolder" xml:space="preserve">
+    <value>Escriba una nueva contraseña</value>
+  </data>
 </root>
