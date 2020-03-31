@@ -37,11 +37,16 @@ namespace Taxi.Prism.Views
                     Position position = new Position(
                         _geolocatorService.Latitude,
                         _geolocatorService.Longitude);
-                    MyMap.MoveToRegion(MapSpan.FromCenterAndRadius(
-                        position,
-                        Distance.FromKilometers(.5)));
+                    MoveMap(position);
                 }
             }
+        }
+
+        private void MoveMap(Position position)
+        {
+            MyMap.MoveToRegion(MapSpan.FromCenterAndRadius(
+                position,
+                Distance.FromKilometers(.2)));
         }
 
         private async Task<bool> CheckLocationPermisionsAsync()

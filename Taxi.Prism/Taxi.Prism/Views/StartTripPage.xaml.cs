@@ -55,11 +55,38 @@ namespace Taxi.Prism.Views
                     Position position = new Position(
                         _geolocatorService.Latitude,
                         _geolocatorService.Longitude);
-                    MyMap.MoveToRegion(MapSpan.FromCenterAndRadius(
-                        position,
-                        Distance.FromKilometers(.5)));
+                    MoveMap(position);
                 }
             }
+        }
+
+        private void MoveMap(Position position)
+        {
+            MyMap.MoveToRegion(MapSpan.FromCenterAndRadius(
+                position,
+                Distance.FromKilometers(.2)));
+        }
+
+        public void DrawLine(Position a, Position b)
+        {
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                Polygon polygon = new Polygon
+                {
+                    StrokeWidth = 10,
+                    StrokeColor = Color.FromHex("#8D07F6"),
+                    FillColor = Color.FromHex("#8D07F6"),
+                    Geopath = { a, b }
+                };
+
+                MyMap.MapElements.Add(polygon);
+            }
+            else
+            {
+                AddPin(b, string.Empty, string.Empty, PinType.SavedPin);
+            }
+
+            MoveMap(b);
         }
 
         private async Task<bool> CheckLocationPermisionsAsync()
