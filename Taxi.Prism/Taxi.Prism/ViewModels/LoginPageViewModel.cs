@@ -10,6 +10,7 @@ using Taxi.Common.Models;
 using Taxi.Common.Services;
 using Taxi.Prism.Helpers;
 using Taxi.Prism.Views;
+using Xamarin.Essentials;
 
 namespace Taxi.Prism.ViewModels
 {
@@ -149,28 +150,20 @@ namespace Taxi.Prism.ViewModels
         {
             if (string.IsNullOrEmpty(Email))
             {
-                await App.Current.MainPage.DisplayAlert(
-                    Languages.Error,
-                    Languages.EmailError,
-                    Languages.Accept);
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.EmailError, Languages.Accept);
                 return;
             }
 
             if (string.IsNullOrEmpty(Password))
             {
-                await App.Current.MainPage.DisplayAlert(
-                    Languages.Error,
-                    Languages.PasswordError,
-                    Languages.Accept);
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.PasswordError, Languages.Accept);
                 return;
             }
 
             IsRunning = true;
             IsEnabled = false;
 
-            string url = App.Current.Resources["UrlAPI"].ToString();
-            bool connection = await _apiService.CheckConnectionAsync(url);
-            if (!connection)
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 IsRunning = false;
                 IsEnabled = true;
@@ -184,6 +177,7 @@ namespace Taxi.Prism.ViewModels
                 Username = Email
             };
 
+            string url = App.Current.Resources["UrlAPI"].ToString();
             Response response = await _apiService.GetTokenAsync(url, "Account", "/CreateToken", request);
 
             if (!response.IsSuccess)

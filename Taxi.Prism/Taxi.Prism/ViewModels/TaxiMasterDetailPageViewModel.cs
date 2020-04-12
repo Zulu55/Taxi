@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Navigation;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -10,6 +9,7 @@ using Taxi.Common.Models;
 using Taxi.Common.Services;
 using Taxi.Prism.Helpers;
 using Taxi.Prism.Views;
+using Xamarin.Essentials;
 
 namespace Taxi.Prism.ViewModels
 {
@@ -21,7 +21,7 @@ namespace Taxi.Prism.ViewModels
         private UserResponse _user;
         private DelegateCommand _modifyUserCommand;
 
-        public TaxiMasterDetailPageViewModel(INavigationService navigationService, IApiService apiService) 
+        public TaxiMasterDetailPageViewModel(INavigationService navigationService, IApiService apiService)
             : base(navigationService)
         {
             _instance = this;
@@ -33,7 +33,7 @@ namespace Taxi.Prism.ViewModels
 
         public DelegateCommand ModifyUserCommand => _modifyUserCommand ?? (_modifyUserCommand = new DelegateCommand(ModifyUserAsync));
 
-        public UserResponse User 
+        public UserResponse User
         {
             get => _user;
             set => SetProperty(ref _user, value);
@@ -48,9 +48,7 @@ namespace Taxi.Prism.ViewModels
 
         public async void ReloadUser()
         {
-            string url = App.Current.Resources["UrlAPI"].ToString();
-            bool connection = await _apiService.CheckConnectionAsync(url);
-            if (!connection)
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 return;
             }
@@ -63,6 +61,7 @@ namespace Taxi.Prism.ViewModels
                 Email = user.Email
             };
 
+            string url = App.Current.Resources["UrlAPI"].ToString();
             Response response = await _apiService.GetUserByEmail(url, "api", "/Account/GetUserByEmail", "bearer", token.Token, emailRequest);
             UserResponse userResponse = (UserResponse)response.Result;
             Settings.User = JsonConvert.SerializeObject(userResponse);

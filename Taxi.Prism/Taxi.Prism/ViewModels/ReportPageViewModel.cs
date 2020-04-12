@@ -9,6 +9,7 @@ using Taxi.Common.Models;
 using Taxi.Common.Services;
 using Taxi.Prism.Helpers;
 using Taxi.Prism.Views;
+using Xamarin.Essentials;
 using Xamarin.Forms.Maps;
 
 namespace Taxi.Prism.ViewModels
@@ -66,9 +67,7 @@ namespace Taxi.Prism.ViewModels
             IsRunning = true;
             IsEnabled = false;
 
-            var url = App.Current.Resources["UrlAPI"].ToString();
-            bool connection = await _apiService.CheckConnectionAsync(url);
-            if (!connection)
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 IsRunning = false;
                 IsEnabled = true;
@@ -105,6 +104,7 @@ namespace Taxi.Prism.ViewModels
                 Remarks = Remark
             };
 
+            var url = App.Current.Resources["UrlAPI"].ToString();
             _apiService.AddIncident(url, "/api", "/Trips/AddIncident", request, "bearer", token.Token);
             IsRunning = false;
             IsEnabled = true;

@@ -5,6 +5,7 @@ using System.Linq;
 using Taxi.Common.Models;
 using Taxi.Common.Services;
 using Taxi.Prism.Helpers;
+using Xamarin.Essentials;
 
 namespace Taxi.Prism.ViewModels
 {
@@ -62,9 +63,8 @@ namespace Taxi.Prism.ViewModels
             }
 
             IsRunning = true;
-            string url = App.Current.Resources["UrlAPI"].ToString();
-            bool connection = await _apiService.CheckConnectionAsync(url);
-            if (!connection)
+
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 IsRunning = false;
                 await App.Current.MainPage.DisplayAlert(
@@ -74,6 +74,7 @@ namespace Taxi.Prism.ViewModels
                 return;
             }
 
+            string url = App.Current.Resources["UrlAPI"].ToString();
             Response response = await _apiService.GetTaxiAsync($"{PlaqueLetters}{PlaqueNumbers}", url, "api", "/Taxis");
             IsRunning = false;
 

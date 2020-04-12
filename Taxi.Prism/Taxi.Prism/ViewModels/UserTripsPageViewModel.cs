@@ -8,6 +8,7 @@ using Taxi.Common.Helpers;
 using Taxi.Common.Models;
 using Taxi.Common.Services;
 using Taxi.Prism.Helpers;
+using Xamarin.Essentials;
 
 namespace Taxi.Prism.ViewModels
 {
@@ -42,10 +43,10 @@ namespace Taxi.Prism.ViewModels
             set => SetProperty(ref _isRunning, value);
         }
 
-        public UserGroupDetailResponse User 
+        public UserGroupDetailResponse User
         {
             get => _user;
-            set => SetProperty(ref _user, value); 
+            set => SetProperty(ref _user, value);
         }
 
         public List<TripItemViewModel> Trips
@@ -69,9 +70,7 @@ namespace Taxi.Prism.ViewModels
         {
             IsRunning = true;
 
-            string url = App.Current.Resources["UrlAPI"].ToString();
-            bool connection = await _apiService.CheckConnectionAsync(url);
-            if (!connection)
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 IsRunning = false;
                 await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ConnectionError, Languages.Accept);
@@ -86,6 +85,7 @@ namespace Taxi.Prism.ViewModels
                 UserId = User.User.Id
             };
 
+            string url = App.Current.Resources["UrlAPI"].ToString();
             Response response = await _apiService.GetMyTrips(url, "api", "/Trips/GetMyTrips", "bearer", token.Token, request);
 
             IsRunning = false;

@@ -9,6 +9,7 @@ using Taxi.Common.Helpers;
 using Taxi.Common.Models;
 using Taxi.Common.Services;
 using Taxi.Prism.Helpers;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Taxi.Prism.ViewModels
@@ -96,9 +97,8 @@ namespace Taxi.Prism.ViewModels
 
             IsRunning = true;
             IsEnabled = false;
-            string url = App.Current.Resources["UrlAPI"].ToString();
-            bool connection = await _apiService.CheckConnectionAsync(url);
-            if (!connection)
+
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 IsRunning = false;
                 IsEnabled = true;
@@ -115,6 +115,7 @@ namespace Taxi.Prism.ViewModels
             User.PictureArray = imageArray;
             User.UserTypeId = Role.Id;
             User.CultureInfo = Languages.Culture;
+            string url = App.Current.Resources["UrlAPI"].ToString();
             Response response = await _apiService.RegisterUserAsync(url, "/api", "/Account", User);
             IsRunning = false;
             IsEnabled = true;

@@ -9,6 +9,7 @@ using Taxi.Common.Models;
 using Taxi.Common.Services;
 using Taxi.Prism.Helpers;
 using Taxi.Prism.Views;
+using Xamarin.Essentials;
 
 namespace Taxi.Prism.ViewModels
 {
@@ -51,9 +52,8 @@ namespace Taxi.Prism.ViewModels
         private async void LoadUsersAsync()
         {
             IsRunning = true;
-            string url = App.Current.Resources["UrlAPI"].ToString();
-            bool connection = await _apiService.CheckConnectionAsync(url);
-            if (!connection)
+
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 IsRunning = false;
                 await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ConnectionError, Languages.Accept);
@@ -62,6 +62,7 @@ namespace Taxi.Prism.ViewModels
 
             TokenResponse token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
             UserResponse user = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
+            string url = App.Current.Resources["UrlAPI"].ToString();
             Response response = await _apiService.GetListAsync<UserGroupDetailResponse>(url, "/api", $"/UserGroups/{user.Id}", "bearer", token.Token);
             IsRunning = false;
 

@@ -7,6 +7,7 @@ using Taxi.Common.Helpers;
 using Taxi.Common.Models;
 using Taxi.Common.Services;
 using Taxi.Prism.Helpers;
+using Xamarin.Essentials;
 using Xamarin.Forms.Maps;
 
 namespace Taxi.Prism.ViewModels
@@ -113,20 +114,16 @@ namespace Taxi.Prism.ViewModels
             IsRunning = true;
             IsEnabled = false;
 
-            string url = App.Current.Resources["UrlAPI"].ToString();
-            bool connection = await _apiService.CheckConnectionAsync(url);
-            if (!connection)
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 IsRunning = false;
                 IsEnabled = true;
-                await App.Current.MainPage.DisplayAlert(
-                    Languages.Error,
-                    Languages.ConnectionError,
-                    Languages.Accept);
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ConnectionError, Languages.Accept);
                 return;
             }
 
             TokenResponse token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
+            string url = App.Current.Resources["UrlAPI"].ToString();
             Response response = await _apiService.GetTripAsync(url, "api", "/Trips", id, "bearer", token.Token);
 
             IsRunning = false;
@@ -166,9 +163,7 @@ namespace Taxi.Prism.ViewModels
             IsRunning = true;
             IsEnabled = false;
 
-            string url = App.Current.Resources["UrlAPI"].ToString();
-            bool connection = await _apiService.CheckConnectionAsync(url);
-            if (!connection)
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 IsRunning = false;
                 IsEnabled = true;
@@ -204,6 +199,7 @@ namespace Taxi.Prism.ViewModels
                 TripId = _tripId
             };
 
+            string url = App.Current.Resources["UrlAPI"].ToString();
             _apiService.CompleteTripAsync(url, "/api", "/Trips/CompleteTrip", completeTripRequest, "bearer", token.Token);
             await _navigationService.GoBackToRootAsync();
         }

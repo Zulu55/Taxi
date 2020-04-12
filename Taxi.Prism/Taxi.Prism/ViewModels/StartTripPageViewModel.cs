@@ -113,8 +113,8 @@ namespace Taxi.Prism.ViewModels
             IsEnabled = false;
 
             _timer.Stop();
-            bool connection = await _apiService.CheckConnectionAsync(_url);
-            if (!connection)
+
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 IsRunning = false;
                 IsEnabled = true;
@@ -179,16 +179,11 @@ namespace Taxi.Prism.ViewModels
             IsRunning = true;
             IsEnabled = false;
 
-            _url = App.Current.Resources["UrlAPI"].ToString();
-            bool connection = await _apiService.CheckConnectionAsync(_url);
-            if (!connection)
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 IsRunning = false;
                 IsEnabled = true;
-                await App.Current.MainPage.DisplayAlert(
-                    Languages.Error,
-                    Languages.ConnectionError,
-                    Languages.Accept);
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ConnectionError, Languages.Accept);
                 return;
             }
 
@@ -204,6 +199,7 @@ namespace Taxi.Prism.ViewModels
                 UserId = new Guid(_user.Id)
             };
 
+            _url = App.Current.Resources["UrlAPI"].ToString();
             Response response = await _apiService.NewTripAsync(_url, "/api", "/Trips", tripRequest, "bearer", _token.Token);
 
             if (!response.IsSuccess)
