@@ -30,6 +30,6 @@ namespace Taxi.Common.Models
 
         public string PictureFullPath => string.IsNullOrEmpty(PicturePath)
             ? "https://TaxiWeb0.azurewebsites.net//images/noimage.png"
-            : LoginType == LoginType.Taxi ? $"https://TaxiWeb0.azurewebsites.net{PicturePath.Substring(1)}" : PicturePath;
+            : $"https://zulutaxi.blob.core.windows.net/users/{PicturePath}";
     }
 }
