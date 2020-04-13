@@ -9,6 +9,7 @@
     <PackageReference Include="Syncfusion.Xamarin.SfBusyIndicator" Version="17.4.0.51" />
     <PackageReference Include="Syncfusion.Xamarin.SfRating" Version="17.4.0.51" />
     <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.Forms" Version="4.4.0.991640" />

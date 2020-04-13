@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
-using Plugin.Connectivity;
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Taxi.Common.Models;
+using Xamarin.Essentials;
 
 namespace Taxi.Common.Services
 {
@@ -303,14 +303,9 @@ namespace Taxi.Common.Services
             }
         }
 
-        public async Task<bool> CheckConnectionAsync(string url)
+        public bool CheckConnection()
         {
-            if (!CrossConnectivity.Current.IsConnected)
-            {
-                return false;
-            }
-
-            return await CrossConnectivity.Current.IsRemoteReachable(url);
+            return Connectivity.NetworkAccess == NetworkAccess.Internet;
         }
 
         public async Task<Response> GetTaxiAsync(string plaque, string urlBase, string servicePrefix, string controller)

@@ -19,7 +19,7 @@ namespace Taxi.Common.Services
 
         Task<Response> GetTaxiAsync(string plaque, string urlBase, string servicePrefix, string controller);
 
-        Task<bool> CheckConnectionAsync(string url);
+        bool CheckConnection();
 
         Task<Response> GetTokenAsync(string urlBase, string servicePrefix, string controller, TokenRequest request);
 
