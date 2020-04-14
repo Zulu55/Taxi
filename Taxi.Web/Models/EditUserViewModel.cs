@@ -33,6 +33,11 @@ namespace Taxi.Web.Models
         public IFormFile PictureFile { get; set; }
 
         [Display(Name = "Picture")]
+        public string PictureFullPath => string.IsNullOrEmpty(PicturePath)
+            ? "https://TaxiWeb3.azurewebsites.net//images/noimage.png"
+            : $"https://zulutaxi.blob.core.windows.net/users/{PicturePath}";
+
+        [Display(Name = "Picture")]
         public string PicturePath { get; set; }
     }
 }

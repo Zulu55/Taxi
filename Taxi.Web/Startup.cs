@@ -79,6 +79,7 @@ namespace Taxi.Web
             services.AddScoped<ICombosHelper, CombosHelper>();
             services.AddScoped<IImageHelper, ImageHelper>();
             services.AddScoped<IMailHelper, MailHelper>();
+            services.AddScoped<IBlobHelper, BlobHelper>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
