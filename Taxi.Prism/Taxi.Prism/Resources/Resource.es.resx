@@ -354,4 +354,43 @@
   <data name="ConfirmAddress" xml:space="preserve">
     <value>Confirma tu dirección.</value>
   </data>
+  <data name="GenericComment" xml:space="preserve">
+    <value>Comentario genérico</value>
+  </data>
+  <data name="CommnetPlaceHolder" xml:space="preserve">
+    <value>Seleccione un comentario....</value>
+  </data>
+  <data name="Comment1" xml:space="preserve">
+    <value>Muy buen servicio</value>
+  </data>
+  <data name="Comment2" xml:space="preserve">
+    <value>Conductor muy amigable</value>
+  </data>
+  <data name="Comment3" xml:space="preserve">
+    <value>Taxi limpio</value>
+  </data>
+  <data name="Comment5" xml:space="preserve">
+    <value>Mal conductor</value>
+  </data>
+  <data name="Comment6" xml:space="preserve">
+    <value>Cobro mayor a lo esperado</value>
+  </data>
+  <data name="Comment4" xml:space="preserve">
+    <value>Taxi sucio o en mal estado</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Comentario</value>
+  </data>
+  <data name="DistanceTraveled" xml:space="preserve">
+    <value>Distancia Recorrida</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Hora</value>
+  </data>
+  <data name="ApproximateValue" xml:space="preserve">
+    <value>Valor aproximado</value>
+  </data>
+  <data name="QualificationError" xml:space="preserve">
+    <value>Usted debe entrar en una calificación de viaje.!</value>
+  </data>
 </root>

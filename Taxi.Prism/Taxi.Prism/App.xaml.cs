@@ -44,6 +44,7 @@ namespace Taxi.Prism
             containerRegistry.RegisterForNavigation<RememberPasswordPage, RememberPasswordPageViewModel>();
             containerRegistry.RegisterForNavigation<ChangePasswordPage, ChangePasswordPageViewModel>();
             containerRegistry.RegisterForNavigation<StartTripPage, StartTripPageViewModel>();
+            containerRegistry.RegisterForNavigation<EndTripPage, EndTripPageViewModel>();
         }
     }
 }
